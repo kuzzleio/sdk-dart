@@ -1,4 +1,4 @@
-library kuzzle_dart;
+library sdk_kuzzle;
 
 export 'src/controllers/abstract.dart';
 export 'src/controllers/auth.dart';

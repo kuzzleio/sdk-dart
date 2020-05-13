@@ -1,0 +1,7 @@
+name: Tests
+version: 1.0.0
+description: Dart SDK doc snippet test project
+
+dependencies:
+  kuzzle:
+    path: /mnt/

@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  kuzzle:
+    image: kuzzleio/kuzzle:2
+    ports:
+      - "7512:7512"
+    cap_add:
+      - SYS_PTRACE
+    depends_on:
+      - redis
+      - elasticsearch
+    environment:
+      - kuzzle_services__storageEngine__client__node=http://elasticsearch:9200
+      - kuzzle_services__internalCache__node__host=redis
+      - kuzzle_services__memoryStorage__node__host=redis
+      - kuzzle_services__storageEngine__commonMapping__dynamic=true
+      - NODE_ENV=production
+
+  redis:
+    image: redis:5
+
+  elasticsearch:
+    image: kuzzleio/elasticsearch:7
+    ulimits:
+      nofile: 65536
+
+  doc-tests:
+    image: kuzzleio/snippets-tests
+    privileged: true
+    ports:
+      - '9229:9229'
+    depends_on:
+      - kuzzle
+      - doc-runner-dart
+    volumes:
+      - ../..:/mnt
+      - /var/run/docker.sock:/var/run/docker.sock
+      - snippets:/var/snippets
+    environment:
+      - CONFIG_FILE=/mnt/.ci/doc/config.yml
+
+  doc-runner-dart:
+    image: google/dart
+    command: >
+      bash -c '
+        mkdir -p /var/snippets/dart;
+        touch /tmp/runner_is_ready;
+        tail -f /dev/null
+      '
+    volumes:
+      - ../..:/mnt
+      - snippets:/var/snippets
+
+volumes:
+  snippets:

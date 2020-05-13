@@ -1,0 +1,19 @@
+---
+
+  snippets:
+    mount: /mnt
+    path: 'doc/**/snippets/*.test.yml'
+    templates: /mnt/.ci/doc/templates
+  
+  runners:
+    default: dart
+  
+    dart:
+      service: doc-runner-dart
+      path: /var/snippets/dart
+      build:
+        cmd: cd /mnt
+      run:
+        before: timeout 600 bash -c 'until stat /tmp/runner_is_ready && curl -f -s -o /dev/null http://kuzzle:7512/_now; do sleep 1; done'
+        cmd: cp {{ snippet.source }} /mnt/.ci/doc/project/ && cd /mnt/.ci/doc/project/ && pub get && dart *.dart
+  

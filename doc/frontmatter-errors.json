@@ -1,0 +1,22 @@
+{
+    "/controllers/auth/": [
+        {
+            "fix": {
+                "type": "page"
+            },
+            "error": "MISSING_KEY",
+            "key": "type"
+        },
+        {
+            "error": "MISSING_KEY",
+            "key": "title"
+        },
+        {
+            "fix": {
+                "code": true
+            },
+            "error": "MISSING_KEY",
+            "key": "code"
+        }
+    ]
+}

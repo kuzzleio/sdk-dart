@@ -1,34 +1,143 @@
-language: dart
-sudo: false
-dart:
-  - stable
-  # - dev
-dart_task:
-- test: --platform vm
-- dartanalyzer: --fatal-warnings lib
-# - dartfmt
-
-services:
-  - docker
-
-before_script:
-  - if [ $TRAVIS_DART_TEST == true ]; then ./docker_launch.sh; fi
-
-cache:
-  directories:
-    - $HOME/.pub-cache
-
-after_success:
-  - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
-  - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ] && [ $TRAVIS_BRANCH == 'master' ]; then dartdoc; fi
-
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  local-dir: doc/api
-  on:
-    branch: master
-    dart: stable
-    condition: $TRAVIS_DART_TEST == true
+---
+  env:
+    global:
+      - AWS_ACCESS_KEY_ID=AKIAIYAXFUAHXOWP2MJA
+      # AWS_SECRET_ACCESS_KEY
+      - secure: NElUP03Z1jbkOO20zYOo6WTdXrHa+b1UbMQJJX1rvG8wLHcEEid5m5VUa9UdSrBT4OxeVLKTVqEtEgFshz8Jjcc7JJ4pZBtGq4ty+S+nG6F9DJ+IMS2kD8h5qtoqh1TBLhov19s0mRNCG53No2+8VSk8STAeSG7x2hL2PAgJq3LCCy5lYVbmhnrCXObtd1a7Nq8XV7EHM+R9aITq3+jKa/NpdADoUv/WcoQAqjc8W3GhACRiNxRaGM58OF2WTojLM5fD3wwuicGkcsBkZkxho4cs0u36EEoxhZuy9U2/Emp7uhs9yCrhY0AwqYbSqvZ6jiwtJflvHHAsW2ZTgHWUekKippAyPIqF+QTeBvkg+q7tabOkfQLaZcREDzUBMI5AQiIW0Sv1fTPEs5jJv2+dE4bzi6BJmzFFGE0iHt4Nui7TLYMeAN17RYB5rJK50AGBA42Puzjr8CaV1FfnqLXOwiDXjGwvz7iHk4MMHFT/vvLcgDgHM16SM5QvhfbfX6Aj13VIG9lWUfKsalMSug8+zrXadtnZoz5XPskw1oA2iEUmgNzS33EVedgtxWDykadn3zhA+Ii+4C+Gge1dPG0sNXYiyI0/XKwlHBe6/Ar/DzKAf9Fo7/Z2haYGHC8XXmblagzVTxqX1FZVeiI3kyDBtduMSILU5ir5VA0dNtGdKVY=
+  # ------------------------
+  # Jobs configuration
+  # ------------------------
+  jobs:
+    include:
+      - stage: Tests
+        name: Dead link check
+        if:
+          type = pull_request OR type = push AND branch =~ /^master|[0-9]+-(dev|stable)$/
+          OR type = cron
+        language: node_js
+        node_js: 12
+        before_script:
+          - npm ci
+          - npm run doc-prepare
+          - $(npm bin)/kuzdoc iterate-repos:install --repos_path doc/framework/.repos/
+          - $(npm bin)/kuzdoc framework:link -d /sdk/dart/2/ -v 3
+  
+        script:
+          - gem install typhoeus
+          - cd doc/framework/ && HYDRA_MAX_CONCURRENCY=20 ruby .ci/dead-links.rb -p src/sdk/java/3/
+  
+  
+      - stage: Tests
+        name: Documentation Snippets
+        if: type = pull_request OR type = push AND branch =~ /^master|[0-9]+-dev$/ OR type = cron
+        language: node_js
+        node_js: 12
+        script: docker-compose -f .ci/doc/docker-compose.yml run doc-tests index
+  
+  
+      - stage: Tests
+        name: Unit tests Dart SDK
+        language: dart
+        sudo: false
+        dart:
+          - stable
+        dart_task:
+        - test: --platform vm
+        - dartanalyzer: --fatal-warnings lib
+        services:
+          - docker
+        before_script:
+          - if [ $TRAVIS_DART_TEST == true ]; then ./docker_launch.sh; fi
+        cache:
+          directories:
+            - $HOME/.pub-cache
+        after_success:
+          - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
+          - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ] && [ $TRAVIS_BRANCH == 'master' ]; then dartdoc; fi      
+  
+  
+      - stage: Deployments
+        name: Deploy documentation to next-docs.kuzzle.io
+        if: type = push AND branch =~ /^[0-9]+-dev$/
+        language: node_js
+        node_js: 12
+        env:
+          - BRANCH=dev
+          - NODE_ENV=production
+          - S3_BUCKET=docs-next.kuzzle.io
+          - CLOUDFRONT_DISTRIBUTION_ID=E2ZCCEK9GRB49U
+          - AWS_DEFAULT_REGION=us-west-2
+  
+        addons:
+          apt:
+            update: true
+            packages:
+              - python
+              - python-pip
+  
+        install:
+          - pip install awscli --upgrade --user
+          - npm ci
+  
+        script:
+          - npm run doc-prepare
+          - npm run doc-build
+  
+        deploy:
+          provider: script
+          script:
+            - npm run doc-upload
+          skip_cleanup: true
+          on:
+            all_branches: true
+  
+        after_deploy:
+          - npm run doc-cloudfront
+  
+  
+      - stage: Deployments
+        name: Deploy documentation to docs.kuzzle.io
+        if: type = push AND branch =~ /^master|[0-9]+-stable$/
+        language: node_js
+        node_js: 12
+        env:
+          - NODE_ENV=production
+          - S3_BUCKET=docs.kuzzle.io
+          - CLOUDFRONT_DISTRIBUTION_ID=E3D6RP0POLCJMM
+          - AWS_DEFAULT_REGION=us-west-2
+        addons:
+          apt:
+            packages:
+              - python
+              - python-pip
+        install:
+          - pip install awscli --upgrade --user
+          - npm ci
+        script:
+          - npm run doc-prepare
+          - npm run doc-build
+        deploy:
+          provider: script
+          script:
+            - npm run doc-upload
+          skip_cleanup: true
+          on:
+            all_branches: true
+        after_deploy:
+          - npm run doc-cloudfront
+  
+  stages:
+    - name: Tests
+      if: type =~ /(cron|push|pull_request)/ AND branch =~ /^master|[0-9]+-(dev|stable)$/
+    - name: Builds
+      if: type =~ /(cron|push|pull_request)/ AND branch =~ /^master|[0-9]+-(dev|stable)$/
+    - name: Deployments
+      if: type =~ /(cron|push|pull_request)/ AND branch =~ /^master|[0-9]+-stable$/
+  
+  notifications:
+    slack:
+      rooms:
+        - secure: ACjz4TJEYBEzmwVOYrCNnr4+jC0FaX+qh150QacYGIgaQYL+U3xLEQmWNlZ3oxaPPMDAk42m+diHolqNwh6qsOWaPSWRlGfLKhHLSzRI98bhF7HQ+3eLMYmx7y7SKwRzyRjus0jgxp0Kc2mq0nhKqv+7rarQtIgWlC1PLrzZ35CUbUlqYSoeYAlXoyDB1eZgYsvjt+eC5yCvGePsfKbupWC2/hIVl+qZ+9AhVmOfiMv7daFW29Vu300aoY+0IqwX7jHGcmHn/7QCRsx0IBy/SL24TzfSV9SUSnbjK4fTrcrhjYDEZdH1lpvDtvr50GgkrTjy1wPVz8XIyCZ7LZolylkx+nR1MWyvum20QRFub2Qhz/+rS+OFiQZ8H01BPuklLUTSQhBksfpGBck3d2yNLiTqGEVWYTnZ9mkCnMQ3BzJXEF04KLHG7wYn2rk6wjPghVmFQH5GMsxM5v33CFgcNzp6lRJOX9CmjZosck6o9SA0WlazHH/CLWWKk1wrQ1ygDayW5m+N/o58UIxgW2LIUlp4tV1z/bRtO2yTd020yWchlKPVmf1A5OMfigJNMRsQGNZNadS7qA2M394OJw3/Hg+0EVF8gai/V8FRijmkxmhYyCIYMcjaGwx8JxfoMrRKcM76haBAhg0JQxsSVKzyXfONGzd5DXjcxSGZ2wuEdu0=
+      on_success: never
+      on_failure: always
+  

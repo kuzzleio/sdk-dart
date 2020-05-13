@@ -7,7 +7,7 @@ authors:
 - Sacha Stafyniak<sacha.stafyniak@gmail.com>
 - Manuel Baun<manuel.baun@gmail.com>
 
-homepage: https://github.com/prijindal/kuzzle_dart
+homepage: https://github.com/kuzzleio/sdk-dart
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
