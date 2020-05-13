@@ -2,7 +2,7 @@
 
 set -eu
 
-DOC_VERSION=3
+DOC_VERSION=2
 DOC_PATH=/sdk/dart/2
 PWD=$(dirname $(readlink -f $0))
 FMWKDIR="$PWD/framework"
