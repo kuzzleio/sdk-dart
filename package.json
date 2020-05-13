@@ -1,0 +1,15 @@
+{
+  "name": "sdk-dart",
+  "scripts": {
+    "doc-prepare": "kuzdoc framework:install",
+    "doc-dev": "kuzdoc repo:dev -d /sdk/dart/2/ -v 3",
+    "doc-build": "kuzdoc repo:build -d /sdk/dart/2/ -v 3",
+    "doc-upload": "kuzdoc repo:deploy -d /sdk/dart/2/ -v 3",
+    "doc-cloudfront": "kuzdoc repo:cloudfront -d /sdk/dart/2/",
+    "doc-deploy": "npm run doc-upload && npm run doc-cloudfront",
+    "doc-netlify": "npm run doc-prepare && kuzdoc repo:build -d / -v 3"
+  },
+  "dependencies": {
+    "kuzdoc": "^1.2.2"
+  }
+}
