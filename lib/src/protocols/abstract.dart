@@ -25,11 +25,11 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     this.port = 7512,
     Duration reconnectionDelay,
     this.ssl = false,
-  })  : assert(host.isNotEmpty),
-        assert(port > 0),
-        _state = KuzzleProtocolState.offline,
-        _reconnectionDelay = reconnectionDelay ?? Duration(seconds: 1),
-        id = _uuid.v4();
+  }) : assert(host.isNotEmpty),
+      assert(port > 0),
+      _state = KuzzleProtocolState.offline,
+      _reconnectionDelay = reconnectionDelay ?? Duration(seconds: 1),
+      id = _uuid.v4();
 
   bool autoReconnect;
   final String host;
@@ -117,12 +117,6 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     once(request.requestId, (response) {
       if (response.error != null) {
         emit(ProtocolEvents.QUERY_ERROR, [response.error, request]);
-
-        if (response.action != 'logout' &&
-            response.error.message == 'Token expired') {
-          emit(ProtocolEvents.TOKEN_EXPIRED);
-        }
-
         return completer.completeError(response.error);
       }
 

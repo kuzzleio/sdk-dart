@@ -364,7 +364,10 @@ class SecurityController extends KuzzleController {
     }
 
     throw BadResponseFormatError(
-        '$name.hasCredentials: bad response format', response);
+      response.error?.id,
+      '$name.hasCredentials: bad response format', 
+      response
+    );
   }
 
   /// Deletes multiple security profiles.
@@ -633,6 +636,9 @@ class SecurityController extends KuzzleController {
     }
 
     throw BadResponseFormatError(
-        '$name.validateCredentials: bad response format', response);
+      response.error?.id,
+      '$name.validateCredentials: bad response format', 
+      response
+    );
   }
 }

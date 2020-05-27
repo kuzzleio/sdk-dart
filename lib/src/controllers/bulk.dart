@@ -26,6 +26,9 @@ class BulkController extends KuzzleController {
       return result;
     }
 
-    throw BadResponseFormatError('$name.exists: bad response format', response);
+    throw BadResponseFormatError(response.error?.id, 
+      '$name.exists: bad response format', 
+      response
+    );
   }
 }

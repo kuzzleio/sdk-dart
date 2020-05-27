@@ -125,7 +125,11 @@ class DocumentController extends KuzzleController {
       return response.result as bool;
     }
 
-    throw BadResponseFormatError('$name.exists: bad response format', response);
+    throw BadResponseFormatError(
+      response.error?.id,
+      '$name.exists: bad response format', 
+      response
+    );
   }
 
   /// Get a document

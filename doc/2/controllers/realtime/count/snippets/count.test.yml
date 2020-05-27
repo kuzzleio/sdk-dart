@@ -1,0 +1,7 @@
+name: Realtime#count
+description: Counts subscribers for a subscription room.
+hooks:
+  before:
+  after:
+template: print-result
+expected: "1"

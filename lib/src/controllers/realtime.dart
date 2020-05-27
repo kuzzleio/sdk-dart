@@ -1,22 +1,73 @@
 import 'dart:async';
 
+import 'package:kuzzle/src/kuzzle/response.dart';
+import 'package:kuzzle/src/protocols/events.dart';
+
 import '../kuzzle.dart';
 import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
-import '../kuzzle/room.dart';
 
 import 'abstract.dart';
 
-class RealTimeController extends KuzzleController {
-  RealTimeController(Kuzzle kuzzle) : super(kuzzle, name: 'realtime');
+typedef SubscribeListener = void Function(KuzzleResponse);
 
-  final Map<String, List<KuzzleRoom>> _subscriptions = {};
+class Subscription {
+    Subscription({this.index,
+                this.collection,
+                this.filters,
+                this.callback,
+                this.autoResubscribe,
+                this.subscribeToSelf,
+                this.state,
+                this.scope,
+                this.users,
+                this.volatile}
+    );
+
+    String index;
+    String collection;
+    Map<String, dynamic> filters;
+    SubscribeListener callback;
+    bool autoResubscribe;
+    bool subscribeToSelf;
+    String state;
+    String scope;
+    String users;
+    Map<String, dynamic> volatile;
+}
+
+class RealTimeController extends KuzzleController {
+  RealTimeController(Kuzzle kuzzle) : super(kuzzle, name: 'realtime') {
+    kuzzle.protocol.on(ProtocolEvents.UNHANDLED_RESPONSE, 
+    (KuzzleResponse message) {
+      var fromSelf = false;
+      if (message.volatile != null && message.volatile.isNotEmpty) {
+        if (message.volatile.containsKey('sdkInstanceId') &&
+            message.volatile['sdkInstanceId'] == kuzzle.protocol.id) {
+          fromSelf = true;
+        }
+      }
+
+      final subs = _currentSubscriptions[message.room];
+      for (final sub in subs) {
+        if (sub.subscribeToSelf == true || !fromSelf) {
+          sub.callback(message);
+        }
+      }
+    });
+  }
+
+  final Map<String, List<Subscription>> _currentSubscriptions = {};
+  final Map<String, List<Subscription>> _subscriptionsCache = {};
+
+  /// room => channel
+  final Map<String, String> _rooms = {};
 
   /// Returns the number of other connections sharing the same subscription.
   Future<int> count(String roomId) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
-      action: 'refresh',
+      action: 'count',
       body: <String, dynamic>{
         'roomId': roomId,
       },
@@ -52,50 +103,94 @@ class RealTimeController extends KuzzleController {
   /// optionally, user events matching the provided filters will
   /// generate real-time notifications, sent to you in real-time by Kuzzle.
   Future<String> subscribe(String index, String collection,
-      Map<String, dynamic> filters, RoomListener callback,
-      {String scope,
+      Map<String, dynamic> filters, SubscribeListener callback,
+      {String scope = 'all',
       String state,
       String users,
       Map<String, dynamic> volatile,
-      bool subscribeToSelf,
-      bool autoResubscribe}) async {
-    final room = KuzzleRoom(kuzzle, index, collection, filters, callback,
-        volatile: volatile,
-        users: users,
-        scope: scope,
-        state: state,
-        subscribeToSelf: subscribeToSelf,
-        autoResubscribe: autoResubscribe);
+      bool subscribeToSelf = true,
+      bool autoResubscribe}) async => kuzzle.query(
+        KuzzleRequest(
+          action: 'subscribe',
+          controller: 'realtime',
+          index: index,
+          collection: collection,
+          body: filters,
+          state: state,
+          scope: scope,
+          users: users,
+          volatile: volatile,
+        ),
+        volatile: volatile)
+        .then((response) {
+          final subscription = Subscription(
+            index: index, 
+            collection: collection, 
+            filters: filters, 
+            callback: callback,
+            volatile: volatile,
+            users: users,
+            scope: scope,
+            state: state,
+            subscribeToSelf: subscribeToSelf,
+            autoResubscribe: autoResubscribe
+          );
+          final roomId = response.result['roomId'] as String;
+          final channel = response.result['channel'] as String;
 
-    return room.subscribe().then((response) {
-      if (!_subscriptions.containsKey(room.id)) {
-        _subscriptions[room.id] = <KuzzleRoom>[];
+          if (_currentSubscriptions[channel] == null) {
+            final List<Subscription> item = [];
+            item.add(subscription);
+            _currentSubscriptions[channel] = item;
+            _subscriptionsCache[channel] = item;
+          } else {
+            _currentSubscriptions[channel].add(subscription);
+            _subscriptionsCache[channel].add(subscription);
+          }
+          _rooms[roomId] = channel;
+
+          kuzzle.on(ProtocolEvents.RECONNECTED, _renewSubscribe);
+
+          return roomId;
+        });
+
+  void _renewSubscribe() async {
+    for (final subs in _subscriptionsCache.values) {
+      for (final sub in subs) {
+        await subscribe(
+          sub.index,
+          sub.collection,
+          sub.filters,
+          sub.callback,
+          scope: sub.scope,
+          state: sub.state,
+          users: sub.users,
+          volatile: sub.volatile,
+          subscribeToSelf: sub.subscribeToSelf,
+          autoResubscribe: sub.autoResubscribe,
+        );
       }
-
-      _subscriptions[room.id].add(room);
-
-      return room.id;
-    });
+    }
   }
 
   /// Removes a subscription.
   Future<String> unsubscribe(String roomId) async {
-    if (!_subscriptions.containsKey(roomId)) {
+    if (!_currentSubscriptions.containsKey(_rooms[roomId])) {
       return Future.error(
-          KuzzleError('$name.unsubscribe: not subscribed to $roomId'));
+          KuzzleError(
+            'not.subscribed',
+            '$name.unsubscribe: not subscribed to $roomId'
+          ));
     }
-
-    for (final room in _subscriptions[roomId]) {
-      room.removeListeners();
-    }
-
-    _subscriptions[roomId].clear();
-    _subscriptions.remove(roomId);
 
     final response = await kuzzle.query(KuzzleRequest(
         controller: name,
         action: 'unsubscribe',
         body: <String, dynamic>{'roomId': roomId}));
+
+    _currentSubscriptions[roomId]?.clear();
+    _subscriptionsCache[roomId]?.clear();
+    _rooms.remove(roomId);
 
     return response.result as String;
   }

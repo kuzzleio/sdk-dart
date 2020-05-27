@@ -5,7 +5,6 @@ import 'package:pedantic/pedantic.dart';
 
 import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
-import '../kuzzle/response.dart';
 
 import 'abstract.dart';
 import 'events.dart';
@@ -105,18 +104,7 @@ class WebSocketProtocol extends KuzzleProtocol {
   }
 
   void _handlePayload(dynamic payload) {
-    try {
-      final _json = json.decode(payload as String) as Map<String, dynamic>;
-      final response = KuzzleResponse.fromJson(_json);
-
-      if (response.room.isNotEmpty) {
-        emit(response.room, [response]);
-      } else {
-        emit(ProtocolEvents.DISCARDED, [response]);
-      }
-    } catch (_) {
-      emit(ProtocolEvents.DISCARDED, [payload]);
-    }
+    emit(ProtocolEvents.NETWORK_ON_RESPONSE_RECEIVED, [payload]);
   }
 
   void _handleError(dynamic error, StackTrace stackTrace) {
@@ -132,7 +120,10 @@ class WebSocketProtocol extends KuzzleProtocol {
       clientDisconnected();
     } else if (wasConnected) {
       clientNetworkError(
-          KuzzleError(_webSocket.closeReason, _webSocket.closeCode));
+          KuzzleError('clientNetworkError', 
+          _webSocket.closeReason, 
+          _webSocket.closeCode)
+      );
     }
   }
 }

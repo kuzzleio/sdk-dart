@@ -1,3 +1,3 @@
 final result = await kuzzle
   .collection
-  .list('nyc-open-data');
+  .list('nyc-open-data', type: 'stored');
