@@ -128,11 +128,11 @@ jobs:
 
 stages:
   - name: Tests
-    if: type =~ /(push)/ AND branch =~ /^master|[0-9]+-(dev|stable)$/
+    if: (type = push AND branch =~ /^master|[0-9]+-(dev|stable)$/) OR type = pull_request
   - name: Builds
-    if: type =~ /(push)/ AND branch =~ /^master|[0-9]+-(dev|stable)$/
+    if: (type = push AND branch =~ /^master|[0-9]+-(dev|stable)$/) OR type = pull_request
   - name: Deployments
-    if: type =~ /(push)/ AND branch =~ /^master|[0-9]+-(dev|stable)$/
+    if: type = push AND branch =~ /^master|[0-9]+-(dev|stable)$/
 
 notifications:
   slack:
