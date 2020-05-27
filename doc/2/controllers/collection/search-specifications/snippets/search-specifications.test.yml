@@ -14,4 +14,4 @@ hooks:
       }
     }' kuzzle:7512/nyc-open-data/yellow-taxi/_specifications?refresh=wait_for
 template: print-search-result
-expected: "2"
+expected: "1"
