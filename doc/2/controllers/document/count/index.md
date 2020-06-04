@@ -36,7 +36,7 @@ Future<int> count(
 
 ## Return
 
-Returns an Integer.
+Returns an int.
 
 ## Usage
 

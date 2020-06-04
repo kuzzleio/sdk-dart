@@ -17,14 +17,14 @@ Updates multiple documents.
 Future<Map<String, dynamic>> mUpdate(
       String index, String collection, 
       List<Map<String, dynamic>> documents,
-      {bool waitForRefresh = false, int retryOnConflict})
+      { bool waitForRefresh = false, int retryOnConflict, })
 ```
 
 | Arguments          | Type                                                    | Description                       |
 | ------------------ | ------------------------------------------------------- | --------------------------------- |
 | `index`            | <pre>String</pre>                                       | Index                             |
 | `collection`       | <pre>String</pre>                                       | Collection                        |
-| `documents`        | <pre>List<Map<String, dynamic>></pre> | ArrayList containing the documents to update |
+| `documents`        | <pre>List<Map<String, dynamic>></pre> | List containing the documents to update |
 | `retryOnConflict`  | <pre>int</pre><br>(`null`)                | The number of times the database layer should retry in case of version conflict |
 | `waitForRefresh`   | <pre>bool</pre><br>(`false`)                | If set to `true`, Kuzzle will wait for the persistence layer to finish indexing |
 
@@ -41,7 +41,7 @@ Each document has the following properties:
 
 ## Return
 
-A `ConcurrentHashMap<String, ArrayList<Object>>` which has a `successes` and `errors`:
+A `Map<String, dynamic>` which has a `successes` and `errors`:
 Each created document is an object of the `successes` array with the following properties:
 
 | Property     | Type                                         | Description                      |
@@ -55,7 +55,7 @@ Each errored document is an object of the `errors` array with the following prop
 | Property     | Type                                         | Description                      |
 |------------- |--------------------------------------------- |--------------------------------- |
 | `document`   | <pre>Map<String, dynamic></pre> | Document that causes the error   |
-| `status`     | <pre>Integer</pre>                           | HTTP error status                |
+| `status`     | <pre>int</pre>                           | HTTP error status                |
 | `reason`     | <pre>int</pre>                            | Human readable reason |
 
 ## Usage

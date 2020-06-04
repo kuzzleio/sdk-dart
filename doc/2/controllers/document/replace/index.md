@@ -35,7 +35,7 @@ Future<Map<String, dynamic>> replace(
 
 ## Return
 
-A `ConcurrentHashMap` which has the following properties:
+A `Map` which has the following properties:
 
 | Property     | Type                         | Description                      |
 |------------- |----------------------------- |--------------------------------- |

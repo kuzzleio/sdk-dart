@@ -30,12 +30,12 @@ Future<Map<String, dynamic>> mGet(
 
 ## Return
 
-A `List<String>` which has a `successes` and `errors`:
+A `Map<String, dynamic>` which has a `successes` and `errors`:
 Each created document is an object of the `successes` array with the following properties:
 
 | Property     | Type                                         | Description                      |
 |------------- |--------------------------------------------- |--------------------------------- |
-| `_source`    | <pre>List<String></pre> | Document content                 |
+| `_source`    | <pre>Map<String, dynamic></pre> | Document content                 |
 | `_id`        | <pre>String</pre>                            | Document ID                      |
 | `_version`   | <pre>int</pre>                           | Version of the document in the persistent data storage |
 
