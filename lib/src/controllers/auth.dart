@@ -61,13 +61,13 @@ class AuthController extends KuzzleController {
   }
 
   /// Fetches the current user.
-  Future<KuzzleUser> getCurrentUser() async {
+  Future<Map<String, dynamic>> getCurrentUser() async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'getCurrentUser',
     ));
 
-    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+    return response.result as Map<String, dynamic>;
   }
 
   /// Get credential information of
@@ -163,18 +163,18 @@ class AuthController extends KuzzleController {
   }
 
   /// Fetches the current user.
-  Future<KuzzleUser> updateSelf(Map<String, dynamic> body) async {
+  Future<Map<String, dynamic>> updateSelf(Map<String, dynamic> body) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'updateSelf',
       body: body,
     ));
 
-    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+  return response.result as Map<String, dynamic>;
   }
 
   /// Validate [credentials] of the specified [strategy] for the current user.
-  Future<Map<String, dynamic>> validateMyCredentials(
+  Future<bool> validateMyCredentials(
       String strategy, Map<String, dynamic> credentials) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -183,6 +183,6 @@ class AuthController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result as Map<String, dynamic>;
+    return response.result as bool;
   }
 }
