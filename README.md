@@ -1,7 +1,7 @@
 [![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square)](https://stackoverflow.com/questions/tagged/flutter?sort=votes)
 [![Pub](https://img.shields.io/pub/v/kuzzle.svg?style=flat-square)](https://pub.dartlang.org/packages/kuzzle)
-[![codecov](https://img.shields.io/codecov/c/github/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://codecov.io/gh/prijindal/kuzzle_dart)
-[![Build Status](https://img.shields.io/travis/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://travis-ci.org/prijindal/kuzzle_dart)
+[![codecov](https://img.shields.io/codecov/c/github/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://codecov.io/gh/kuzzleio/sdk-dart)
+[![Build Status](https://img.shields.io/travis/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://travis-ci.com/kuzzleio/sdk-dart)
 
 # Kuzzle Dart SDK
 
