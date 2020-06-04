@@ -9,6 +9,6 @@ await kuzzle
     expiresIn:''
   );
 
-KuzzleUser = await kuzzle
+KuzzleUser user = await kuzzle
   .auth
   .getCurrentUser();
