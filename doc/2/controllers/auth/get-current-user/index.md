@@ -12,18 +12,12 @@ Returns informations about the user currently loggued with the SDK instance.
 ## Arguments
 
 ```dart
-Future<Map<String, dynamic>> getCurrentUser()
+Future<KuzzleUser> getCurrentUser()
 ```
 
 ## Return
 
-A Map representing the User.
-
-| Property     | Type               | Description                                       |
-|--------------|--------------------|---------------------------------------------------|
-| `_id`        | <pre>String</pre>  | Representing the current user `kuid`              |
-| `strategies` | <pre>Array</pre>  | Available authentication strategies for that user |
-| `_source`    | <pre>Map</pre> | User information                                  |
+A User representing the current user logged with the SDK.
 
 ## Usage
 

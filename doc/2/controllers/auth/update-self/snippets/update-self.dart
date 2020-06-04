@@ -9,7 +9,7 @@ await kuzzle
     expiresIn:''
 );
 
-final result = await kuzzle
+await kuzzle
   .auth
   .updateSelf(
     {

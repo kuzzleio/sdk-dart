@@ -3,5 +3,5 @@ description: Updates the current user object in Kuzzle.
 hooks:
   before: curl -X POST kuzzle:7512/users/foo/_create -H "Content-Type:application/json" --data '{"content":{"profileIds":["default"]},"credentials":{"local":{"username":"foo","password":"bar"}}}'
   after: curl -X DELETE kuzzle:7512/users/foo
-template: print-result
-expected: ^{_id:\ foo, _source:\ {profileIds:\ \[default\],\ _kuzzle_info:\ {.*},\ age:\ 42}}$
+template: default
+expected: Success

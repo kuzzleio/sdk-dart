@@ -12,7 +12,7 @@ Updates the current user object in Kuzzle.
 ## Arguments
 
 ```dart
-Future<Map<String, dynamic>> updateSelf(Map<String, dynamic> body)
+Future<KuzzleUser> updateSelf(Map<String, dynamic> body)
 ```
 
 | Argument  | Type               | Description                           |
@@ -21,12 +21,7 @@ Future<Map<String, dynamic>> updateSelf(Map<String, dynamic> body)
 
 ## Return
 
-Returns a Map with the following properties:
-
-| Property  | Type               | Description                               |
-|-----------|--------------------|-------------------------------------------|
-| `_id`     | <pre>String</pre>  | User's `kuid`                             |
-| `_source` | <pre>Map<String, dynamic></pre> | Additional (and optional) user properties |
+A User representing the current user logged with the SDK.
 
 ## Usage
 
