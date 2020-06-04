@@ -27,4 +27,4 @@ order: 0
 | `state` | <pre>String</pre> | Document state (realtime only) |
 | `status` | <pre>int</pre> | Response status, following HTTP status codes |
 | `timestamp` | <pre>Long</pre> | Notification timestamp (UTC) |
-| `volatile` | <pre>ConcurrentHashMap<String, Object></pre> | Volatile data |
+| `volatile` | <pre>Map<String, dynamic></pre> | Volatile data |
