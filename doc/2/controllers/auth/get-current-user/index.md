@@ -17,7 +17,7 @@ Future<KuzzleUser> getCurrentUser()
 
 ## Return
 
-A User representing the current user logged with the SDK.
+A [User](/sdk/dart/2/core-classes/user) representing the current user logged with the SDK.
 
 ## Usage
 

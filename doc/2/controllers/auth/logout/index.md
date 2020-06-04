@@ -17,7 +17,7 @@ Future<void> logout()
 
 ## Return
 
-<!-- A [Response](/sdk/java/3/core-classes/response) object. -->
+A [Response](/sdk/dart/2/core-classes/response) object.
 
 ## Usage
 

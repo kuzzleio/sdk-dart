@@ -67,7 +67,8 @@ class AuthController extends KuzzleController {
       action: 'getCurrentUser',
     ));
 
-  return KuzzleUser.fromKuzzleResponse(kuzzle, response);  }
+  return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+  }
 
   /// Get credential information of
   /// the specified [strategy] for the current user.
@@ -169,7 +170,7 @@ class AuthController extends KuzzleController {
       body: body,
     ));
 
-  return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Validate [credentials] of the specified [strategy] for the current user.
