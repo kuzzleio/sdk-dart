@@ -24,7 +24,7 @@ Future<bool> publish(
 |--------------|--------------------|-------------------------------------|
 | `index`      | <pre>String</pre>  | Index name                          |
 | `collection` | <pre>String</pre>  | Collection name                     |
-| `message`    | <pre>Map<String, dynamic></pre> | ConcurrentHashMap representing a JSON payload |
+| `message`    | <pre>Map<String, dynamic></pre> | Map representing a JSON payload |
 
 ## Usage
 
