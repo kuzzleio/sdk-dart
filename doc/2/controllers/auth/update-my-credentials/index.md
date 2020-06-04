@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: UpdateMyCredentials
+title: updateMyCredentials
 description: Updates the current user's credentials for the specified strategy.
 ---
 
