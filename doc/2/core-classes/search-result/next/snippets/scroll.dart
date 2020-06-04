@@ -5,7 +5,7 @@ for (var i = 0; i < 100; i++) {
 }
 
 await kuzzle.document.mCreate('nyc-open-data', 'yellow-taxi', documents,
-  refresh: 'wait_for'
+  waitForRefresh: true
 );
 
 var res = await kuzzle.document.search(

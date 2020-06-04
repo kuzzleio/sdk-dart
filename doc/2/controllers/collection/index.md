@@ -1,7 +1,7 @@
 ---
 code: true
 type: branch
-title: Collection
+title: collection
 description: Collection Controller
 ---
 
