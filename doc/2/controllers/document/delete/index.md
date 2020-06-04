@@ -14,7 +14,7 @@ Deletes a document.
 ## Arguments
 
 ```dart
-Future<Map<String, dynamic>> delete(
+Future<void> delete(
     String index,
     String collection,
     String id, {
@@ -30,14 +30,6 @@ Future<Map<String, dynamic>> delete(
 | `waitForRefresh`   | <pre>bool</pre><br>(`false`)                | If set to `true`, Kuzzle will wait for the persistence layer to finish indexing|
 
 ---
-
-## Return
-
-A `Map<String, dynamic>` which has the following property:
-
-| Property     | Type                         | Description                      |
-|------------- |----------------------------- |--------------------------------- |
-| `_id`        | <pre>String</pre>            | ID of the deleted document                       |
 
 ## Usage
 

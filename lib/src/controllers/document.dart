@@ -74,13 +74,13 @@ class DocumentController extends KuzzleController {
   }
 
   /// Deletes a document.
-  Future<Map<String, dynamic>> delete(
+  Future<void> delete(
     String index,
     String collection,
     String id, {
     bool waitForRefresh = false,
   }) async {
-    final response = await kuzzle.query(KuzzleRequest(
+    await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'delete',
       index: index,
@@ -88,12 +88,10 @@ class DocumentController extends KuzzleController {
       uid: id,
       waitForRefresh: waitForRefresh,
     ));
-
-    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes documents matching the provided search query.
-  Future<Map<String, dynamic>> deleteByQuery(
+  Future<List<String>> deleteByQuery(
     String index,
     String collection,
     Map<String, dynamic> query, {
@@ -108,7 +106,9 @@ class DocumentController extends KuzzleController {
       waitForRefresh: waitForRefresh,
     ));
 
-    return response.result as Map<String, dynamic>;
+    return List<String>.from(
+      response.result['ids'] as List<dynamic>
+    ) as List<String>;
   }
 
   /// Check if a document exists

@@ -18,9 +18,8 @@ Future<Map<String, dynamic>> replace(
     String index,
     String collection,
     String id,
-    Map<String, dynamic> document, {
-    bool waitForRefresh = false,
-  })
+    Map<String, dynamic> document,
+    { bool waitForRefresh = false, })
 ```
 
 | Arguments          | Type                                         | Description                       |
@@ -35,7 +34,7 @@ Future<Map<String, dynamic>> replace(
 
 ## Return
 
-A `ConcurrentHashMap` which has the following properties:
+A `Map<String, dynamic>` which has the following properties:
 
 | Property     | Type                         | Description                      |
 |------------- |----------------------------- |--------------------------------- |

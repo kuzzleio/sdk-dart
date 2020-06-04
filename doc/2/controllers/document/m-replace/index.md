@@ -17,16 +17,15 @@ Replaces multiple documents.
 Future<Map<String, dynamic>> mReplace(
     String index,
     String collection,
-    List<Map<String, dynamic>> documents, {
-    bool waitForRefresh = false,
-  })
+    List<Map<String, dynamic>> documents,
+    { bool waitForRefresh = false, })
 ```
 
 | Arguments          | Type                                                    | Description                       |
 | ------------------ | ------------------------------------------------------- | --------------------------------- |
 | `index`            | <pre>String</pre>                                       | Index                             |
 | `collection`       | <pre>String</pre>                                       | Collection                        |
-| `documents`        | <pre>Map<String, dynamic></pre> | ArrayList containing the documents to replace |
+| `documents`        | <pre>List<Map<String, dynamic>></pre> | List containing the documents to replace |
 | `waitForRefresh`   | <pre>bool</pre><br>(`false`)                                      | If set to `true`, Kuzzle will wait for the persistence layer to finish indexing |
 
 ---

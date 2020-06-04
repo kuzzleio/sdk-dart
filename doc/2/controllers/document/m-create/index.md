@@ -17,8 +17,7 @@ Creates multiple documents.
 Future<c> mCreate(
       String index, String collection, 
       List<Map<String, dynamic>> documents,
-      {bool waitForRefresh = false})
-```
+      { bool waitForRefresh = false, })
 
 | Arguments          | Type                                                    | Description                       |
 | ------------------ | ------------------------------------------------------- | --------------------------------- |
