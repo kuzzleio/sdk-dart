@@ -1,0 +1,11 @@
+name: document#replace
+description: replaces a document
+hooks:
+  before: |
+    curl -XDELETE kuzzle:7512/nyc-open-data
+    curl -XPOST kuzzle:7512/nyc-open-data/_create
+    curl -XPUT kuzzle:7512/nyc-open-data/yellow-taxi
+    curl -XPOST -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" kuzzle:7512/nyc-open-data/yellow-taxi/some-id/_create
+  after:
+template: print-result
+expected: "firstname: John"
