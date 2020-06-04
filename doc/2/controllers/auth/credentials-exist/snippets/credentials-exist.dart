@@ -16,5 +16,5 @@ final result = await kuzzle
   );
 
   if (exists) {
-    print("Credentials exists for local strategy");
+    print('Credentials exists for local strategy');
   }
