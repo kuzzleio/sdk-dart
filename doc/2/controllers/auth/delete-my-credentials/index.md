@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: DeleteMyCredentials
+title: deleteMyCredentials
 description: Deletes the current user's credentials for the specified strategy.
 ---
 
