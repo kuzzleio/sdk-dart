@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: GetCurrentUser
+title: getCurrentUser
 description: Returns the profile object for the user linked to the `JSON Web Token`.
 ---
 
