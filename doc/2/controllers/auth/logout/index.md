@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: Logout
+title: logout
 description: Revokes the user's token & unsubscribe them from registered rooms.
 ---
 
