@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: Login
+title: login
 description: Authenticates a user.
 ---
 
