@@ -4,4 +4,4 @@ hooks:
   before:
   after:
 template: print-result
-expected: ^{.*}$
+expected: ^{realtime:\ {.*}, dump:\ {.*}$
