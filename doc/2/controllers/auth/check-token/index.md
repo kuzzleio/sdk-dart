@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: CheckToken
+title: checkToken
 description: Checks an authentication Token's validity.
 ---
 
