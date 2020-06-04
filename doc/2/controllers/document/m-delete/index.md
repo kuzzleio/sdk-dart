@@ -17,9 +17,8 @@ Deletes multiple documents.
 Future<Map<String, dynamic>> mDelete(
     String index,
     String collection,
-    List<String> ids, {
-    bool waitForRefresh = false,
-  })
+    List<String> ids,
+    { bool waitForRefresh = false, })
 ```
 
 | Arguments          | Type                                                    | Description                       |

@@ -39,7 +39,7 @@ Each created document is an object of the `successes` array with the following p
 | `_id`        | <pre>String</pre>                            | Document ID                      |
 | `_version`   | <pre>int</pre>                           | Version of the document in the persistent data storage |
 
-The `errors` array contain the IDs of not found documents.
+The `errors` array contains the IDs of not found documents.
 
 ## Usage
 
