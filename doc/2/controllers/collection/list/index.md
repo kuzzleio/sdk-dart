@@ -29,8 +29,8 @@ Returns a `ConcurrentHashMap<String, Object>` containing the following propertie
 | Property      | Type                | Description                                                        |
 | ------------- | ------------------- | ------------------------------------------------------------------ |
 | `type`        | <pre>String</pre>   | Types of returned collections <br/>(`all`, `realtime` or `stored`) |
-| `from`        | <pre>Integer</pre>   | Offset of the first result                                         |
-| `size`        | <pre>Integer</pre>   | Maximum number of returned results                                 |
+| `from`        | <pre>int</pre>   | Offset of the first result                                         |
+| `size`        | <pre>int</pre>   | Maximum number of returned results                                 |
 
 Each object in the `collections` array contains the following properties:
 

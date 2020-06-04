@@ -17,8 +17,10 @@ Updates multiple documents.
 Future<Map<String, dynamic>> mUpdate(
       String index, String collection, 
       List<Map<String, dynamic>> documents,
-      { bool waitForRefresh = false, int retryOnConflict, })
-```
+      {
+      bool waitForRefresh = false, 
+      int retryOnConflict
+})
 
 | Arguments          | Type                                                    | Description                       |
 | ------------------ | ------------------------------------------------------- | --------------------------------- |

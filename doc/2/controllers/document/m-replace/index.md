@@ -17,9 +17,8 @@ Replaces multiple documents.
 Future<Map<String, dynamic>> mReplace(
     String index,
     String collection,
-    List<Map<String, dynamic>> documents, {
-    bool waitForRefresh = false,
-  })
+    List<Map<String, dynamic>> documents,
+    { bool waitForRefresh = false, })
 ```
 
 | Arguments          | Type                                                    | Description                       |

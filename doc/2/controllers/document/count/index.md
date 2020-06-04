@@ -21,8 +21,9 @@ Kuzzle uses the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasti
 Future<int> count(
     String index,
     String collection,
-    {Map<String, dynamic> query})
-```
+    {
+    Map<String, dynamic> query
+})
 
 ---
 

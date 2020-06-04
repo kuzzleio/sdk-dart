@@ -11,7 +11,7 @@ class KuzzleRequest {
       this.index,
       this.jwt,
       this.requestId,
-      this.waitForRefresh = false,
+      this.waitForRefresh,
       this.uid,
       this.volatile,
       this.startTime,
@@ -125,6 +125,8 @@ class KuzzleRequest {
     }
     if (waitForRefresh == true) {
       map['refresh'] = 'wait_for';
+    } else if (waitForRefresh == false) {
+      map['refresh'] = 'false';
     }
     if (uid != null) {
       map['_id'] = uid;
