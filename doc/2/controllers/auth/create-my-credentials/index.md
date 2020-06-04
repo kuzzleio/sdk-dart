@@ -21,7 +21,7 @@ Future<Map<String, dynamic>> createMyCredentials(
 | Argument      | Type               | Description                          |
 |---------------|--------------------|--------------------------------------|
 | `strategy`    | <pre>String</pre>  | Strategy to use                      |
-| `credentials` | <pre>Map<String, dynamic><String, Object></re> | Map representing the credentials |
+| `credentials` | <pre>Map<String, dynamic></pre> | Map representing the credentials |
 
 ## Return
 
