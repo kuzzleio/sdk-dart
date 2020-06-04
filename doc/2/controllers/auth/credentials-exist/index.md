@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: CredentialsExist
+title: credentialsExist
 description: Checks that the current user has credentials for the specified strategy.
 ---
 
