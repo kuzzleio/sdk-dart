@@ -5,7 +5,7 @@ title: GetCurrentUser
 description: Returns the profile object for the user linked to the `JSON Web Token`.
 ---
 
-# GetCurrentUserAsync
+# GetCurrentUser
 
 Returns informations about the user currently loggued with the SDK instance.
 
