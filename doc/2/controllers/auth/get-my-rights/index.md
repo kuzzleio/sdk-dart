@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: GetMyRights
+title: getMyRights
 description: Returns the rights for the user linked to the `JSON Web Token`.
 ---
 
