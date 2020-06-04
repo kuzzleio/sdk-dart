@@ -6,7 +6,7 @@ final jwt = await kuzzle
       'username': 'foo',
       'password': 'bar'
     },
-    expiresIn:''
+    expiresIn: ''
   );
 
 final token = await kuzzle
