@@ -126,6 +126,16 @@ jobs:
       after_deploy:
         - npm run doc-cloudfront
 
+    - stage: Deployments
+      name: Deploy on pub.dev
+      if: type = push AND branch =~ /^master|[0-9]+-stable$/
+      language: dart
+      dart: stable
+      deploy:
+        provider: script
+        script:
+          - pub publish
+
 stages:
   - name: Tests
     if: (type = push AND branch =~ /^master|[0-9]+-(dev|stable)$/) OR type = pull_request
