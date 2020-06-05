@@ -52,7 +52,7 @@ jobs:
         directories:
           - $HOME/.pub-cache
       after_success:
-        - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
+        # - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
         - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ] && [ $TRAVIS_BRANCH == 'master' ]; then dartdoc; fi
 
 
