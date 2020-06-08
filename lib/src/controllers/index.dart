@@ -44,7 +44,11 @@ class IndexController extends KuzzleController {
       }
     }
 
-    throw BadResponseFormatError('$name.exists: bad response format', response);
+    throw BadResponseFormatError(
+      response.error?.id,
+      '$name.exists: bad response format', 
+      response
+    );
   }
 
   /// Returns the complete list of data indexes.
@@ -62,7 +66,11 @@ class IndexController extends KuzzleController {
       }
     }
 
-    throw BadResponseFormatError('$name.list: bad response format', response);
+    throw BadResponseFormatError(
+      response.error?.id,
+      '$name.list: bad response format', 
+      response
+    );
   }
 
   /// Deletes multiple indexes.
@@ -81,6 +89,10 @@ class IndexController extends KuzzleController {
       }
     }
 
-    throw BadResponseFormatError('$name.mDelete: bad response format', response);
+    throw BadResponseFormatError(
+      response.error?.id,
+      '$name.mDelete: bad response format', 
+      response
+    );
   }
 }

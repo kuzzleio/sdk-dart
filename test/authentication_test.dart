@@ -5,7 +5,11 @@ import 'package:kuzzle/kuzzle.dart';
 import 'helpers/kuzzle.dart';
 
 void main() {
-  final kuzzle = Kuzzle(WebSocketProtocol('localhost'));
+  final kuzzle = Kuzzle(WebSocketProtocol(Uri(
+    scheme: 'ws',
+    host: 'localhost',
+    port: 7512,
+  )));
   Map<String, dynamic> credentials;
   KuzzleUser user;
   setUpAll(() async {

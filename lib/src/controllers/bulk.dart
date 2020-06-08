@@ -32,7 +32,10 @@ class BulkController extends KuzzleController {
       return result;
     }
 
-    throw BadResponseFormatError('$name.import: bad response format', response);
+    throw BadResponseFormatError(response.error?.id, 
+      '$name.exists: bad response format', 
+      response
+    );
   }
 
   /// Creates or replaces
@@ -56,7 +59,10 @@ class BulkController extends KuzzleController {
       return result;
     }
 
-    throw BadResponseFormatError('$name.import: bad response format', response);
+    throw BadResponseFormatError(response.error?.id, 
+      '$name.exists: bad response format', 
+      response
+    );
   }
 
   /// Creates or replaces a document
@@ -81,6 +87,9 @@ class BulkController extends KuzzleController {
       return response.result as Map<String, dynamic>;
     }
 
-    throw BadResponseFormatError('$name.write: bad response format', response);
+    throw BadResponseFormatError(response.error?.id, 
+      '$name.exists: bad response format', 
+      response
+    );
   }
 }

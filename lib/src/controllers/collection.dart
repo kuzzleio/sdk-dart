@@ -62,7 +62,10 @@ class CollectionController extends KuzzleController {
       return response.result as bool;
     }
 
-    throw BadResponseFormatError('$name.exists: bad response format', response);
+    throw BadResponseFormatError(response.error?.id, 
+      '$name.exists: bad response format', 
+      response
+    );
   }
 
   /// Returns a data [collection] mapping.
@@ -280,6 +283,7 @@ class CollectionController extends KuzzleController {
     }
 
     throw BadResponseFormatError(
+      response.error?.id,
       'UpdateSpecifications: bad response format',
       response,
     );
