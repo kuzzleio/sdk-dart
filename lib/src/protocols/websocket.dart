@@ -11,19 +11,15 @@ import 'events.dart';
 
 class WebSocketProtocol extends KuzzleProtocol {
   WebSocketProtocol(
-    String host, {
+    Uri uri, {
     bool autoReconnect = true,
-    int port = 7512,
     Duration reconnectionDelay,
-    bool ssl = false,
     Duration pingInterval,
   })  : _pingInterval = pingInterval,
         super(
-          host,
+          uri,
           autoReconnect: autoReconnect,
-          port: port,
-          reconnectionDelay: reconnectionDelay,
-          ssl: ssl,
+          reconnectionDelay: reconnectionDelay
         );
 
   String _lastUrl;
@@ -38,7 +34,7 @@ class WebSocketProtocol extends KuzzleProtocol {
 
   @override
   Future<void> connect() async {
-    final url = '${ssl ? 'wss' : 'ws'}://$host:$port';
+    final url = '${uri.scheme}://${uri.host}:${uri.port}';
 
     await super.connect();
 
