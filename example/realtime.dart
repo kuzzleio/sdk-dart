@@ -24,12 +24,6 @@ Future<void> main() async {
     });
   });
 
-  // await kuzzle.realtime.unsubscribe(roomId);
-
-  // Timer(Duration(seconds: 60), () {
-  //   print('unsubscribing from room $roomId');
-  //   kuzzle.realtime.unsubscribe(roomId);
-  // });
 }
 
 void listener(KuzzleResponse response) {

@@ -14,11 +14,9 @@ Initializes a new instance of the WebSocket class pointing to the Kuzzle server 
 
 ```dart
 WebSocketProtocol(
-    String host, {
+    Uri uri, {
     bool autoReconnect = true,
-    int port = 7512,
     Duration reconnectionDelay,
-    bool ssl = false,
     Duration pingInterval,
   })
 ```
@@ -27,7 +25,7 @@ WebSocketProtocol(
 
 | Argument  | Type              | Description                  |
 | --------- | ----------------- | ---------------------------- |
-| `host`    | <pre>String</pre> | URI pointing to a Kuzzle server |
+| `uri`    | <pre>Uri</pre> | URI pointing to a Kuzzle server |
 | `autoReconnect` | <pre>bool</pre> | If `true` will automatically reconnect after a conneciton loss |
 | `port` | <pre>int</pre> | Kuzzle port |
 | `reconnectionDelay` | <pre>Duration</pre> | Time to wait before trying to reconnect |

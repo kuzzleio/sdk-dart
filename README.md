@@ -22,7 +22,7 @@ Include this in your pubspec.yaml
 
 ```yaml
 dependencies:
-  kuzzle: ^2.0.0-alpha.1
+  kuzzle: ^2.0.0
 
 ```
 
@@ -32,7 +32,7 @@ dependencies:
 import 'package:kuzzle/kuzzle.dart';
 
 final kuzzle = Kuzzle(
-  WebSocketProtocol('127.0.0.1.xip.io'),
+  WebSocketProtocol('127.0.0.1'),
   offlineMode: OfflineMode.auto,
 );
 
@@ -49,7 +49,7 @@ void main () async {
 
 ## Documentation and Samples
 
-* [https://prijindal.github.io/kuzzle_dart/](https://prijindal.github.io/kuzzle_dart/) - 
+* [https://next-docs.kuzzle.io/sdk/dart/2/](https://next-docs.kuzzle.io/sdk/dart/2/) - 
   _Access the auto generated documentation from source code_
 * [https://docs.kuzzle.io/core/1/api](https://docs.kuzzle.io/core/1/api) - 
   _Official Kuzzle API documentation_
