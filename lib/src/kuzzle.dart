@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'controllers/abstract.dart';
 import 'controllers/auth.dart';
@@ -70,6 +71,28 @@ class Kuzzle extends KuzzleEventEmitter {
       jwt = null;
       emit(ProtocolEvents.TOKEN_EXPIRED);
     });
+
+    protocol.on(ProtocolEvents.NETWORK_ON_RESPONSE_RECEIVED, (payload) {
+    try {
+      final _json = json.decode(payload as String) as Map<String, dynamic>;
+      final response = KuzzleResponse.fromJson(_json);
+
+      if (response.room.isNotEmpty) {
+        if (!_requests.contains(response.room)) {
+          protocol.emit(ProtocolEvents.UNHANDLED_RESPONSE, [response]);
+        }
+        if (response.error != null && 
+          response.error.id == 'security.token.expired') {
+            emit(ProtocolEvents.TOKEN_EXPIRED);
+        }
+        protocol.emit(response.room, [response]);
+      } else {
+        protocol.emit(ProtocolEvents.UNHANDLED_RESPONSE, [response]);
+      }
+    } catch (_) {
+      protocol.emit(ProtocolEvents.DISCARDED, [payload]);
+    }
+    });
   }
 
   ServerController get server => this['server'] as ServerController;
@@ -130,6 +153,8 @@ class Kuzzle extends KuzzleEventEmitter {
   /// Common volatile data, will be sent to all future requests
   Map<String, dynamic> globalVolatile;
 
+  final List<String> _requests = List();
+
   bool get autoReconnect => protocol.autoReconnect;
   set autoReconnect(bool value) {
     protocol.autoReconnect = value;
@@ -180,6 +205,7 @@ class Kuzzle extends KuzzleEventEmitter {
     });
 
     protocol.on(ProtocolEvents.DISCONNECT, () {
+      _requests.clear();
       emit(ProtocolEvents.DISCONNECTED);
     });
 
@@ -259,6 +285,7 @@ class Kuzzle extends KuzzleEventEmitter {
       if (lastDocumentIndex != -1) {
         for (final queuedRequest
             in _offlineQueue.getRange(0, lastDocumentIndex + 1)) {
+          _requests.remove(queuedRequest.request.requestId);
           emit(ProtocolEvents.OFFLINE_QUEUE_POP, [queuedRequest.request]);
         }
 
@@ -281,6 +308,8 @@ class Kuzzle extends KuzzleEventEmitter {
     void _dequeuingProcess() {
       if (_offlineQueue.isNotEmpty) {
         final queuedRequest = _offlineQueue.first;
+
+        _requests.add(queuedRequest.request.requestId);
 
         protocol.query(queuedRequest.request).then((response) {
           queuedRequest.completer.complete(response);
@@ -371,6 +400,7 @@ class Kuzzle extends KuzzleEventEmitter {
           'Unable to execute request: not connected to a Kuzzle server.'));
     }
 
+    _requests.add(request.requestId);
     // todo: implement query options
     return protocol.query(request);
   }

@@ -2,7 +2,7 @@ import 'package:kuzzle/kuzzle.dart';
 
 void main() {
   final kuzzle = Kuzzle(
-    WebSocketProtocol('127.0.0.1.xip.io'),
+    WebSocketProtocol('127.0.0.1'),
     offlineMode: OfflineMode.auto,
   );
 

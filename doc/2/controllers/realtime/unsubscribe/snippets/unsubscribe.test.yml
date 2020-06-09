@@ -1,0 +1,7 @@
+name: Realtime#unsubscribe
+description: Removes a subscription.
+hooks:
+  before:
+  after:
+template: default
+expected: Success

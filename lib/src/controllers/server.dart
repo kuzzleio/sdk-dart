@@ -21,7 +21,10 @@ class ServerController extends KuzzleController {
     }
 
     throw BadResponseFormatError(
-        '$name.adminExists: bad response format', response);
+      response.error?.id,
+      '$name.adminExists: bad response format', 
+      response
+    );
   }
 
   /// Returns all stored statistics frames
@@ -82,6 +85,10 @@ class ServerController extends KuzzleController {
       }
     }
 
-    throw BadResponseFormatError('$name.now: bad response format', response);
+    throw BadResponseFormatError(
+      response.error?.id,
+      '$name.now: bad response format', 
+      response
+    );
   }
 }
