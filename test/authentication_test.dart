@@ -32,14 +32,13 @@ void main() {
             .createUser(
               'user',
               {
-                'local': {
-                  'credentials': credentials,
+                'credentials': {
+                  'local': credentials
                 },
-                  'content': user.content
+                'content': user.content
               });
         expect(saveduser.content['name'], user.content['name']);
         user = saveduser;
-        print(credentials);
       });
 
       test('login', () async {
@@ -122,10 +121,6 @@ void main() {
 
       test('signout', () async {
         await kuzzle.auth.logout();
-      });
-
-      test('admin login', () async {
-        await kuzzle.auth.login('local', adminCredentials);
       });
 
       test('search users', () async {
