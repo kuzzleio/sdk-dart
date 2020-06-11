@@ -1,4 +1,4 @@
-final result = await kuzzle.security.searchProfiles(body:{
+final result = await kuzzle.security.searchProfiles(query:{
   'roles': [ 'default' ]
 });
 
