@@ -52,7 +52,7 @@ jobs:
         directories:
           - $HOME/.pub-cache
       after_success:
-        - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
+        # - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
         - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ] && [ $TRAVIS_BRANCH == 'master' ]; then dartdoc; fi
 
 
@@ -125,6 +125,16 @@ jobs:
           all_branches: true
       after_deploy:
         - npm run doc-cloudfront
+
+    - stage: Deployments
+      name: Deploy on pub.dev
+      if: type = push AND branch =~ /^master|[0-9]+-stable$/
+      language: dart
+      dart: stable
+      deploy:
+        provider: script
+        script:
+          - pub publish
 
 stages:
   - name: Tests

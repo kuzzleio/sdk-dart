@@ -1,7 +1,7 @@
 [![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square)](https://stackoverflow.com/questions/tagged/flutter?sort=votes)
 [![Pub](https://img.shields.io/pub/v/kuzzle.svg?style=flat-square)](https://pub.dartlang.org/packages/kuzzle)
-[![codecov](https://img.shields.io/codecov/c/github/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://codecov.io/gh/prijindal/kuzzle_dart)
-[![Build Status](https://img.shields.io/travis/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://travis-ci.org/prijindal/kuzzle_dart)
+[![codecov](https://img.shields.io/codecov/c/github/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://codecov.io/gh/kuzzleio/sdk-dart)
+[![Build Status](https://img.shields.io/travis/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://travis-ci.com/kuzzleio/sdk-dart)
 
 # Kuzzle Dart SDK
 
@@ -22,7 +22,7 @@ Include this in your pubspec.yaml
 
 ```yaml
 dependencies:
-  kuzzle: ^2.0.0-alpha.1
+  kuzzle: ^2.0.0
 
 ```
 
@@ -32,7 +32,7 @@ dependencies:
 import 'package:kuzzle/kuzzle.dart';
 
 final kuzzle = Kuzzle(
-  WebSocketProtocol('127.0.0.1.xip.io'),
+  WebSocketProtocol('127.0.0.1'),
   offlineMode: OfflineMode.auto,
 );
 
@@ -49,7 +49,7 @@ void main () async {
 
 ## Documentation and Samples
 
-* [https://prijindal.github.io/kuzzle_dart/](https://prijindal.github.io/kuzzle_dart/) - 
+* [https://next-docs.kuzzle.io/sdk/dart/2/](https://next-docs.kuzzle.io/sdk/dart/2/) - 
   _Access the auto generated documentation from source code_
 * [https://docs.kuzzle.io/core/1/api](https://docs.kuzzle.io/core/1/api) - 
   _Official Kuzzle API documentation_

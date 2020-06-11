@@ -1,0 +1,7 @@
+name: server#getStats
+description: Returns statistics snapshots within a provided timestamp range.
+hooks:
+  before:
+  after:
+template: print-result
+expected: hits

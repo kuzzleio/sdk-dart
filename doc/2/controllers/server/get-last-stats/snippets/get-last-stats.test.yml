@@ -1,0 +1,7 @@
+name: server#getLastStats
+description: Gets all stored internal statistic snapshots.
+hooks:
+  before:
+  after:
+template: print-result
+expected: ongoingRequests

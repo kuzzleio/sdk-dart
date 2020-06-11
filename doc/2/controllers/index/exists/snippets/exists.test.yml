@@ -1,0 +1,8 @@
+---
+name: Index#ExistsAsync
+description: Test if an index exists.
+hooks:
+  before: curl -X POST kuzzle:7512/nyc-open-data/_create
+  after:
+template: print-result
+expected: "true"

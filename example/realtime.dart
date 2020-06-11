@@ -4,7 +4,7 @@ import 'package:kuzzle/kuzzle.dart';
 
 Future<void> main() async {
   final kuzzle = Kuzzle(
-    WebSocketProtocol('127.0.0.1.xip.io'),
+    WebSocketProtocol('127.0.0.1'),
     offlineMode: OfflineMode.auto,
   );
 
@@ -14,7 +14,7 @@ Future<void> main() async {
 
   final roomId =
       await kuzzle.realtime.subscribe('index', 'collection', filters, listener);
-  print('unsubscribing to room $roomId');
+  print('subscribing to room $roomId');
 
   Timer.periodic(Duration(seconds: 2), (_) {
     print('publishing realtime message');
@@ -24,10 +24,6 @@ Future<void> main() async {
     });
   });
 
-  Timer(Duration(seconds: 60), () {
-    print('unsubscribing from room $roomId');
-    kuzzle.realtime.unsubscribe(roomId);
-  });
 }
 
 void listener(KuzzleResponse response) {

@@ -1,0 +1,7 @@
+name: Auth#GetStrategies
+description: Returns the rights for the user linked to the `JSON Web Token`.
+hooks:
+  before: curl -X POST kuzzle:7512/users/foo/_create -H "Content-Type:application/json" --data '{"content":{"profileIds":["default"]},"credentials":{"local":{"username":"foo","password":"bar"}}}'
+  after: curl -X DELETE kuzzle:7512/users/foo
+template: print-result
+expected: [local]

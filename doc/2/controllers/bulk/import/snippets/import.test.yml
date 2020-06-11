@@ -1,0 +1,9 @@
+name: Bulk#ImportAsync
+description: Creates, updates or deletes large amounts of documents as fast as possible.
+hooks:
+  before: |
+    curl -X POST kuzzle:7512/nyc-open-data/_create
+    curl -X PUT kuzzle:7512/nyc-open-data/yellow-taxi
+  after: curl -X DELETE kuzzle:7512/nyc-open-data
+template: default
+expected: "Success"

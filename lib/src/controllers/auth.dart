@@ -174,7 +174,7 @@ class AuthController extends KuzzleController {
   }
 
   /// Validate [credentials] of the specified [strategy] for the current user.
-  Future<Map<String, dynamic>> validateMyCredentials(
+  Future<bool> validateMyCredentials(
       String strategy, Map<String, dynamic> credentials) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -183,6 +183,6 @@ class AuthController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result as Map<String, dynamic>;
+    return response.result as bool;
   }
 }

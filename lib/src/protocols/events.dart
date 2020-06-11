@@ -12,4 +12,7 @@ class ProtocolEvents {
   static const String LOGIN_ATTEMPT = 'loginAttempt';
   static const String OFFLINE_QUEUE_PUSH = 'offlineQueuePush';
   static const String OFFLINE_QUEUE_POP = 'offlineQueuePop';
+  static const String NETWORK_ON_RESPONSE_RECEIVED = 
+  'networkOnResponseReceived';
+  static const UNHANDLED_RESPONSE = 'unhandledResponse';
 }

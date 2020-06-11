@@ -1,0 +1,8 @@
+---
+name: websocket#constructor
+description: Creates a new WebSocket instance
+hooks:
+  before:
+  after:
+template: without-ctor
+expected: Success

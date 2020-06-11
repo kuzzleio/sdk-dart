@@ -5,8 +5,8 @@ hooks:
     curl -XDELETE kuzzle:7512/nyc-open-data
     curl -XPOST kuzzle:7512/nyc-open-data/_create
     curl -XPUT kuzzle:7512/nyc-open-data/yellow-taxi
-    curl -XPOST -d '{"name":"John"}' -H "Content-Type: application/json" kuzzle:7512/nyc-open-data/yellow-taxi/some-id/_create
-    curl -XPOST -d '{"name":"John"}' -H "Content-Type: application/json" kuzzle:7512/nyc-open-data/yellow-taxi/some-id2/_create
+    curl -XPOST -d '{"name":"John"}' -H "Content-Type: application/json" kuzzle:7512/nyc-open-data/yellow-taxi/some-id/_create?refresh=wait_for
+    curl -XPOST -d '{"name":"John"}' -H "Content-Type: application/json" kuzzle:7512/nyc-open-data/yellow-taxi/some-id2/_create?refresh=wait_for
   after:
 template: print-result
 expected: "_id: some-id(.*)_id: some-id2"

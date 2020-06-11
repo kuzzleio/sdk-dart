@@ -20,23 +20,17 @@ enum KuzzleProtocolState {
 
 abstract class KuzzleProtocol extends KuzzleEventEmitter {
   KuzzleProtocol(
-    this.host, {
+    this.uri, {
     this.autoReconnect = true,
-    this.port = 7512,
     Duration reconnectionDelay,
-    this.ssl = false,
-  })  : assert(host.isNotEmpty),
-        assert(port > 0),
-        _state = KuzzleProtocolState.offline,
-        _reconnectionDelay = reconnectionDelay ?? Duration(seconds: 1),
-        id = _uuid.v4();
+  }) : _state = KuzzleProtocolState.offline,
+      _reconnectionDelay = reconnectionDelay ?? Duration(seconds: 1),
+      id = _uuid.v4();
 
   bool autoReconnect;
-  final String host;
+  final Uri uri;
   final String id;
-  final int port;
   final Duration _reconnectionDelay;
-  final bool ssl;
 
   @protected
   bool wasConnected = false;
@@ -81,7 +75,9 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     _state = KuzzleProtocolState.offline;
 
     emit(ProtocolEvents.NETWORK_ERROR,
-        [KuzzleError('Unable to connect to kuzzle server at $host:$port')]);
+        [
+          KuzzleError('Unable to connect to kuzzle server at ${uri.toString()}')
+        ]);
 
     if (autoReconnect && !retrying && !stopRetryingToConnect) {
       retrying = true;
@@ -117,12 +113,6 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     once(request.requestId, (response) {
       if (response.error != null) {
         emit(ProtocolEvents.QUERY_ERROR, [response.error, request]);
-
-        if (response.action != 'logout' &&
-            response.error.message == 'Token expired') {
-          emit(ProtocolEvents.TOKEN_EXPIRED);
-        }
-
         return completer.completeError(response.error);
       }
 

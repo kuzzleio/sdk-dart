@@ -19,12 +19,14 @@ class KuzzleProfile {
   String uid;
   List<dynamic> policies;
 
+  List<String> get roleIds => policies
+    .map((policy) => policy['roleId'] as String).toList();
+  
   Future<List<KuzzleRole>> getRoles() async {
     if (policies == null || policies.isEmpty) {
       return <KuzzleRole>[];
     }
 
-    return kuzzle.security
-        .mGetRoles(policies.map((policy) => policy['roleId']) as List<String>);
+    return kuzzle.security.mGetRoles(roleIds);
   }
 }
