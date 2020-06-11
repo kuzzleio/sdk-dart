@@ -29,9 +29,17 @@ void main() {
     group('user auth', () {
       test('register', () async {
         final saveduser = await kuzzle.security
-            .createUser('user', {'credentials': credentials, 'content': user.content});
+            .createUser(
+              'user',
+              {
+                'local': {
+                  'credentials': credentials,
+                },
+                  'content': user.content
+              });
         expect(saveduser.content['name'], user.content['name']);
         user = saveduser;
+        print(credentials);
       });
 
       test('login', () async {
