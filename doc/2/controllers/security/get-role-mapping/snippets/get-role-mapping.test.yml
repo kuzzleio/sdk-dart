@@ -1,0 +1,4 @@
+name: security#getRoleMapping
+description: Get roles mapping
+template: print-result
+expected: '^{mapping:'

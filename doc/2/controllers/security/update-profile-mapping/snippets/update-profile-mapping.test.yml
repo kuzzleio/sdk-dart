@@ -1,0 +1,4 @@
+name: security#updateProfileMapping
+description: Update profile mapping
+template: print-result
+expected: 'description: {'

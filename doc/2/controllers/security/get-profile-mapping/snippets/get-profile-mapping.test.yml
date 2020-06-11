@@ -1,0 +1,4 @@
+name: security#getProfileMapping
+description: Get profile mapping
+template: print-result
+expected: '^{mapping:'

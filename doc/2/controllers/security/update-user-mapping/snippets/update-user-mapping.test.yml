@@ -1,0 +1,4 @@
+name: security#updateUserMapping
+description: Update user mapping
+template: print-result
+expected: 'firstName: '

@@ -19,7 +19,7 @@ class RoleSearchResult extends SearchResult {
     hits = (response.result['hits'] as List).map((hit) => KuzzleRole(kuzzle,
             uid: hit['_id'] as String,
             controllers: hit['_source']['controllers'] as Map<String, dynamic>))
-        as List<dynamic>;
+        .toList();
   }
 
   // @override

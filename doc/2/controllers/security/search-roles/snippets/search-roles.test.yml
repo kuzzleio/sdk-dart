@@ -1,0 +1,4 @@
+name: security#searchRoles
+description: search roles
+template: print-result
+expected: Instance of 'RoleSearchResult'

@@ -1,0 +1,4 @@
+name: security#getUserMapping
+description: Get users mapping
+template: print-result
+expected: '^{mapping:'

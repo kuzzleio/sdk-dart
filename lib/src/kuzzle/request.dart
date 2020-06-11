@@ -12,6 +12,7 @@ class KuzzleRequest {
       this.jwt,
       this.requestId,
       this.waitForRefresh,
+      this.force,
       this.uid,
       this.volatile,
       this.startTime,
@@ -43,6 +44,7 @@ class KuzzleRequest {
     index = request.index;
     jwt = request.jwt;
     waitForRefresh = request.waitForRefresh;
+    force = request.force;
     uid = request.uid;
     volatile = request.volatile;
     startTime = request.startTime;
@@ -74,6 +76,7 @@ class KuzzleRequest {
     requestId = data['requestId'] as String;
     requestId ??= _uuid.v4();
     waitForRefresh = (data['refresh'] as String) == 'wait_for' ? true : false;
+    force = data['force'] as bool;
     uid = data['_id'] as String;
     volatile = data['volatile'] as Map<String, dynamic>;
     startTime = data['startTime'] == null
@@ -122,6 +125,9 @@ class KuzzleRequest {
     }
     if (requestId != null) {
       map['requestId'] = requestId;
+    }
+    if (force != null) {
+      map['force'] = force;
     }
     if (waitForRefresh == true) {
       map['refresh'] = 'wait_for';
@@ -201,6 +207,7 @@ class KuzzleRequest {
   String jwt;
   String requestId;
   bool waitForRefresh;
+  bool force;
   String uid;
   Map<String, dynamic> volatile;
   DateTime startTime;

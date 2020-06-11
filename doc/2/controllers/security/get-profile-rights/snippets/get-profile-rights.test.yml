@@ -1,0 +1,26 @@
+name: security#getProfileRights
+description: Get profile rights
+hooks:
+  before: >
+    curl -H "Content-type: application/json" -d '{
+      "policies": [
+        {
+          "roleId": "admin",
+          "restrictedTo": [
+            { "index": "someindex" },
+            {
+              "index": "anotherindex",
+              "collections": [
+                "somecollection"
+              ]
+            }
+          ]
+        },
+        {
+          "roleId": "default"
+        }
+      ]
+    }' kuzzle:7512/profiles/myProfile/_create
+  after: curl -XDELETE kuzzle:7512/profiles/myProfile
+template: print-result
+expected: "action: *"

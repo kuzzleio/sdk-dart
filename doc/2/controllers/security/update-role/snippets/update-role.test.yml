@@ -1,0 +1,16 @@
+name: security#updateRole
+description: Update role
+hooks:
+  before: >
+    curl -H "Content-type: application/json" -d '{
+      "controllers": {
+        "auth": {
+          "actions": {
+            "login": true
+          }
+        }
+      }
+    }' kuzzle:7512/roles/read-only/_create
+  after: curl -f -XDELETE kuzzle:7512/roles/read-only
+template: print-result
+expected: Instance of 'KuzzleRole'

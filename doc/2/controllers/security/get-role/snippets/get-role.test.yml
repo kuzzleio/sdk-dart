@@ -1,0 +1,24 @@
+name: security#getRole
+description: Get role
+hooks:
+  before: >
+    curl -H "Content-type: application/json" -d '{
+      "controllers": {
+        "auth": {
+          "actions": {
+            "login": true,
+            "getMyRights": true,
+            "updateSelf": true
+          }
+        },
+        "document": {
+          "actions": {
+            "get": true,
+            "search": true
+          }
+        }
+      }
+    }' kuzzle:7512/roles/myRole/_create
+  after: curl -XDELETE kuzzle:7512/roles/myRole
+template: print-result
+expected: Instance of 'KuzzleRole'

@@ -1,0 +1,6 @@
+name: security#createUser
+description: Creates user
+hooks:
+  after: curl -XDELETE kuzzle:7512/users/jdoe
+template: print-result
+expected: Instance of 'KuzzleUser'

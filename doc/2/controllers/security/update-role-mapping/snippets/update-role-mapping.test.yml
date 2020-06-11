@@ -1,0 +1,4 @@
+name: security#updateRoleMapping
+description: Update role mapping
+template: print-result
+expected: 'description:'
