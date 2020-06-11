@@ -84,8 +84,8 @@ class IndexController extends KuzzleController {
     final result = response.result as Map<String, dynamic>;
 
     if (result != null && result.containsKey('deleted')) {
-      if (result['deleted'] is List<String>) {
-        return result['deleted'] as List<String>;
+      if (result['deleted'] is List<dynamic>) {
+        return List<String>.from(result['deleted'] as List<dynamic>);
       }
     }
 

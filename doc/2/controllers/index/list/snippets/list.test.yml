@@ -1,0 +1,10 @@
+---
+name: Index#ListAsync
+description: List indexes handled by Kuzzle.
+hooks:
+  before: |
+    curl -X POST kuzzle:7512/admin/_resetDatabase 
+    curl -X POST kuzzle:7512/nyc-open-data/_create
+  after:
+template: print-result
+expected: ["nyc-open-data"]
