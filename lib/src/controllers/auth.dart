@@ -67,7 +67,7 @@ class AuthController extends KuzzleController {
       action: 'getCurrentUser',
     ));
 
-  return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Get credential information of
