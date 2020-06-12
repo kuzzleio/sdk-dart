@@ -23,8 +23,8 @@ Future<KuzzleRole> createOrReplaceRole(
 | --- | --- | --- |
 | `id` | <pre>String</pre> | Role identifier |
 | `controllers` | <pre>Map<String, dynamic></pre> | [Role definition](/core/2/guides/essentials/security#defining-roles) |
-| `waitForRefresh` | <pre>bool</pre><br />(`false`) | If set to `true`, Kuzzle will not respond until the created/replaced role is indexed |
-| `force`   | <pre>bool</pre><br />(`false`) | If set to `true`, creates or replaces the role even if it gives access to non-existent plugins API routes. |
+| `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the created/replaced role is indexed |
+| `force`   | <pre>bool</pre><br />(`null`) | If set to `true`, creates or replaces the role even if it gives access to non-existent plugins API routes. |
 
 ## Return
 

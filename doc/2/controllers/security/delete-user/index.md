@@ -21,7 +21,7 @@ Future<Map<String, dynamic>> deleteUser(String id,
 | Property | Type | Description |
 | --- | --- | --- |
 | `id` | <pre>String</pre> | User [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
-| `waitForRefresh` | <pre>bool</pre><br />(`false`) | If set to `true`, Kuzzle will not respond until the user deletion is indexed |
+| `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the user deletion is indexed |
 
 ## Return
 

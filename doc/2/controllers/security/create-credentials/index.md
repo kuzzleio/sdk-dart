@@ -26,7 +26,7 @@ Future<Map<String, dynamic>> createCredentials(
 | `strategy` | <pre>string</pre> | Strategy to use |
 | `kuid` | <pre>string</pre> | User [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
 | `credentials` | <pre>object</pre> | New credentials |
-| `waitForRefresh` | <pre>bool</pre><br />(`false`) | If set to `true`, Kuzzle will not respond until the credentials are indexed |
+| `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the credentials are indexed |
 
 ### credentials
 

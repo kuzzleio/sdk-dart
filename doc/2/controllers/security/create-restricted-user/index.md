@@ -27,7 +27,7 @@ Future<KuzzleUser> createRestrictedUser(Map<String, dynamic> body, String uid,
 |--- |--- |--- |
 | `body` | <pre>Map<String, dynamic></pre> | User content &amp; credentials |
 | `kuid` | <pre>String</pre> | User [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid). If not provided, a random kuid is automatically generated |
-| `waitForRefresh` | <pre>boolean</pre><br />(`false`) | If set to `true`, Kuzzle will not respond until the user is indexed |
+| `waitForRefresh` | <pre>boolean</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the user is indexed |
 
 
 ### body

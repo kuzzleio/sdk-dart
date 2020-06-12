@@ -21,7 +21,7 @@ Deletes a security role.
 | Property | Type | Description |
 | --- | --- | --- |
 | `id` | <pre>String</pre> | Role identifier |
-| `waitForRefresh` | <pre>bool</pre><br />(`false`) | If set to `true`, Kuzzle will not respond until the role deletion is indexed |
+| `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the role deletion is indexed |
 
 ## Return
 

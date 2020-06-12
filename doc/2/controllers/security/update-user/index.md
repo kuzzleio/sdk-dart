@@ -22,7 +22,7 @@ Future<KuzzleUser> updateUser(String uid, Map<String, dynamic> body,
 |--- |--- |--- |
 | `kuid` | <pre>String</pre> | User [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
 | `body` | <pre>Map<String, dynamic></pre> | User content |
-| `waitForRefresh` | <pre>bool</pre><br />(`false`) | If set to `true`, Kuzzle will not respond until the updated user is indexed |
+| `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the updated user is indexed |
 
 ### body
 

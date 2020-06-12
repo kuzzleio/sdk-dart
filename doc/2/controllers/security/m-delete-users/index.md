@@ -23,7 +23,7 @@ Throws a partial error (error code 206) if one or more user deletions fail.
 | Property | Type | Description |
 |--- |--- |--- |
 | `kuids` | <pre>List<String></pre> | Array of user [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
-| `waitForRefresh` | <pre>bool</pre><br />(`false`) | If set to `true`, Kuzzle will not respond until the users deletion is indexed |
+| `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the users deletion is indexed |
 
 ## Return
 

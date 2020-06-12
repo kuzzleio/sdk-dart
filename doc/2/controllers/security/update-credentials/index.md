@@ -24,7 +24,7 @@ Updates a user credentials for the specified authentication strategy.
 | `strategy` | <pre>String</pre> | Strategy to use |
 | `kuid` | <pre>String</pre> | User [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
 | `credentials` | <pre>Map<String, dynamic></pre> | New credentials |
-| `waitForRefresh` | <pre>bool</pre><br />(`false`) | If set to `true`, Kuzzle will not respond until the credentials are indexed |
+| `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the credentials are indexed |
 
 ### credentials
 
