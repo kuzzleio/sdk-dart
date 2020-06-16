@@ -16,7 +16,7 @@ class SecurityController extends KuzzleController {
   /// Creates authentication credentials for a user.
   Future<Map<String, dynamic>> createCredentials(
       String strategy,
-      String uid,
+      String id,
       Map<String, dynamic> credentials,
       {bool refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
