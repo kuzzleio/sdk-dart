@@ -182,7 +182,7 @@ class SecurityController extends KuzzleController {
 
   /// Deletes a security role.
   /// An error is returned if the role is still in use.
-  Future<Map<String, dynamic>> deleteRole(String uid,
+  Future<Map<String, dynamic>> deleteRole(String id,
   {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
