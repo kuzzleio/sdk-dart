@@ -13,7 +13,7 @@ Deletes user credentials for the specified authentication strategy.
 
 ```dart
 Future<Map<String, dynamic>> deleteCredentials(
-      String strategy, String uid, {bool waitForRefresh})
+      String strategy, String id, {bool waitForRefresh})
 ```
 
 <br />
