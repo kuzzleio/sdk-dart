@@ -154,7 +154,7 @@ class SecurityController extends KuzzleController {
 
   /// Deletes user credentials for the specified authentication strategy.
   Future<Map<String, dynamic>> deleteCredentials(
-      String strategy, String uid, {bool waitForRefresh}) async {
+      String strategy, String id, {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'deleteCredentials',
