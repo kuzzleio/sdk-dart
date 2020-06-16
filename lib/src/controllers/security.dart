@@ -32,7 +32,7 @@ class SecurityController extends KuzzleController {
 
   /// Creates a Kuzzle administrator account, only if none exist.
   Future<KuzzleUser> createFirstAdmin(
-      String uid, Map<String, dynamic> body,
+      String id, Map<String, dynamic> body,
       {bool reset}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
