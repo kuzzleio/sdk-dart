@@ -521,7 +521,7 @@ class SecurityController extends KuzzleController {
 
   /// Updates a user credentials for the specified authentication strategy.
   Future<Map<String, dynamic>> updateCredentials(
-      String strategy, String uid, Map<String, dynamic> credentials,
+      String strategy, String id, Map<String, dynamic> credentials,
       {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
