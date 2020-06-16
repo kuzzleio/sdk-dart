@@ -66,7 +66,7 @@ class SecurityController extends KuzzleController {
   /// Creates a new role or, if the provided role
   /// identifier already exists, replaces it.
   Future<KuzzleRole> createOrReplaceRole(
-      String uid, Map<String, dynamic> controllers,
+      String id, Map<String, dynamic> controllers,
       {bool waitForRefresh, bool force,}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
