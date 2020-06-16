@@ -12,7 +12,7 @@ Updates a user definition.
 <br />
 
 ```dart
-Future<KuzzleUser> updateUser(String uid, Map<String, dynamic> body,
+Future<KuzzleUser> updateUser(String id, Map<String, dynamic> body,
       {bool waitForRefresh})
 ```
 
