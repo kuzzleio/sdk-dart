@@ -168,7 +168,7 @@ class SecurityController extends KuzzleController {
 
   /// Deletes a security profile.
   /// An error is returned if the profile is still in use.
-  Future<Map<String, dynamic>> deleteProfile(String uid,
+  Future<Map<String, dynamic>> deleteProfile(String id,
   {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
