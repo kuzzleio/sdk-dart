@@ -455,7 +455,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Replaces a user with new configuration.
-  Future<KuzzleUser> replaceUser(String uid, Map<String, dynamic> body,
+  Future<KuzzleUser> replaceUser(String id, Map<String, dynamic> body,
       {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
