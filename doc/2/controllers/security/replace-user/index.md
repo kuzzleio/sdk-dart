@@ -12,7 +12,7 @@ Replaces a user with new configuration.
 <br />
 
 ```dart
-Future<KuzzleUser> replaceUser(String uid, 
+Future<KuzzleUser> replaceUser(String id, 
   Map<String, dynamic> body, {bool waitForRefresh})
 ```
 
