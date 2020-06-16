@@ -107,7 +107,7 @@ class SecurityController extends KuzzleController {
   /// This method allows users with limited rights to create other accounts,
   /// but blocks them from creating accounts with unwanted privileges
   /// (e.g. an anonymous user creating his own account).
-  Future<KuzzleUser> createRestrictedUser(Map<String, dynamic> body, String uid,
+  Future<KuzzleUser> createRestrictedUser(Map<String, dynamic> body, String id,
       {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
