@@ -12,7 +12,7 @@ Updates a security profile definition.
 <br />
 
 ```dart
- Future<KuzzleProfile> updateProfile(String uid, List<dynamic> policies,
+ Future<KuzzleProfile> updateProfile(String id, List<dynamic> policies,
       {bool waitForRefresh})
 ```
 
