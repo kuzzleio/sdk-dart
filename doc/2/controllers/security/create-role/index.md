@@ -12,7 +12,7 @@ Creates a new role.
 <br />
 
 ```dart
-Future<KuzzleRole> createRole(String uid, Map<String, dynamic> controllers,
+Future<KuzzleRole> createRole(String id, Map<String, dynamic> controllers,
   {bool waitForRefresh, bool force})
 ```
 
