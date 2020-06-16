@@ -138,7 +138,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Creates a new user
-  Future<KuzzleUser> createUser(String uid, 
+  Future<KuzzleUser> createUser(String id, 
       Map<String, dynamic> body,
       {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
