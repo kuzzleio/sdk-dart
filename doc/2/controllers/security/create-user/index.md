@@ -12,7 +12,7 @@ Creates a new user.
 <br />
 
 ```dart
-Future<KuzzleUser> createUser(String uid, 
+Future<KuzzleUser> createUser(String id, 
       Map<String, dynamic> body,
       {bool waitForRefresh})
 ```
