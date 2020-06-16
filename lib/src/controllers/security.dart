@@ -594,7 +594,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Updates a user definition.
-  Future<KuzzleUser> updateUser(String uid, Map<String, dynamic> body,
+  Future<KuzzleUser> updateUser(String id, Map<String, dynamic> body,
       {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
