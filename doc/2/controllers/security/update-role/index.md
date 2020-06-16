@@ -14,7 +14,7 @@ Updates a security role definition.
 <br />
 
 ```dart
-Future<KuzzleRole> updateRole(String uid, Map<String, dynamic> controllers,
+Future<KuzzleRole> updateRole(String id, Map<String, dynamic> controllers,
       {bool waitForRefresh, bool force})
 ```
 
