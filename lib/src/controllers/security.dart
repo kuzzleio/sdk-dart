@@ -195,7 +195,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Deletes a user and all their associate credentials.
-  Future<Map<String, dynamic>> deleteUser(String uid,
+  Future<Map<String, dynamic>> deleteUser(String id,
   {bool waitForRefresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
