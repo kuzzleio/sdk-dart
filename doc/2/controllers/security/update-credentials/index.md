@@ -13,7 +13,7 @@ Updates a user credentials for the specified authentication strategy.
 
 ```dart
  Future<Map<String, dynamic>> updateCredentials(
-      String strategy, String uid, Map<String, dynamic> credentials,
+      String strategy, String id, Map<String, dynamic> credentials,
       {bool waitForRefresh})
 ```
 
