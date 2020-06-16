@@ -34,10 +34,10 @@ The credentials to send. The expected properties depend on the target authentica
 
 Example for the `local` strategy:
 
-```js
+```dart
 {
-  username: 'foo',
-  password: 'bar'
+  'username': 'foo',
+  'password': 'bar'
 }
 ```
 
