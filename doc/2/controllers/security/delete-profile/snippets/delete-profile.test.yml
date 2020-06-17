@@ -6,4 +6,4 @@ hooks:
       "policies": []
     }' kuzzle:7512/profiles/myProfile/_create
 template: default
-expected: Profile successfully deleted
+expected: Success

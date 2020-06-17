@@ -25,7 +25,7 @@ Deletes a security profile.
 
 ## Return
 
-An acknowledgment message. 
+An object containing the `kuid` of the deleted profile in its `_id` property.
 
 ## Usage
 

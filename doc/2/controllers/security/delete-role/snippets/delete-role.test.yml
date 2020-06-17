@@ -12,4 +12,4 @@ hooks:
       }
     }' kuzzle:7512/roles/myRole/_create
 template: default
-expected: Role successfully deleted
+expected: Success

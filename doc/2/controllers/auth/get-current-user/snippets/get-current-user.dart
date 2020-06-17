@@ -6,7 +6,6 @@ await kuzzle
       'username': 'foo',
       'password': 'bar'
     },
-    expiresIn: ''
   );
 
 KuzzleUser user = await kuzzle

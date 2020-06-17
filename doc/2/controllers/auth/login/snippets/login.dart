@@ -5,6 +5,5 @@ final result = await kuzzle
     {
       'username': 'foo',
       'password': 'bar'
-    },
-    expiresIn: ''
+    }
   );

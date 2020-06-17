@@ -25,7 +25,7 @@ Deletes a security role.
 
 ## Return
 
-An acknowledgment message. 
+An object containing the `kuid` of the deleted role in its `_id` property.
 
 ## Usage
 
