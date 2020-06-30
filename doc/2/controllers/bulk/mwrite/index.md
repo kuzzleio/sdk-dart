@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: MWriteAsync
+title: mWrite
 description: Creates or replaces multiple documents directly into the storage engine.
 ---
 
