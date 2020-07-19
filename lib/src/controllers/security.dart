@@ -13,6 +13,24 @@ import 'abstract.dart';
 class SecurityController extends KuzzleController {
   SecurityController(Kuzzle kuzzle) : super(kuzzle, name: 'security');
 
+  /// Creates a new API key for a user.
+  Future<Map<String, dynamic>> createApiKey(
+      String userId, String description,
+      {String expiresIn, bool refresh}) async {
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'createApiKey',
+      userId: userId,
+      body: <String, dynamic>{
+        'description': description,
+      },
+      waitForRefresh: refresh,
+      expiresIn: expiresIn
+    ));
+
+    return response.result as Map<String, dynamic>;
+  }
+
   /// Creates authentication credentials for a user.
   Future<Map<String, dynamic>> createCredentials(
       String strategy,
@@ -150,6 +168,20 @@ class SecurityController extends KuzzleController {
     ));
 
     return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+  }
+
+  /// Deletes user API key.
+  Future<Null> deleteApiKey(
+      String userId, String id, {bool waitForRefresh}) async {
+    await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'deleteApiKey',
+      userId: userId,
+      uid: id,
+      waitForRefresh: waitForRefresh,
+    ));
+
+    return null;
   }
 
   /// Deletes user credentials for the specified authentication strategy.
