@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="kuzzle-dart.png"/>
+</p>
+
 [![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square)](https://stackoverflow.com/questions/tagged/flutter?sort=votes)
 [![Pub](https://img.shields.io/pub/v/kuzzle.svg?style=flat-square)](https://pub.dartlang.org/packages/kuzzle)
 [![codecov](https://img.shields.io/codecov/c/github/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://codecov.io/gh/kuzzleio/sdk-dart)
@@ -61,8 +65,11 @@ void main () async {
 If you find a bug or want a feature, but don't know how to fix/implement it, feel free to open an issue.
 If you fixed a bug or implemented a new feature, we will enjoy to merge your pull request.
 
-## Contributors
-- stafyniaksacha
-- Manuelbaun
-- prijindal
-- Aschen
+## History
+
+The first version of this SDK has been developed by @prijindal which was inspired by the SDK Javascript v5. Later with the help of another contributor, @stafyniaksacha, the SDK was reworked to match the new version 6 of the javascript SDK.
+The compatibility of the SDK with Kuzzle v2 was done by @Manuelbaun.
+
+Given the growing interest of the Dart/Flutter community for Kuzzle, we proposed to take over the SDK to integrate it officially and that it be subject to the same quality controls as our other projects.
+
+Many thanks to our amazing contributors!

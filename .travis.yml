@@ -133,6 +133,8 @@ jobs:
       dart: stable
       deploy:
         provider: script
+        before_script:
+          - ./docker_launch.sh;
         script:
           - pub publish
 

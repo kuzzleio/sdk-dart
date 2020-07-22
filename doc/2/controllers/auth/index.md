@@ -1,7 +1,7 @@
 ---
 code: true
 type: branch
-title: Auth
+title: auth
 description: Auth Controller
 ---
 
