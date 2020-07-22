@@ -9,11 +9,11 @@ hooks:
         },
         "credentials": {
           "local": {
-            "username": "user'${i}'",
+            "username": "mDeleteUser'${i}'",
             "password": "pass"
           }
         }
-      }' kuzzle:7512/users/user${i}/_create
+      }' kuzzle:7512/users/mDeleteUser${i}/_create?refresh=wait_for
     done
 template: print-result
-expected: '[user1, user2, user3]'
+expected: '[mDeleteUser1, mDeleteUser2, mDeleteUser3]'

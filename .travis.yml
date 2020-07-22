@@ -131,12 +131,8 @@ jobs:
       if: type = push AND branch =~ /^master|[0-9]+-stable$/
       language: dart
       dart: stable
-      deploy:
-        provider: script
-        before_script:
-          - ./docker_launch.sh;
-        script:
-          - pub publish
+      script:
+        - pub publish
 
 stages:
   - name: Tests

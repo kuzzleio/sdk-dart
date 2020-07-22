@@ -30,30 +30,11 @@ dependencies:
 
 ```
 
-## Basic usage
-
-```dart
-import 'package:kuzzle/kuzzle.dart';
-
-final kuzzle = Kuzzle(
-  WebSocketProtocol('127.0.0.1'),
-  offlineMode: OfflineMode.auto,
-);
-
-void main () async {
-  // note that we don't need to await connection to be effective
-  kuzzle.connect(); 
-  
-  final result = await kuzzle.server.info();
-  print('[result][server][info] $result');
-}
-```
-
 > only `WebSocketProtocol` protocol is available for now, feel free to suggest a PR for other protocols submissions
 
 ## Documentation and Samples
 
-* [https://next-docs.kuzzle.io/sdk/dart/2/](https://next-docs.kuzzle.io/sdk/dart/2/) - 
+* [https://docs.kuzzle.io/sdk/dart/2/](https://docs.kuzzle.io/sdk/dart/2/) - 
   _Access the auto generated documentation from source code_
 * [https://docs.kuzzle.io/core/1/api](https://docs.kuzzle.io/core/1/api) - 
   _Official Kuzzle API documentation_

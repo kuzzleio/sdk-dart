@@ -3,7 +3,7 @@ await kuzzle
   .login(
     'local',
     {
-      'username': 'foo',
+      'username': 'user',
       'password': 'bar'
     },
 );
@@ -13,7 +13,7 @@ final result = await kuzzle
   .updateMyCredentials(
     'local',
     {
-      'username': 'foo2',
+      'username': 'user2',
       'password': 'bar2'
     }
 );
