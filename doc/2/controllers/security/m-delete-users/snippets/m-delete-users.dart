@@ -1,5 +1,5 @@
 final result = await kuzzle.security.mDeleteUsers([
-  'mDe3leteUser1',
+  'mDeleteUser1',
   'mDeleteUser2',
-  'mDeleteUser'
+  'mDeleteUser3'
 ]);
