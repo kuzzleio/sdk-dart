@@ -454,6 +454,39 @@ class SecurityController extends KuzzleController {
     return roles;
   }
 
+  /// Gets multiple security roles.
+  Future<List<KuzzleUser>> mGetUsers(
+    List<String> ids, {String verb}) async {
+    final response = await kuzzle.query(KuzzleRequest(
+        controller: name,
+        action: 'mGetUsers',
+        verb: verb,
+        body: <String, dynamic>{
+          'ids': ids,
+        }));
+
+    final users = <KuzzleUser>[];
+
+    for (final hit in response.result['hits']) {
+      users.add(KuzzleUser(kuzzle,
+          uid: hit['_id'] as String,
+          content: hit['_source'] as Map<String, dynamic>));
+    }
+
+    return users;
+  }
+
+  /// Forces an immediate reindexation of the provided security collection.
+  Future<bool> refresh(String collection) async {
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'refresh',
+      collection: collection
+    ));
+
+    return response.status == 200 && response.result == null;
+  }
+
   /// Replaces a user with new configuration.
   Future<KuzzleUser> replaceUser(String id, Map<String, dynamic> body,
       {bool waitForRefresh}) async {

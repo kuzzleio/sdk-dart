@@ -18,6 +18,7 @@ Future<c> mCreate(
       String index, String collection, 
       List<Map<String, dynamic>> documents,
       { bool waitForRefresh = false, })
+```
 
 | Arguments          | Type                                                    | Description                       |
 | ------------------ | ------------------------------------------------------- | --------------------------------- |

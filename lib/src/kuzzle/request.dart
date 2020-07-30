@@ -31,6 +31,7 @@ class KuzzleRequest {
       this.state,
       this.source,
       this.users,
+      this.verb,
       this.includeKuzzleMeta}) {
     requestId ??= _uuid.v4();
   }
@@ -62,6 +63,7 @@ class KuzzleRequest {
     scope = request.scope;
     state = request.state;
     users = request.users;
+    verb = request.verb;
     source = request.source;
     includeKuzzleMeta = request.includeKuzzleMeta;
   }
@@ -98,6 +100,7 @@ class KuzzleRequest {
     scope = data['scope'] as String;
     state = data['state'] as String;
     users = data['users'] as String;
+    verb = data['verb'] as String;
     source = data['source'] as bool;
     includeKuzzleMeta = data['includeKuzzleMeta'] as bool;
   }
@@ -185,6 +188,9 @@ class KuzzleRequest {
     if (users != null) {
       map['users'] = users;
     }
+    if (verb != null) {
+      map['verb'] = verb;
+    }
     if (source != null) {
       map['source'] = source;
     }
@@ -226,5 +232,6 @@ class KuzzleRequest {
   String scope;
   String state;
   String users;
+  String verb;
   bool includeKuzzleMeta;
 }
