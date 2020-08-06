@@ -28,7 +28,7 @@ You can set the `verb` option to `POST` to force the SDK to use the POST API ins
 
 ## Returns
 
-An array of retrieved [`User`](/sdk/dart/2/core-classes/user/introduction)objects.
+An array of retrieved [`User`](/sdk/dart/2/core-classes/user/introduction) objects.
 
 ## Usage
 
