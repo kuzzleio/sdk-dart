@@ -4,7 +4,7 @@ import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
 import '../kuzzle/role.dart';
 
-import 'abstract.dart';
+import 'search-result.dart';
 
 class RoleSearchResult extends SearchResult {
   RoleSearchResult(
@@ -12,7 +12,6 @@ class RoleSearchResult extends SearchResult {
     KuzzleRequest request,
     KuzzleResponse response,
   }) : super(kuzzle, request: request, response: response) {
-    controller = null;
     searchAction = 'searchRoles';
     scrollAction = null; // scrollRoles action does not exists in Kuzzle API.
 
@@ -22,18 +21,15 @@ class RoleSearchResult extends SearchResult {
         .toList();
   }
 
-  // @override
-  // Future<List<dynamic>> next() {
-  //   if (request.scroll != null || request.sort != null) {
-  //     throw KuzzleError('only from/size params are allowed for role search');
-  //   }
-
-  //   return super.next().then((_) => hits = (response.result['hits'] as List)
-  //       .map((hit) => KuzzleRole(kuzzle,
-  //           uid: hit['_id'] as String,
-  //           controllers: hit['_source']['controllers']
-  //               as Map<String, dynamic>)) as List<dynamic>);
-  // }
+  @override
+  RoleSearchResult buildNextSearchResult (KuzzleResponse response) {
+    final nextSearchResult = RoleSearchResult(
+      kuzzle, 
+      request: request, 
+      response: response);
+    nextSearchResult.fetched += fetched;
+    return nextSearchResult;
+  }
 
   List<KuzzleRole> getRoles() => List<KuzzleRole>.from(hits);
 }
