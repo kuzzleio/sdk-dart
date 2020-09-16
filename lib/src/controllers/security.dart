@@ -1,3 +1,5 @@
+import 'package:kuzzle/src/search_result/abstract.dart';
+
 import '../kuzzle.dart';
 import '../kuzzle/errors.dart';
 import '../kuzzle/profile.dart';
@@ -531,6 +533,22 @@ class SecurityController extends KuzzleController {
     ));
 
     return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+  }
+
+  /// Searches for an user API keys.
+  Future<SearchResult> searchApiKeys(String userId, Map<String, dynamic> query,
+      {int from, int size}) async {
+    final request = KuzzleRequest(
+      controller: name,
+      action: 'searchApiKeys',
+      userId: userId,
+      body: query,
+      from: from,
+      size: size,
+    );
+
+    final response = await kuzzle.query(request);
+    return SearchResult(kuzzle, request: request, response: response);
   }
 
   /// Searches security profiles, optionally returning
