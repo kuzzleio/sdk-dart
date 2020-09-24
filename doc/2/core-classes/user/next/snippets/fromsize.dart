@@ -13,13 +13,16 @@ for (var i = 1; i <= 5; i++) {
   });
 }
 
-var res = await kuzzle.security.searchUsers(query:
-  {
-  'query': {
-    'term': {
-      'status': 'student'
+var res = await kuzzle.security.searchUsers(
+  query: {
+    'query': {
+      'term': {
+        'status': 'student'
+      }
     }
-  }}, from: 1, size: 1);
+  }, 
+  from: 1, 
+  size: 1);
 
 final result = [];
 
