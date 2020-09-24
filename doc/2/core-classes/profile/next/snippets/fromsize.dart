@@ -9,8 +9,10 @@ for (var i = 1; i <= 5; i++) {
   );
 }
 
-var res = await kuzzle.security.searchProfiles(query:{
-  'roles': ['default']}, from: 1, size: 1);
+var res = await kuzzle.security.searchProfiles(
+  query:{ roles': [ 'default' ] }, 
+  from: 1, 
+  size: 1);
 
 final result = [];
 
