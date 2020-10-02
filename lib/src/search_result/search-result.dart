@@ -66,9 +66,7 @@ class SearchResult {
         controller: controller,
         scrollId: response.result['scrollId'] as String,
       );
-      if (searchAction != 'searchRoles') {
-        query.action = scrollAction;
-      }
+      query.action = scrollAction;
       return await kuzzle
           .query(query)
           .then((_response) {

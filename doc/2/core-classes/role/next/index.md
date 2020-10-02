@@ -20,40 +20,9 @@ Future<List<dynamic>> next()
 
 Returns a `RoleSearchResult` object, or `null` if no more pages are available.
 
-## Pagination strategies
+## Pagination strategie
 
-Depending on the arguments given to the initial search, the `next` method will pick one of the following strategies, by decreasing order of priority.
-
-### Strategy: scroll cursor
-
-If the original search query is given a `scroll` parameter, the `next` method uses a cursor to paginate results.
-
-The results from a scroll request are frozen, and reflect the state of the index at the time the initial `search` request.  
-For that reason, this method is guaranteed to return consistent results, even if documents are updated or deleted in the database between two pages retrieval.
-
-This is the most consistent way to paginate results, however, this comes at a higher computing cost for the server.
-
-::: warning
-When using a cursor with the `scroll` option, Elasticsearch has to duplicate the transaction log to keep the same result during the entire scroll session.  
-It can lead to memory leaks if a scroll duration too great is provided, or if too many scroll sessions are open simultaneously.  
-:::
-
-::: info
-<SinceBadge version="Kuzzle 2.2.0"/>
-You can restrict the scroll session maximum duration under the `services.storage.maxScrollDuration` configuration key.
-:::
-
-<<< ./snippets/scroll.dart
-
-### Strategy: sort / size
-
-If the initial search contains `sort` and `size` parameters, the `next` method retrieves the next page of results following the sort order, the last item of the current page acting as a live cursor.
-
-To avoid too many duplicates, it is advised to provide a sort combination that will always identify one item only. The recommended way is to use the field `_uid` which is certain to contain one unique value for each document.
-
-Because this method does not freeze the search results between two calls, there can be missing or duplicated documents between two result pages.
-
-This method efficiently mitigates the costs of scroll searches, but returns less consistent results: it's a middle ground, ideal for real-time search requests.
+The `next` method can work with the following strategie.
 
 ### Strategy: from / size
 

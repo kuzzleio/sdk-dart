@@ -2,7 +2,7 @@
 code: true
 type: page
 title: next
-description: ProfileSearchResult next method
+description: UserSearchResult next method
 order: 200
 ---
 
@@ -18,7 +18,7 @@ Future<List<dynamic>> next()
 
 ## Returns
 
-Returns a `ProfileSearchResult` object, or `null` if no more pages are available.
+Returns a `UserSearchResult` object, or `null` if no more pages are available.
 
 ## Pagination strategies
 
