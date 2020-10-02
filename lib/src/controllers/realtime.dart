@@ -174,7 +174,7 @@ class RealTimeController extends KuzzleController {
   }
 
   /// Removes a subscription.
-  Future<String> unsubscribe(String roomId) async {
+  Future<void> unsubscribe(String roomId) async {
     if (!_currentSubscriptions.containsKey(_rooms[roomId])) {
       return Future.error(
           KuzzleError(
@@ -183,7 +183,7 @@ class RealTimeController extends KuzzleController {
           ));
     }
 
-    final response = await kuzzle.query(KuzzleRequest(
+    await kuzzle.query(KuzzleRequest(
         controller: name,
         action: 'unsubscribe',
         body: <String, dynamic>{'roomId': roomId}));
@@ -191,7 +191,5 @@ class RealTimeController extends KuzzleController {
     _currentSubscriptions[roomId]?.clear();
     _subscriptionsCache[roomId]?.clear();
     _rooms.remove(roomId);
-
-    return response.result as String;
   }
 }
