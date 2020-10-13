@@ -18,7 +18,7 @@ Future<List<KuzzleUser>> mGetUsers(List<String> ids)
 
 | Property | Type | Description |
 |--- |--- |--- |
-| `ids` | <pre>List<String></pre> | User identifiers |
+| `ids` | `List<String>` | User identifiers |
 | `verb`| <pre>String</pre> | (HTTP only) Forces the verb of the API route |
 
 #### verb

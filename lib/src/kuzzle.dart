@@ -397,7 +397,9 @@ class Kuzzle extends KuzzleEventEmitter {
 
       emit(ProtocolEvents.DISCARDED, [request]);
       return Future.error(KuzzleError(
-          'Unable to execute request: not connected to a Kuzzle server.'));
+          'not_connected',
+          'Unable to execute request: not connected to a Kuzzle server.',
+        503));
     }
 
     _requests.add(request.requestId);

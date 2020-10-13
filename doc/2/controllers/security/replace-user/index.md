@@ -30,7 +30,7 @@ Future<KuzzleUser> replaceUser(String id,
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `profileIds` | <pre>List<String></pre> | Profile identifiers to assign the user to |
+| `profileIds` | `List<String>` | Profile identifiers to assign the user to |
 
 **other properties**
 

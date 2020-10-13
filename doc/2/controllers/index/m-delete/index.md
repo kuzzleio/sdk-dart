@@ -17,7 +17,7 @@ Future<List<String>> mDelete(List<String> indexes)
 
 | Argument  | Type              | Description           |
 |-----------|-------------------|-----------------------|
-| `indexes` | <pre>List<String></pre> | List of indexes names |
+| `indexes` | `List<String>` | List of indexes names |
 
 ## Return
 

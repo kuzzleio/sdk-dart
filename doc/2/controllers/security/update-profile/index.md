@@ -21,7 +21,7 @@ Updates a security profile definition.
 | Property | Type | Description |
 |--- |--- |--- |
 | `id` | <pre>String</pre> | Profile identifier |
-| `policies` | <pre>List<dynamic></pre> | [Profile definition content](/core/2/guides/essentials/security#defining-profiles) |
+| `policies` | `List<dynamic>` | [Profile definition content](/core/2/guides/essentials/security#defining-profiles) |
 | `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the created profile is indexed |
 
 ## Return

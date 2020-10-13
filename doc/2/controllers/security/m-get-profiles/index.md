@@ -19,7 +19,7 @@ Future<List<KuzzleProfile>> mGetProfiles(List<String> ids)
 
 | Property | Type | Description |
 |--- |--- |--- |
-| `ids` | <pre>List<String></pre> | Profile identifiers |
+| `ids` | `List<String>` | Profile identifiers |
 
 ## Return
 

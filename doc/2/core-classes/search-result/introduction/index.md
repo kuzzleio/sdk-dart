@@ -19,7 +19,7 @@ It can be returned by the following methods:
 | Property       | Type                                                    | Description        |
 | -------------- | ------------------------------------------------------- | ------------------ |
 | `aggregations` | <pre>Map<String, dynamic></pre>            | Search aggregations (can be undefined) |
-| `hits`         | <pre>List<dynamic></pre> | Page results       |
+| `hits`         | `List<dynamic>` | Page results       |
 | `total`        | <pre>int</pre>                                      |  Total number of items that _can_ be retrieved |
 | `fetched`      | <pre>int</pre>                                      | Number of retrieved items so far   |
 

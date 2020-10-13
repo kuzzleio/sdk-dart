@@ -5,7 +5,6 @@ import '../kuzzle.dart';
 import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
-
 class SearchResult {
   SearchResult(
     this.kuzzle, {
@@ -56,18 +55,20 @@ class SearchResult {
   int fetched = 0;
   int total = 0;
 
+  @override
   Future<SearchResult> next() async {
     if (fetched >= total) {
       return null;
     }
 
     if (request.scroll != null && request.scroll.isNotEmpty) {
-      return await kuzzle
-          .query(KuzzleRequest(
+      final query = KuzzleRequest(
         controller: controller,
-        action: scrollAction,
         scrollId: response.result['scrollId'] as String,
-      ))
+      );
+      query.action = scrollAction;
+      return await kuzzle
+          .query(query)
           .then((_response) {
         response = _response;
 
@@ -81,7 +82,7 @@ class SearchResult {
           fetched = fetched;
         }
 
-        return _buildNextSearchResult(response);
+        return buildNextSearchResult(response);
       });
     } else if (request.size != null && request.sort != null) {
       final _request = KuzzleRequest.clone(request)..action = searchAction;
@@ -114,7 +115,7 @@ class SearchResult {
           fetched = hits.length;
         }
 
-        return _buildNextSearchResult(response);;
+        return buildNextSearchResult(response);
       });
     } else if (request.size != null) {
 
@@ -139,7 +140,7 @@ class SearchResult {
           fetched = fetched;
         }
 
-        return _buildNextSearchResult(response);
+        return buildNextSearchResult(response);
       });
     }
 
@@ -162,13 +163,13 @@ class SearchResult {
     return _get(object[key] as Map<String, dynamic>, path);
   }
 
-  SearchResult _buildNextSearchResult (KuzzleResponse response) {
+  @protected
+  SearchResult buildNextSearchResult(KuzzleResponse response){
     final nextSearchResult = SearchResult(
       kuzzle, 
       request: request, 
       response: response);
     nextSearchResult.fetched += fetched;
-
     return nextSearchResult;
   }
 }
