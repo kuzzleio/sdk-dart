@@ -1,4 +1,4 @@
-import 'package:kuzzle/src/search_result/abstract.dart';
+import 'package:kuzzle/src/search_result/search-result.dart';
 
 import '../kuzzle.dart';
 import '../kuzzle/errors.dart';
