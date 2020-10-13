@@ -12,12 +12,12 @@ Removes a subscription.
 ## Arguments
 
 ```dart
-Future<String> unsubscribe(String roomId)
+Future<void> unsubscribe(String roomId)
 ```
 
 | Argument  | Type               | Description          |
 |-----------|--------------------|----------------------|
-| `roomid` | <pre>String</pre>  | Subscription room ID |
+| `roomid`  | <pre>String</pre>  | Subscription room ID |
 
 ## Usage
 
