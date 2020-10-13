@@ -7,8 +7,6 @@ description: Searches for a user API keys.
 
 # searchApiKeys
 
-<SinceBadge version="7.1.0" />
-
 <SinceBadge version="Kuzzle 2.1.0" />
 
 Searches for a user API keys.
