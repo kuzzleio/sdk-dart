@@ -535,7 +535,7 @@ class SecurityController extends KuzzleController {
     return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
-  /// Searches for an user API keys.
+  /// Searches for a user API keys.
   Future<SearchResult> searchApiKeys(String userId, Map<String, dynamic> query,
       {int from, int size}) async {
     final request = KuzzleRequest(
