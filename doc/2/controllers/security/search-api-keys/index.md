@@ -11,7 +11,7 @@ description: Searches for a user API keys.
 
 <SinceBadge version="Kuzzle 2.1.0" />
 
-Searches for an user API keys.
+Searches for a user API keys.
 
 <br />
 
