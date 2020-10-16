@@ -160,9 +160,9 @@ class RealTimeController extends KuzzleController {
 
   void _renewSubscribe() async {
     for (final subs in _subscriptionsCache.values) {
-       final List<Subscription> _localSubs = List<Subscription>.from(subs);
-        subs.clear();
-        for (final sub in _localSubs) {
+      final List<Subscription> _localSubs = List<Subscription>.from(subs);
+      subs.clear();
+      for (final sub in _localSubs) {
         await subscribe(
           sub.index,
           sub.collection,
