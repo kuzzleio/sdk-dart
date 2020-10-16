@@ -145,11 +145,11 @@ class RealTimeController extends KuzzleController {
             _subscriptionsCache[channel] = item;
           } else {
             if (!_currentSubscriptions[channel].contains(subscription)) {
-            _currentSubscriptions[channel].add(subscription);
-          }
-          if (!_subscriptionsCache[channel].contains(subscription)) {
-            _subscriptionsCache[channel].add(subscription);
-          }
+              _currentSubscriptions[channel].add(subscription);
+            }
+            if (!_subscriptionsCache[channel].contains(subscription)) {
+              _subscriptionsCache[channel].add(subscription);
+            }
           }
           _rooms[roomId] = channel;
 
