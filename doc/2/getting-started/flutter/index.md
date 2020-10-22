@@ -8,11 +8,11 @@ order: 0
 
 # Getting Started with Kuzzle and Flutter
 
-This section deals with **Kuzzle V2** (+ **Dart SDK 2**) and **VueJS**. We will create **documents** in Kuzzle and subscribe to [document notifications](/sdk/dart/2/essentials/realtime-notifications#document-messages) to develop a realtime chat.
+This section deals with **Kuzzle v2**, the **Dart SDK v2** and **Flutter**. We will create **documents** in Kuzzle and subscribe to [document notifications](/sdk/dart/2/essentials/realtime-notifications#document-messages) to develop a realtime chat.
 
 ## Requirements
 
-- **Running Kuzzle V2 Stack** ([instructions here](/core/2/guides/getting-started/running-kuzzle))
+- **Running Kuzzle v2 Stack** ([instructions here](/core/2/guides/getting-started/running-kuzzle))
 - **Setup an editor** ([instructions here](https://flutter.dev/docs/get-started/editor))
 - **Create a new project** ([instructions here](https://flutter.dev/docs/get-started/test-drive?tab=androidstudio#create-app))
 
