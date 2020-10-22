@@ -144,8 +144,12 @@ class RealTimeController extends KuzzleController {
             _currentSubscriptions[channel] = item;
             _subscriptionsCache[channel] = item;
           } else {
-            _currentSubscriptions[channel].add(subscription);
-            _subscriptionsCache[channel].add(subscription);
+            if (!_currentSubscriptions[channel].contains(subscription)) {
+              _currentSubscriptions[channel].add(subscription);
+            }
+            if (!_subscriptionsCache[channel].contains(subscription)) {
+              _subscriptionsCache[channel].add(subscription);
+            }
           }
           _rooms[roomId] = channel;
 
@@ -156,7 +160,9 @@ class RealTimeController extends KuzzleController {
 
   void _renewSubscribe() async {
     for (final subs in _subscriptionsCache.values) {
-      for (final sub in subs) {
+      final List<Subscription> _localSubs = List<Subscription>.from(subs);
+      subs.clear();
+      for (final sub in _localSubs) {
         await subscribe(
           sub.index,
           sub.collection,

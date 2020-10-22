@@ -105,6 +105,7 @@ jobs:
         - S3_BUCKET=docs.kuzzle.io
         - CLOUDFRONT_DISTRIBUTION_ID=E3D6RP0POLCJMM
         - AWS_DEFAULT_REGION=us-west-2
+        - FRAMEWORK_BRANCH=master
       addons:
         apt:
           packages:
