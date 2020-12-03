@@ -1,0 +1,8 @@
+---
+name: kuzzle#Connect
+description: Connects the SDK to Kuzzle
+hooks:
+  before:
+  after:
+template: without-connect
+expected: Success
