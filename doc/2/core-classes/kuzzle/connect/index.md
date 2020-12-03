@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: Connect
+title: connect
 description: Connects the SDK to Kuzzle
 ---
 
