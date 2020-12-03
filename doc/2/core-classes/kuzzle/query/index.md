@@ -9,7 +9,7 @@ description: Base method to send API query to Kuzzle
 
 Base method used to send queries to Kuzzle, following the [API Documentation](/core/2/api).
 
-:::warning
+::: warning
 This is a low-level method, exposed to allow advanced SDK users to bypass high-level methods.
 :::
 
