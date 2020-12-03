@@ -5,7 +5,7 @@ title: connect
 description: Connects the SDK to Kuzzle
 ---
 
-# Connect
+# connect
 
 Connects to Kuzzle using the underlying protocol `connect` method. 
 
