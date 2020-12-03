@@ -26,7 +26,7 @@ This is a low-level method, exposed to allow advanced SDK users to bypass high-l
 | --------- | ----------------- | ---------------------- |
 | `request` | <pre>KuzzleRequest</pre> | API request    |
 | `volatile`   | <pre>Map<String, dynamic></pre> | Additional information to send to Kuzzle |
-| `queueable`   | <pre>bool</pre> | Additional information to send to Kuzzle |
+| `queueable`   | <pre>bool</pre> | If true, queues the request during downtime, until connected to Kuzzle again |
 
 ### request
 

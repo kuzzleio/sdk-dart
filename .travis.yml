@@ -24,7 +24,7 @@ jobs:
 
       script:
         - gem install typhoeus
-        - cd doc/framework/ && HYDRA_MAX_CONCURRENCY=20 ruby .ci/dead-links.rb -p src/sdk/java/3/
+        - cd doc/framework/ && HYDRA_MAX_CONCURRENCY=20 ruby .ci/dead-links.rb -p src/sdk/dart/2/
 
 
     - stage: Tests
