@@ -42,7 +42,7 @@ A `Map<String, dynamic>` representing the data mapping of the collection.
 
 The mapping must have a root field `properties` that contain the mapping definition:
 
-More information about database mappings [here](/core/2/guides/essentials/database-mappings).
+More information about database mappings [here](/core/2/guides/main-concepts/data-storage).
 
 ## Usage
 

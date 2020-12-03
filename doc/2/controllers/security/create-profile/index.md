@@ -22,7 +22,7 @@ Future<KuzzleProfile> createProfile(
 | Property | Type | Description |
 |--- |--- |--- |
 | `id` | <pre>String</pre> | Profile identifier |
-| `policies` | <pre>List<Map<String, dynamic>></pre> | [Profile content](/core/2/guides/essentials/security#defining-profiles) |
+| `policies` | <pre>List<Map<String, dynamic>></pre> | [Profile content](/core/2/guides/main-concepts/permissions#profiles) |
 | `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the created profile is indexed |
 
 ## Return

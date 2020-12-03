@@ -16,4 +16,4 @@ The Kuzzle Dart SDK can automatically reconnect in case of a network disconnecti
 
 To control the auto reconnection feature with WebSocket (enabled by default), refer to the `autoReconnect` option of the [WebSocketProtocol](/sdk/dart/2/protocols/websocket) object.
 
-To control the auto resubscription (enabled by default), refer to the `autoResubscribe` option of the [subscribe](/sdk/dart/2/controller/realtime/subscribe) object.
+To control the auto resubscription (enabled by default), refer to the `autoResubscribe` option of the [subscribe](/sdk/dart/2/controllers/realtime/subscribe) object.

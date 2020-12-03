@@ -19,7 +19,7 @@ Future<KuzzleUser> getUser(String id)
 
 | Property | Type | Description |
 |--- |--- |--- |
-| `id` | <pre>String</pre> | User [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
+| `id` | <pre>String</pre> | User [kuid](/core/2/guides/main-concepts/authentication#kuzzle-user-identifier-kuid) |
 
 ## Return
 

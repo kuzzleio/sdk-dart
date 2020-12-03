@@ -38,7 +38,7 @@ Check the appropriate [authentication plugin](/core/2/plugins/guides/strategies/
 
 ### expiresIn
 
-The default value for the `expiresIn` option is defined at server level, in Kuzzle's [configuration file](/core/2/guides/essentials/configuration).
+The default value for the `expiresIn` option is defined at server level, in Kuzzle's [configuration file](/core/2/guides/advanced/configuration).
 
 
 ## Return

@@ -21,7 +21,7 @@ Future<KuzzleUser> createFirstAdmin(
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `kuid` | <pre>String</pre> | Administrator [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
+| `kuid` | <pre>String</pre> | Administrator [kuid](/core/2/guides/main-concepts/authentication#kuzzle-user-identifier-kuid) |
 | `body` | <pre>Map<String, dynamic></pre> | Administrator content &amp; credentials |
 | `reset` | <pre>bool</pre><br />(`null`) | If true, restricted permissions are applied to `anonymous` and `default` roles |
 
