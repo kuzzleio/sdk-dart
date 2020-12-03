@@ -1,7 +1,7 @@
 ---
 code: true
 type: page
-title: Query
+title: query
 description: Base method to send API query to Kuzzle
 ---
 
