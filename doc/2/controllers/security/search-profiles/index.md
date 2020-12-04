@@ -29,7 +29,7 @@ Future<ProfileSearchResult> searchProfiles(
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `roles` | <pre>List<String></pre> | Role identifiers |
+| `roles` | `List<String>` | Role identifiers |
 
 
 ## Return

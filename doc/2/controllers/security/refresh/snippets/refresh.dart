@@ -1,0 +1,1 @@
+final result = await kuzzle.security.refresh('users');

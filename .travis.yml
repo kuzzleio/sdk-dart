@@ -133,7 +133,7 @@ jobs:
       language: dart
       dart: stable
       script:
-        - pub publish
+        - pub publish --force
 
 stages:
   - name: Tests

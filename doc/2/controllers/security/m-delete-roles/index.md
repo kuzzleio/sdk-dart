@@ -22,7 +22,7 @@ Future<List<dynamic>> mDeleteRoles(List<String> ids,
 
 | Property | Type | Description |
 |--- |--- |--- |
-| `ids` | <pre>List<String></pre> | Role identifiers |
+| `ids` | `List<String>` | Role identifiers |
 | `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the roles deletion is indexed |
 
 ## Return

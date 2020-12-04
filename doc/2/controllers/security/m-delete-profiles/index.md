@@ -21,7 +21,7 @@ Future<List<dynamic>> mDeleteProfiles(List<String> ids, {bool waitForRefresh})
 
 | Property | Type | Description |
 |--- |--- |--- |
-| `ids` | <pre>List<String></pre> | Profile identifiers |
+| `ids` | `List<String>` | Profile identifiers |
 | `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the profiles deletion is indexed |
 
 ## Return

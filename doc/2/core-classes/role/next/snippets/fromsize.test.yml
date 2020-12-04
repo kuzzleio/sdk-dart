@@ -1,0 +1,11 @@
+name: rolesearchresult#fromsize
+description: Next method with from/size
+hooks:
+  after: |
+    curl -XDELETE kuzzle:7512/roles/read-only-1?refresh=wait_for
+    curl -XDELETE kuzzle:7512/roles/read-only-2?refresh=wait_for
+    curl -XDELETE kuzzle:7512/roles/read-only-3?refresh=wait_for
+    curl -XDELETE kuzzle:7512/roles/read-only-4?refresh=wait_for
+    curl -XDELETE kuzzle:7512/roles/read-only-5?refresh=wait_for
+template: default
+expected: Success

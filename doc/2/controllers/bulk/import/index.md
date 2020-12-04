@@ -53,8 +53,8 @@ A Map<String, dynamic> containing 2 arrays:
 
 | Property | Type                | Description                                         |
 | -------- | ------------------- | --------------------------------------------------- |
-| `successes`  | <pre>List<dynamic></pre> | Array of object containing successful document import |
-| `errors` | <pre>List<dynamic></pre>  | Array of object containing failed document import     |
+| `successes`  | `List<dynamic>` | Array of object containing successful document import |
+| `errors` | `List<dynamic>`  | Array of object containing failed document import     |
 
 Each item of the `successes` array is an object containing the action name as key and the corresponding object contain the following properties:
 

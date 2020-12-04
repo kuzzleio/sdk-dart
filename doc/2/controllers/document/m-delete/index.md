@@ -25,7 +25,7 @@ Future<Map<String, dynamic>> mDelete(
 | ------------------ | ------------------------------------------------------- | --------------------------------- |
 | `index`            | <pre>String</pre>                                       | Index name                        |
 | `collection`       | <pre>String</pre>                                       | Collection name                   |
-| `ids`              | <pre>List<String></pre>                            | Document IDs                      |
+| `ids`              | `List<String>`                            | Document IDs                      |
 ---
 
 ## Return

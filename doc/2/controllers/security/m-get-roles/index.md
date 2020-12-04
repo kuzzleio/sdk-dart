@@ -20,7 +20,7 @@ Future<List<KuzzleRole>> mGetRoles(
 
 | Property | Type | Description |
 |--- |--- |--- |
-| `ids` | <pre>List<String></pre> | Roles identifiers |
+| `ids` | `List<String>` | Roles identifiers |
 
 ## Resolves
 

@@ -1,3 +1,5 @@
+import 'package:kuzzle/src/search_result/search-result.dart';
+
 import '../kuzzle.dart';
 import '../kuzzle/errors.dart';
 import '../kuzzle/profile.dart';
@@ -12,6 +14,24 @@ import 'abstract.dart';
 
 class SecurityController extends KuzzleController {
   SecurityController(Kuzzle kuzzle) : super(kuzzle, name: 'security');
+
+  /// Creates a new API key for a user.
+  Future<Map<String, dynamic>> createApiKey(
+      String userId, String description,
+      {String expiresIn, bool refresh}) async {
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'createApiKey',
+      userId: userId,
+      body: <String, dynamic>{
+        'description': description,
+      },
+      waitForRefresh: refresh,
+      expiresIn: expiresIn
+    ));
+
+    return response.result as Map<String, dynamic>;
+  }
 
   /// Creates authentication credentials for a user.
   Future<Map<String, dynamic>> createCredentials(
@@ -150,6 +170,20 @@ class SecurityController extends KuzzleController {
     ));
 
     return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+  }
+
+  /// Deletes user API key.
+  Future<Null> deleteApiKey(
+      String userId, String id, {bool waitForRefresh}) async {
+    await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'deleteApiKey',
+      userId: userId,
+      uid: id,
+      waitForRefresh: waitForRefresh,
+    ));
+
+    return null;
   }
 
   /// Deletes user credentials for the specified authentication strategy.
@@ -454,6 +488,39 @@ class SecurityController extends KuzzleController {
     return roles;
   }
 
+  /// Gets multiple security roles.
+  Future<List<KuzzleUser>> mGetUsers(
+    List<String> ids, {String verb}) async {
+    final response = await kuzzle.query(KuzzleRequest(
+        controller: name,
+        action: 'mGetUsers',
+        verb: verb,
+        body: <String, dynamic>{
+          'ids': ids,
+        }));
+
+    final users = <KuzzleUser>[];
+
+    for (final hit in response.result['hits']) {
+      users.add(KuzzleUser(kuzzle,
+          uid: hit['_id'] as String,
+          content: hit['_source'] as Map<String, dynamic>));
+    }
+
+    return users;
+  }
+
+  /// Forces an immediate reindexation of the provided security collection.
+  Future<bool> refresh(String collection) async {
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'refresh',
+      collection: collection
+    ));
+
+    return response.status == 200 && response.result == null;
+  }
+
   /// Replaces a user with new configuration.
   Future<KuzzleUser> replaceUser(String id, Map<String, dynamic> body,
       {bool waitForRefresh}) async {
@@ -466,6 +533,22 @@ class SecurityController extends KuzzleController {
     ));
 
     return KuzzleUser.fromKuzzleResponse(kuzzle, response);
+  }
+
+  /// Searches for a user API keys.
+  Future<SearchResult> searchApiKeys(String userId, Map<String, dynamic> query,
+      {int from, int size}) async {
+    final request = KuzzleRequest(
+      controller: name,
+      action: 'searchApiKeys',
+      userId: userId,
+      body: query,
+      from: from,
+      size: size,
+    );
+
+    final response = await kuzzle.query(request);
+    return SearchResult(kuzzle, request: request, response: response);
   }
 
   /// Searches security profiles, optionally returning
@@ -488,14 +571,13 @@ class SecurityController extends KuzzleController {
   /// Searches security roles, optionally returning only
   /// those allowing access to the provided controllers.
   Future<RoleSearchResult> searchRoles(
-      {Map<String, dynamic> query, int from, int size, String scroll}) async {
+      {Map<String, dynamic> query, int from, int size}) async {
     final request = KuzzleRequest(
       controller: name,
       action: 'searchRoles',
       body: query,
       from: from,
       size: size,
-      scroll: scroll,
     );
     final response = await kuzzle.query(request);
 

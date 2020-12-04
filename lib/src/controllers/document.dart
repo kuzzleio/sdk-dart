@@ -4,7 +4,7 @@ import '../kuzzle.dart';
 import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
 
-import '../search_result/abstract.dart';
+import '../search_result/search-result.dart';
 
 import 'abstract.dart';
 
