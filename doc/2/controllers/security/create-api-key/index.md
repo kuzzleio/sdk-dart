@@ -25,7 +25,7 @@ Future<Map<String, dynamic>> createApiKey(
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `userId` | <pre>String</pre> | User [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
+| `userId` | <pre>String</pre> | User [kuid](/core/2/guides/main-concepts/authentication#kuzzle-user-identifier-kuid) |
 | `description` | <pre>String</pre> | API key description |
 | `expiresIn` | <pre>String</pre><br />(`-1`) | Expiration duration |
 | `refresh` | <pre>bool</pre><br />(`false`) | If set to `wait_for`, Kuzzle will not respond until the API key is indexed |

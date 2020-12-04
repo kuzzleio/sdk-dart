@@ -28,12 +28,12 @@ Future<String> login(String strategy, Map<String, dynamic> credentials,
 
 #### strategy
 
-The name of the authentication [strategy](/core/2/guides/kuzzle-depth/authentication/#authentication) used to log the user in.
+The name of the authentication [strategy](/core/2/guides/main-concepts/authentication) used to log the user in.
 
-Depending on the chosen authentication `strategy`, additional [credential arguments](/core/2/guides/kuzzle-depth/authentication/#authentication) may be required.
+Depending on the chosen authentication `strategy`, additional [credential arguments](/core/2/guides/main-concepts/authentication#credentials) may be required.
 The API request example on this page provides the necessary arguments for the [`local` authentication plugin](https://github.com/kuzzleio/kuzzle-plugin-auth-passport-local).
 
-Check the appropriate [authentication plugin](/core/2/plugins/guides/strategies/overview) documentation to get the list of additional arguments to provide.
+Check the appropriate [authentication plugin](/core/2/guides/write-plugins/integrate-authentication-strategy) documentation to get the list of additional arguments to provide.
 
 
 ### expiresIn

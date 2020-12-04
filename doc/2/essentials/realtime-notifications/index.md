@@ -12,7 +12,7 @@ The [RealtimeController.subscribe](/sdk/dart/2/controllers/realtime/subscribe) m
 
 ## Document & messages
 
-These notifications represent [documents changes & messages](/core/2/api/essentials/notifications#documents-changes-messages).
+These notifications represent [documents changes & messages](/core/2/api/payloads/notifications#document-notification).
 
 The `Result` Map is the notification content, and it has the following structure:
 
@@ -23,7 +23,7 @@ The `Result` Map is the notification content, and it has the following structure
 
 ## User
 
-These notifications represent [user events](/core/2/api/essentials/notifications#user-notification).
+These notifications represent [user events](/core/2/api/payloads/notifications#user-notification).
 
 The `Result` object is the notification content, and it has the following structure:
 

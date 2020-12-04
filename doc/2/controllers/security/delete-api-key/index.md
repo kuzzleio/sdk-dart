@@ -24,7 +24,7 @@ Future<Null> deleteApiKey(
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `userId` | <pre>String</pre> | User [kuid](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
+| `userId` | <pre>String</pre> | User [kuid](/core/2/guides/main-concepts/authentication#kuzzle-user-identifier-kuid) |
 | `id` | <pre>String</pre> | API key unique ID |
 | `refresh` | <pre>bool</pre><br />(`false`) | If set to `wait_for`, Kuzzle will not respond until the API key is indexed |
 

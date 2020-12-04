@@ -9,7 +9,7 @@ description: Creates or replaces multiple documents directly into the storage en
 
 This is a low level route intended to bypass Kuzzle actions on document creation, notably:
   - check [document validity](/core/2/guides/advanced/data-validation),
-  - add [kuzzle metadata](/core/2/guides/essentials/document-metadata),
+  - add [kuzzle metadata](/core/2/guides/main-concepts/data-storage#kuzzle-metadata),
   - trigger [realtime notifications](/core/2/guides/main-concepts/realtime-engine) (unless asked otherwise)
 
 ## Arguments
