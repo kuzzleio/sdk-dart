@@ -31,7 +31,7 @@ Future<KuzzleRole> updateRole(String id, Map<String, dynamic> controllers,
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `controllers` | <pre>Map<String, dynamic>t</pre> | [Role definition](/core/2/guides/essentials/security#defining-roles) |
+| `controllers` | <pre>Map<String, dynamic>t</pre> | [Role definition](/core/2/guides/main-concepts/permissions#roles) |
 
 ## Return
 

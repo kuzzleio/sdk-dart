@@ -21,4 +21,4 @@ The `content` property is a Map containing, alongside custom defined values, the
 | Property | Type | Description |
 |--- |--- |--- |
 | `profileIds` | `List<String>` | Profiles IDs for this user |
-| `_kuzzle_info` | <pre>Map<String, dynamic></pre> | [Kuzzle metadata](/core/2/guides/essentials/document-metadata) |
+| `_kuzzle_info` | <pre>Map<String, dynamic></pre> | [Kuzzle metadata](/core/2/guides/main-concepts/data-storage#kuzzle-metadata) |

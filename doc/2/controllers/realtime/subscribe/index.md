@@ -7,7 +7,7 @@ description: Subscribes to real-time notifications.
 
 # Subscribe
 
-Subscribes by providing a set of filters: messages, document changes and, optionally, user events matching the provided filters will generate [real-time notifications](/core/2/api/essentials/notifications), sent to you in real-time by Kuzzle.
+Subscribes by providing a set of filters: messages, document changes and, optionally, user events matching the provided filters will generate [real-time notifications](/core/2/api/payloads/notifications), sent to you in real-time by Kuzzle.
 
 ## Arguments
 
@@ -26,13 +26,13 @@ Future<String> subscribe(String index, String collection,
 |--------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | `index`      | <pre>String</pre>                       | Index name                                            |
 | `collection` | <pre>String</pre>                      | Collection name                                       |
-| `filters`    | <pre>Map<String, dynamic></pre>        | Map representing a set of filters following [Koncorde syntax](/core/2/guides/cookbooks/realtime-api/terms) |
+| `filters`    | <pre>Map<String, dynamic></pre>        | Map representing a set of filters following [Koncorde syntax](/core/2/api/koncorde-filters-syntax) |
 | `callback`   | <pre>SubscribeListener</pre>          | Handler function to handle notifications                    |
 | `scope`           | <pre>String</pre><br/>(`all`)   | Subscribes to document entering or leaving the scope<br/>Possible values: `all`, `in`, `out`, `none`| yes |
 | `users`           | <pre>Users</pre><br/>(`none`)  | Subscribes to users entering or leaving the room<br/>Possible values: `all`, `in`, `out`, `none`| yes |
 | `subscribeToSelf` | <pre>boolean</pre><br/>(`true`)    | Subscribes to notifications fired by our own queries |
 | `autoResubscribe` | <pre>boolean</pre><br/>(`false`)    | Automatically resubscribe after connection loss |
-| `volatile`        | <pre>Map<String, dynamic></pre><br/>(`null`) | ConcurrentHashMap representing subscription information, used in [user join/leave notifications](/core/2/api/essentials/volatile-data)  |
+| `volatile`        | <pre>Map<String, dynamic></pre><br/>(`null`) | ConcurrentHashMap representing subscription information, used in [user join/leave notifications](/core/2/guides/main-concepts/api#volatile-data)  |
 
 ### handler
 

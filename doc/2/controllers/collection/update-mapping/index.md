@@ -9,9 +9,9 @@ description: Update the collection mapping
 
 <SinceBadge version="1.7.1" />
 
-You can define the collection [dynamic mapping policy](/core/2/guides/essentials/database-mappings#dynamic-mapping-policy) by setting the `dynamic` field to the desired value.
+You can define the collection [dynamic mapping policy](/core/2/guides/main-concepts/data-storage#mappings-dynamic-policy) by setting the `dynamic` field to the desired value.
 
-You can define [collection additional metadata](/core/2/guides/essentials/database-mappings#collection-metadata) within the `_meta` root field.
+You can define [collection additional metadata](/core/2/guides/main-concepts/data-storage#mappings-metadata) within the `_meta` root field.
 
 <br/>
 
@@ -37,7 +37,7 @@ An object representing the collection data mapping.
 
 This object must have a root field `properties` that contain the mapping definition:
 
-More informations about database mappings [here](/core/2/guides/essentials/database-mappings).
+More informations about database mappings [here](/core/2/guides/main-concepts/data-storage).
 
 ## Returns
 
