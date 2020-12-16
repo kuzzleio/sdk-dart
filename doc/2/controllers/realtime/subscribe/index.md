@@ -26,7 +26,7 @@ Future<String> subscribe(String index, String collection,
 |--------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | `index`      | <pre>String</pre>                       | Index name                                            |
 | `collection` | <pre>String</pre>                      | Collection name                                       |
-| `filters`    | <pre>Map<String, dynamic></pre>        | Map representing a set of filters following [Koncorde syntax](/core/2/guides/cookbooks/realtime-api/terms) |
+| `filters`    | <pre>Map<String, dynamic></pre>        | Map representing a set of filters following [Koncorde syntax](/core/2/api/koncorde-filters-syntax/terms) |
 | `callback`   | <pre>SubscribeListener</pre>          | Handler function to handle notifications                    |
 | `scope`           | <pre>String</pre><br/>(`all`)   | Subscribes to document entering or leaving the scope<br/>Possible values: `all`, `in`, `out`, `none`| yes |
 | `users`           | <pre>Users</pre><br/>(`none`)  | Subscribes to users entering or leaving the room<br/>Possible values: `all`, `in`, `out`, `none`| yes |

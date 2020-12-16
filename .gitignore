@@ -1,3 +1,7 @@
+# Node
+*.log
+node_modules/
+
 # Miscellaneous
 *.class
 *.lock
