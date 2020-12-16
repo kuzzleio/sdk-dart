@@ -1,22 +1,18 @@
 {
-    "/controllers/auth/": [
+    "/core-classes/kuzzle/connect/": [
         {
-            "fix": {
-                "type": "page"
-            },
-            "error": "MISSING_KEY",
-            "key": "type"
-        },
+            "error": "INVALID_VALUE",
+            "key": "type",
+            "expected": "[\"root\",\"branch\",\"page\"]",
+            "got": "code"
+        }
+    ],
+    "/core-classes/kuzzle/query/": [
         {
-            "error": "MISSING_KEY",
-            "key": "title"
-        },
-        {
-            "fix": {
-                "code": true
-            },
-            "error": "MISSING_KEY",
-            "key": "code"
+            "error": "INVALID_VALUE",
+            "key": "type",
+            "expected": "[\"root\",\"branch\",\"page\"]",
+            "got": "code"
         }
     ]
 }
