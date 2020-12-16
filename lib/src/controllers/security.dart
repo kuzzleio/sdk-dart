@@ -537,7 +537,7 @@ class SecurityController extends KuzzleController {
 
   /// Searches for a user API keys.
   Future<SearchResult> searchApiKeys(String userId, Map<String, dynamic> query,
-      {int from, int size}) async {
+      {int from, int size, String lang}) async {
     final request = KuzzleRequest(
       controller: name,
       action: 'searchApiKeys',
@@ -545,6 +545,7 @@ class SecurityController extends KuzzleController {
       body: query,
       from: from,
       size: size,
+      lang: lang,
     );
 
     final response = await kuzzle.query(request);
@@ -587,7 +588,13 @@ class SecurityController extends KuzzleController {
   /// Searches security profiles, optionally returning
   /// only those linked to the provided list of security roles.
   Future<UserSearchResult> searchUsers(
-      {Map<String, dynamic> query, int from, int size, String scroll}) async {
+      {
+        Map<String, dynamic> query,
+        int from,
+        int size,
+        String scroll,
+        String lang
+      }) async {
     final request = KuzzleRequest(
       controller: name,
       action: 'searchUsers',
@@ -595,6 +602,7 @@ class SecurityController extends KuzzleController {
       from: from,
       size: size,
       scroll: scroll,
+      lang: lang,
     );
     final response = await kuzzle.query(request);
 

@@ -11,6 +11,15 @@ Updates documents matching the provided search query.
 
 Kuzzle uses the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.4/query-dsl.html) syntax.
 
+<SinceBadge version="change-me"/>
+
+This method also supports the [Koncorde Filters DSL](/core/2/guides/cookbooks/realtime-api) to match documents by passing the `lang` argument with the value `koncorde`.  
+Koncorde filters will be translated into an Elasticsearch query.  
+
+::: warning
+Koncorde `bool` operator and `regexp` clause are not supported for search queries.
+:::
+
 An empty or null query will match all documents in the collection.
 
 <br/>
@@ -24,6 +33,7 @@ Future<Map<String, dynamic>> updateByQuery(
     @required Map<String, dynamic> changes,
     bool waitForRefresh = false,
     bool source = false,
+    String lang
   })
 ```
 
@@ -35,6 +45,7 @@ Future<Map<String, dynamic>> updateByQuery(
 | `changes`          | <pre>Map<String, dynamic></pre> | Partial changes to apply to the documents |
 | `waitForRefresh`   | <pre>bool</pre><br>(`false`)                           | If set to `true`, Kuzzle will wait for the persistence layer to finish indexing|
 | `source`           | <pre>bool</pre><br>(`false`)                           | If true, returns the updated document inside the response |
+| `lang`     | <pre>String</pre>               | Specify the query language to use. By default, it's `elasticsearch` but `koncorde` can also be used. <SinceBadge version="change-me"/> |
 
 ---
 

@@ -10,6 +10,7 @@ class KuzzleRequest {
       this.controller,
       this.index,
       this.jwt,
+      this.lang,
       this.requestId,
       this.waitForRefresh,
       this.force,
@@ -45,6 +46,7 @@ class KuzzleRequest {
     controller = request.controller;
     index = request.index;
     jwt = request.jwt;
+    lang = request.lang;
     waitForRefresh = request.waitForRefresh;
     force = request.force;
     uid = request.uid;
@@ -77,6 +79,7 @@ class KuzzleRequest {
     controller = data['controller'] as String;
     index = data['index'] as String;
     jwt = data['jwt'] as String;
+    lang = data['lang'] as String;
     requestId = data['requestId'] as String;
     requestId ??= _uuid.v4();
     waitForRefresh = (data['refresh'] as String) == 'wait_for' ? true : false;
@@ -128,6 +131,9 @@ class KuzzleRequest {
     }
     if (jwt != null) {
       map['jwt'] = jwt;
+    }
+    if (lang != null) {
+      map['lang'] = jwt;
     }
     if (requestId != null) {
       map['requestId'] = requestId;
@@ -217,6 +223,7 @@ class KuzzleRequest {
   String controller;
   String index;
   String jwt;
+  String lang;
   String requestId;
   bool waitForRefresh;
   bool force;

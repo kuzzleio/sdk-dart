@@ -96,6 +96,7 @@ class DocumentController extends KuzzleController {
     String collection,
     Map<String, dynamic> query, {
     bool waitForRefresh = false,
+    String lang
   }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -104,6 +105,7 @@ class DocumentController extends KuzzleController {
       collection: collection,
       body: query,
       waitForRefresh: waitForRefresh,
+      lang: lang,
     ));
 
     return List<String>.from(
@@ -321,6 +323,7 @@ class DocumentController extends KuzzleController {
     int from,
     int size,
     String scroll,
+    String lang,
   }) async {
     final request = KuzzleRequest(
       action: 'search',
@@ -331,6 +334,7 @@ class DocumentController extends KuzzleController {
       from: from,
       size: size,
       scroll: scroll,
+      lang: lang
     );
     final response = await kuzzle.query(request);
 
@@ -397,6 +401,7 @@ class DocumentController extends KuzzleController {
     @required Map<String, dynamic> changes,
     bool waitForRefresh = false,
     bool source = false,
+    String lang
   }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -409,6 +414,7 @@ class DocumentController extends KuzzleController {
       },
       waitForRefresh: waitForRefresh,
       source: source,
+      lang: lang,
     ));
 
     return response.result as Map<String, dynamic>;
