@@ -12,7 +12,7 @@ This section deals with **Kuzzle v2**, the **Dart SDK v2** and **Flutter**. We w
 
 ## Requirements
 
-- **Running Kuzzle v2 Stack** ([instructions here](/core/2/guides/getting-started/running-kuzzle))
+- **Running Kuzzle v2 Stack** ([instructions here](/core/2/guides/getting-started/run-kuzzle))
 - **Setup an editor** ([instructions here](https://flutter.dev/docs/get-started/editor))
 - **Create a new project** ([instructions here](https://flutter.dev/docs/get-started/test-drive?tab=androidstudio#create-app))
 
@@ -79,7 +79,7 @@ It will then update the state of the widget to store those messages in the `mess
 ### Receive new messages in realtime
 
 And finally the method to subscribe to our collection.
-It will call the Kuzzle's realtime controller to allow us to receive [real-time notifications](/core/2/api/essentials/notifications) on message creations. New messages received that way will then be added to our list of previously fetched `messages`, and rendered in our list, by updating the state.
+It will call the Kuzzle's realtime controller to allow us to receive [real-time notifications](/core/2/api/payloads/notifications) on message creations. New messages received that way will then be added to our list of previously fetched `messages`, and rendered in our list, by updating the state.
 
 <<< ./snippets/chat.dart.snippet:4[dart]
 
@@ -132,7 +132,7 @@ For this we simply [create](/sdk/dart/2/controllers/document/create) a document 
 Now that you're more familiar with Kuzzle, dive even deeper to learn how to leverage its full capabilities:
 
 - discover what this SDK has to offer by browsing other sections of this documentation
-- learn more about Kuzzle [realtime engine](/core/2/guides/essentials/real-time)
-- follow our guide to learn how to [manage users, and how to set up fine-grained access control](/core/2/guides/essentials/security)
-- lean how to use Kuzzle [Admin Console](/core/2/guides/essentials/admin-console) to manage your users and data
+- learn more about Kuzzle [realtime engine](/core/2/guides/main-concepts/realtime-engine)
+- follow our guide to learn how to [manage users, and how to set up fine-grained access control](/core/2/guides/main-concepts/permissions)
+- lean how to use Kuzzle [Admin Console](http://next-console.kuzzle.io) to manage your users and data
 - learn how to perform a [basic authentication](/sdk/dart/2/controllers/auth/login)

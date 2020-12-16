@@ -21,7 +21,7 @@ Future<KuzzleRole> createRole(String id, Map<String, dynamic> controllers,
 | Property | Type | Description |
 |--- |--- |--- |
 | `id` | <pre>String</pre> | Role identifier |
-| `controllers` | <pre>Map<String, dynamic></pre> | [Role definition](/core/2/guides/essentials/security#defining-roles) |
+| `controllers` | <pre>Map<String, dynamic></pre> | [Role definition](/core/2/guides/main-concepts/permissions#roles) |
 | `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `wait_for`, Kuzzle will not respond until the created role is indexed |
 | `force`   | <pre>bool</pre><br />(`null`) | If set to `true`, creates the role even if it gives access to non-existent plugins API routes |
 

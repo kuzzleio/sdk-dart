@@ -20,7 +20,7 @@ Future<Map<String, dynamic>> updateProfileMapping(
 
 | Property | Type | Description |
 |--- |--- |--- |
-| `mapping` | <pre>Map<String, dynamic></pre> | Profile collection [mapping definition](/core/2/guides/essentials/database-mappings) |
+| `mapping` | <pre>Map<String, dynamic></pre> | Profile collection [mapping definition](/core/2/guides/main-concepts/data-storage) |
 
 ## Return
 

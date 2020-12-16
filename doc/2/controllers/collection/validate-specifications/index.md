@@ -34,7 +34,7 @@ Future<bool> validateSpecifications(
 
 A `Map<String, dynamic>` representing the specifications.
 
-This object must follow the [Specification Structure](/core/2/guides/cookbooks/datavalidation).
+This object must follow the [Specification Structure](/core/2/guides/advanced/data-validation).
 
 ## Returns
 

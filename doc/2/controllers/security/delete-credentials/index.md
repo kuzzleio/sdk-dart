@@ -21,7 +21,7 @@ Future<Map<String, dynamic>> deleteCredentials(
 | Property | Type | Description |
 | --- | --- | --- |
 | `strategy` | <pre>String</pre> | Strategy to use |
-| `id` | <pre>String</pre> | User [id](/core/2/guides/essentials/user-authentication#kuzzle-user-identifier-kuid) |
+| `id` | <pre>String</pre> | User [id](/core/2/guides/main-concepts/authentication#kuzzle-user-identifier-kuid) |
 | `waitForRefresh` | <pre>bool</pre><br />(`null`) | If set to `true`, Kuzzle will not respond until the credentials deletion is indexed |
 
 ## Returns
