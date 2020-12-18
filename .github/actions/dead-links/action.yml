@@ -7,8 +7,8 @@ runs:
       run: |
         npm ci
         npm run doc-prepare
-        $(npm bin)/kuzdoc iterate-repos:install --repos_path doc/framework/.repos/
-        $(npm bin)/kuzdoc framework:link -d /sdk/dart/2/ -v 2
+        npx kuzdoc iterate-repos:install --repos_path doc/framework/.repos/
+        npx kuzdoc framework:link -d /sdk/dart/2/ -v 2
       shell: bash
     - name: Run dead links Tests
       run: |
