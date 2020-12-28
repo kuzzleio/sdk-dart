@@ -1,0 +1,8 @@
+name: Doc snippets
+description: Run Doc snippets Tests
+runs:
+  using: "composite"
+  steps:
+    - name: Run Doc snippets Tests
+      run: docker-compose -f .ci/doc/docker-compose.yml run doc-tests index
+      shell: bash

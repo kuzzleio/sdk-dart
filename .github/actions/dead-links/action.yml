@@ -1,0 +1,17 @@
+name: Dead Links
+description: Run Dead Links Tests
+runs:
+  using: "composite"
+  steps:
+    - name: Prepare Kuzzle Stack
+      run: |
+        npm ci
+        npm run doc-prepare
+        npx kuzdoc iterate-repos:install --repos_path doc/framework/.repos/
+        npx kuzdoc framework:link -d /sdk/dart/2/ -v 2
+      shell: bash
+    - name: Run dead links Tests
+      run: |
+        sudo gem install typhoeus
+        cd doc/framework/ && HYDRA_MAX_CONCURRENCY=20 ruby .ci/dead-links.rb -p src/sdk/dart/2/
+      shell: bash
