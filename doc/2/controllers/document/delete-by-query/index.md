@@ -49,4 +49,10 @@ Returns a `List<String>` containing the deleted document ids.
 
 ## Usage
 
-<<< ./snippets/delete-by-query.dart
+With the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.3/query-dsl.html) syntax.
+
+<<< ./snippets/delete-by-query-es.dart
+
+With the [Koncorde Filters DSL](/core/2/api/koncorde-filters-syntax) syntax.
+
+<<< ./snippets/delete-by-query-koncorde.dart

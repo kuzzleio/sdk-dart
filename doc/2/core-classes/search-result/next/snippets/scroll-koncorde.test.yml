@@ -1,4 +1,4 @@
-name: searchresult#scroll
+name: searchresult#scroll-koncorde
 description: Next method with scroll
 hooks:
   before: |

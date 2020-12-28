@@ -133,7 +133,7 @@ class KuzzleRequest {
       map['jwt'] = jwt;
     }
     if (lang != null) {
-      map['lang'] = jwt;
+      map['lang'] = lang;
     }
     if (requestId != null) {
       map['requestId'] = requestId;

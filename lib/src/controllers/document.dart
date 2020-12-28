@@ -334,8 +334,9 @@ class DocumentController extends KuzzleController {
       from: from,
       size: size,
       scroll: scroll,
-      lang: lang
+      lang: lang,
     );
+
     final response = await kuzzle.query(request);
 
     return SearchResult(kuzzle, request: request, response: response);

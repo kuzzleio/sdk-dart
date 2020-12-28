@@ -79,4 +79,10 @@ Returns a [SearchResult](/sdk/dart/2/core-classes/search-result) object.
 
 ## Usage
 
-<<< ./snippets/search.dart
+With the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.3/query-dsl.html) syntax.
+
+<<< ./snippets/search-es.dart
+
+With the [Koncorde Filters DSL](/core/2/api/koncorde-filters-syntax) syntax.
+
+<<< ./snippets/search-koncorde.dart

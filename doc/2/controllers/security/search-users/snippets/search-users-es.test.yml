@@ -1,4 +1,4 @@
-name: security#searchUsers
+name: security#searchUsers-es
 description: Search users
 hooks:
   before: |

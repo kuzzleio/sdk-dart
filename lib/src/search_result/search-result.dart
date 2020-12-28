@@ -11,6 +11,7 @@ class SearchResult {
     this.request,
     this.response,
   }) {
+    lang = request.lang;
     controller = request.controller;
     searchAction = 'search';
     scrollAction = 'scroll';
@@ -45,6 +46,9 @@ class SearchResult {
   String controller;
 
   @protected
+  String lang;
+
+  @protected
   String searchAction;
 
   @protected
@@ -67,6 +71,7 @@ class SearchResult {
         scrollId: response.result['scrollId'] as String,
       );
       query.action = scrollAction;
+      query.lang = lang;
       return await kuzzle
           .query(query)
           .then((_response) {
@@ -85,7 +90,9 @@ class SearchResult {
         return buildNextSearchResult(response);
       });
     } else if (request.size != null && request.sort != null) {
-      final _request = KuzzleRequest.clone(request)..action = searchAction;
+      final _request = KuzzleRequest.clone(request)
+        ..action = searchAction
+        ..lang = lang;
 
       _request.body ??= <String, dynamic>{};
       _request.body['search_after'] ??= <dynamic>[];

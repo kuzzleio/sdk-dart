@@ -1,4 +1,4 @@
-name: searchresult#fromsize
+name: searchresult#fromsize-koncorde
 description: Next method with from/size
 hooks:
   before: |

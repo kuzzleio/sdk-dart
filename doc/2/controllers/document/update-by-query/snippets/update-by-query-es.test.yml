@@ -1,0 +1,17 @@
+name: document#updateByQuery-es
+description: Update documents matching query
+hooks:
+  before: |
+    curl -XDELETE kuzzle:7512/nyc-open-data
+    curl -XPOST kuzzle:7512/nyc-open-data/_create
+    curl -XPUT kuzzle:7512/nyc-open-data/yellow-taxi
+    for i in  1 2 ; do
+      curl -H "Content-type: application/json" -d '{"capacity": 4}' kuzzle:7512/nyc-open-data/yellow-taxi/document_$i/_create?refresh=wait_for
+    done
+    for i in  1 2 3 4 5; do
+      curl -H "Content-type: application/json" -d '{"capacity": 7}' kuzzle:7512/nyc-open-data/yellow-taxi/_create?refresh=wait_for
+    done
+    curl -XPOST kuzzle:7512/nyc-open-data/_refresh
+  after:
+template: print-result
+expected: "_id: document_1(.*)_id: document_2"

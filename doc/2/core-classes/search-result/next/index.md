@@ -43,7 +43,13 @@ It can lead to memory leaks if a scroll duration too great is provided, or if to
 You can restrict the scroll session maximum duration under the `services.storage.maxScrollDuration` configuration key.
 :::
 
-<<< ./snippets/scroll.dart
+With the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.3/query-dsl.html) syntax.
+
+<<< ./snippets/scroll-es.dart
+
+With the [Koncorde Filters DSL](/core/2/api/koncorde-filters-syntax) syntax.
+
+<<< ./snippets/scroll-koncorde.dart
 
 ### Strategy: sort / size
 
@@ -64,4 +70,10 @@ Because this method does not freeze the search results between two calls, there 
 It's the fastest pagination method available, but also the less consistent, and it is not possible to retrieve more than 10000 items using it.  
 Above that limit, any call to `next` throws an Exception.
 
-<<< ./snippets/fromsize.dart
+With the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.3/query-dsl.html) syntax.
+
+<<< ./snippets/fromsize-es.dart
+
+With the [Koncorde Filters DSL](/core/2/api/koncorde-filters-syntax) syntax.
+
+<<< ./snippets/fromsize-koncorde.dart

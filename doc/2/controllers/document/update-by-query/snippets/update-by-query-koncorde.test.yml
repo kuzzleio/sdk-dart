@@ -1,4 +1,4 @@
-name: document#updateByQuery
+name: document#updateByQuery-koncorde
 description: Update documents matching query
 hooks:
   before: |
