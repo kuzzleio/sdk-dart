@@ -414,12 +414,14 @@ class DocumentController extends KuzzleController {
     return response.result as Map<String, dynamic>;
   }
 
-  /// ####Updates a document content.
+  /// ####Applies a partial update to an existing document.
+  /// If the document doesn't already exist, a new document is created.
   ///
   /// **[index]**: index name \\\
   /// **[collection]**: collection name \\\
   /// **[uid]**: unique identifier of the document to update \\\
-  /// **[body]**: Partial changes to apply to the document and Fields to add to the document if it gets created (optional)
+  /// **[body]**: Partial changes to apply to the document
+  /// and Fields to add to the document if it gets created (optional)
 
   ///
   /// Optional
