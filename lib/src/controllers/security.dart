@@ -15,6 +15,21 @@ import 'abstract.dart';
 class SecurityController extends KuzzleController {
   SecurityController(Kuzzle kuzzle) : super(kuzzle, name: 'security');
 
+  /// Checks if an API action can be executed by the current user.
+  Future<Map<String, dynamic>> checkRights(
+    String kuid, Map<String, dynamic> requestPayload) async {
+    final response = await kuzzle.query(
+        KuzzleRequest(
+            controller: name,
+            action: 'checkRights',
+            uid: kuid,
+            body: requestPayload,
+          )
+        );
+
+    return response.result as Map<String, dynamic>;
+  }
+
   /// Creates a new API key for a user.
   Future<Map<String, dynamic>> createApiKey(
       String userId, String description,

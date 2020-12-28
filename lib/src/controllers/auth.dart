@@ -11,6 +11,21 @@ import 'abstract.dart';
 class AuthController extends KuzzleController {
   AuthController(Kuzzle kuzzle) : super(kuzzle, name: 'auth');
 
+  /// Checks if an API action can be executed by the current user.
+  Future<Map<String, dynamic>> checkRights(
+    String kuid, Map<String, dynamic> requestPayload) async {
+    final response = await kuzzle.query(
+        KuzzleRequest(
+            controller: name,
+            action: 'checkRights',
+            uid: kuid,
+            body: requestPayload,
+          )
+        );
+
+    return response.result as Map<String, dynamic>;
+  }
+
   /// Checks whether a given jwt [token] still
   /// represents a valid session in Kuzzle.
   Future<Map<String, dynamic>> checkToken(String token) async {
