@@ -414,6 +414,44 @@ class DocumentController extends KuzzleController {
     return response.result as Map<String, dynamic>;
   }
 
+  /// ####Updates a document content.
+  ///
+  /// **[index]**: index name \\\
+  /// **[collection]**: collection name \\\
+  /// **[uid]**: unique identifier of the document to update \\\
+  /// **[body]**: Partial changes to apply to the document and Fields to add to the document if it gets created (optional)
+
+  ///
+  /// Optional
+  ///
+  /// **[refresh]**: if set to wait_for, Kuzzle will not respond
+  /// until the update is indexed \\\
+  /// **[retryOnConflict]**: conflicts may occur if the same document gets updated multiple times within a short timespan, in a database cluster. You can set the retryOnConflict optional argument (with a retry count), to tell Kuzzle to retry the failing updates the specified amount of times before rejecting the request with an error. \\\
+  /// **[source]**: if set to true Kuzzle will return the updated document body in the response \\\
+  Future<Map<String, dynamic>> upsert(
+    String index,
+    String collection,
+    String id,
+    Map<String, dynamic> body, {
+    bool waitForRefresh = false,
+    int retryOnConflict,
+    bool source,
+  }) async {
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'upsert',
+      index: index,
+      collection: collection,
+      uid: id,
+      body: body,
+      waitForRefresh: waitForRefresh,
+      source: source,
+      retryOnConflict: retryOnConflict,
+    ));
+
+    return response.result as Map<String, dynamic>;
+  }
+
   /// Validates data against existing validation rules.
   ///
   /// Documents are always valid if no validation rules are defined
