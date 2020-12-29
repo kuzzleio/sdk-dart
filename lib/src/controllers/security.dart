@@ -16,7 +16,7 @@ class SecurityController extends KuzzleController {
   SecurityController(Kuzzle kuzzle) : super(kuzzle, name: 'security');
 
   /// Checks if an API action can be executed by the current user.
-  Future<Map<String, dynamic>> checkRights(
+  Future<bool> checkRights(
     String kuid, Map<String, dynamic> requestPayload) async {
     final response = await kuzzle.query(
         KuzzleRequest(
@@ -27,7 +27,7 @@ class SecurityController extends KuzzleController {
           )
         );
 
-    return response.result as Map<String, dynamic>;
+    return response.result.allowed as bool;
   }
 
   /// Creates a new API key for a user.
