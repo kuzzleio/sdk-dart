@@ -17,7 +17,7 @@ Applies partial changes to a document. If the document doesn't already exist, a 
     String index,
     String collection,
     String id,
-    Map<String, dynamic> body, {
+    Map<String, dynamic> changes, {
     bool waitForRefresh = false,
     int retryOnConflict,
     bool source,
@@ -29,15 +29,7 @@ Applies partial changes to a document. If the document doesn't already exist, a 
 | `index`      | <pre>String</pre> | Index name                                |
 | `collection` | <pre>String</pre> | Collection name                           |
 | `id`         | <pre>String</pre> | Document ID                               |
-| `body`       | <pre>Map<String, dynamic></pre> | Partial content of the document to update and fields to add to the document if it gets created |
-
-### Body properties
-
-
-| Argument           | Type<br/>(default)              | Description                                                                        |
-| ----------------- | ------------------------------- | ---------------------------------------------------------------------------------- |
-| `changes`         | <pre>Map<String, dynamic></pre>    | partial changes to apply to the document |
-| `defaults` | <pre>Map<String, dynamic></pre><br/>(`{}`)        | (optional) fields to add to the document if it gets created    |
+| `changes`       | <pre>Map<String, dynamic></pre> | Partial content of the document to update |
 
 ### Options
 
@@ -45,6 +37,7 @@ Additional query options
 
 | Options           | Type<br/>(default)              | Description                                                                        |
 | ----------------- | ------------------------------- | ---------------------------------------------------------------------------------- |
+| `defaults` | <pre>Map<String, dynamic></pre><br/>(`{}`)  | (optional) fields to add to the document if it gets created  |
 | `waitForRefresh`         | <pre>bool</pre><br/>(`""`)    | If set to `true`, waits for the change to be reflected for `search` (up to 1s) |
 | `retryOnConflict` | <pre>int</pre><br/>(`10`)        | The number of times the database layer should retry in case of version conflict    |
 | `source`          | <pre>bool</pre><br/>(`false`)| If true, returns the updated document inside the response

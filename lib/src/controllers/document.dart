@@ -347,7 +347,7 @@ class DocumentController extends KuzzleController {
   ///
   /// Optional
   ///
-  /// **[refresh]**: if set to wait_for, Kuzzle will not respond
+  /// **[waitForRefresh]**: if set to wait_for, Kuzzle will not respond
   /// until the update is indexed \\\
   /// **[retryOnConflict]**: conflicts may occur if the same document gets updated multiple times within a short timespan, in a database cluster. You can set the retryOnConflict optional argument (with a retry count), to tell Kuzzle to retry the failing updates the specified amount of times before rejecting the request with an error. \\\
   /// **[source]**: if set to true Kuzzle will return the updated document body in the response \\\
@@ -419,14 +419,15 @@ class DocumentController extends KuzzleController {
   ///
   /// **[index]**: index name \\\
   /// **[collection]**: collection name \\\
-  /// **[uid]**: unique identifier of the document to update \\\
-  /// **[body]**: Partial changes to apply to the document
+  /// **[id]**: unique identifier of the document to update \\\
+  /// **[changes]**: Partial changes to apply to the document
   /// and Fields to add to the document if it gets created (optional)
 
   ///
   /// Optional
   ///
-  /// **[refresh]**: if set to wait_for, Kuzzle will not respond
+  /// **[defaults]**: Fields to add to the document if it gets created
+  /// **[waitForRefresh]**: if set to wait_for, Kuzzle will not respond
   /// until the update is indexed \\\
   /// **[retryOnConflict]**: conflicts may occur if the same document gets updated multiple times within a short timespan, in a database cluster. You can set the retryOnConflict optional argument (with a retry count), to tell Kuzzle to retry the failing updates the specified amount of times before rejecting the request with an error. \\\
   /// **[source]**: if set to true Kuzzle will return the updated document body in the response \\\
@@ -434,7 +435,8 @@ class DocumentController extends KuzzleController {
     String index,
     String collection,
     String id,
-    Map<String, dynamic> body, {
+    Map<String, dynamic> changes, {
+    Map<String, dynamic> defaults,
     bool waitForRefresh = false,
     int retryOnConflict,
     bool source,
@@ -445,7 +447,8 @@ class DocumentController extends KuzzleController {
       index: index,
       collection: collection,
       uid: id,
-      body: body,
+      body: changes,
+      defaults: defaults,
       waitForRefresh: waitForRefresh,
       source: source,
       retryOnConflict: retryOnConflict,
