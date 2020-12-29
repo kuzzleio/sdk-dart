@@ -9,5 +9,5 @@ final requestPayload = {
 };
 
 final result = await kuzzle
-  .auth
+  .security
   .checkRights('foo', requestPayload);

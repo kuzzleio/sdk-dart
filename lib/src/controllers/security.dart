@@ -22,12 +22,12 @@ class SecurityController extends KuzzleController {
         KuzzleRequest(
             controller: name,
             action: 'checkRights',
-            uid: kuid,
+            userId: kuid,
             body: requestPayload,
           )
         );
 
-    return response.result.allowed as bool;
+    return response.result['allowed'] as bool;
   }
 
   /// Creates a new API key for a user.

@@ -22,7 +22,7 @@ class AuthController extends KuzzleController {
           )
         );
 
-    return response.result.allowed as bool;
+    return response.result['allowed'] as bool;
   }
 
   /// Checks whether a given jwt [token] still
