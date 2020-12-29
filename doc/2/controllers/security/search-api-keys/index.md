@@ -48,7 +48,7 @@ Returns a [SearchResult](/sdk/dart/2/core-classes/search-result) object.
 
 ## Usage
 
-With the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.3/query-dsl.html) syntax.
+With the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.4/query-dsl.html) syntax.
 
 <<< ./snippets/search-api-keys-es.dart
 
