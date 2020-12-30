@@ -28,6 +28,7 @@ print(result);
         "description": "LoRa permanent API key",
         "userId": "john.doe",
         "expiresAt": -1,
+        "fingerprint": "4ee98cb8c614e99213e7695f822e42325d86c93cfaf39cb40e860939e784c8e6",
         "ttl": -1
       }
     },
