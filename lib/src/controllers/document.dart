@@ -421,7 +421,6 @@ class DocumentController extends KuzzleController {
   /// **[collection]**: collection name \\\
   /// **[id]**: unique identifier of the document to update \\\
   /// **[changes]**: Partial changes to apply to the document
-  /// and Fields to add to the document if it gets created (optional)
 
   ///
   /// Optional
