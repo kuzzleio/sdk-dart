@@ -2,6 +2,7 @@
 code: true
 type: page
 title: checkRights
+description: Checks if the provided API request can be executed by this network connection, using the current authentication information.
 ---
 
 # checkRights
@@ -9,7 +10,7 @@ title: checkRights
 <SinceBadge version="Kuzzle 2.8.0"/>
 <SinceBadge version="auto-version"/>
 
-Checks if the provided API request can be executed by a user.
+Checks if the provided API request can be executed by this network connection, using the current authentication information.
 
 ---
 
