@@ -2,6 +2,7 @@
 code: true
 type: page
 title: upsert
+description: Applies partial changes to a document. If the document doesn't already exist, a new document is created.
 ---
 
 # upsert
@@ -52,7 +53,7 @@ A `Map<String, dynamic>` with the following properties:
 | `_source`    | <pre>Map<String, dynamic></pre> | Updated document (if `source` option set to true)  |
 | `_id`        | <pre>String</pre>                            | ID of the udated document                   |
 | `_version`   | <pre>int</pre>                           | Version of the document in the persistent data storage |
-| `created`     | <pre>bool</pre>    
+| `created`     | <pre>bool</pre> | If `true`, a new document was created, otherwise the document existed and was updated |
 
 ## Usage
 
