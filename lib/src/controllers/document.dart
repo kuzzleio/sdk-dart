@@ -447,8 +447,10 @@ class DocumentController extends KuzzleController {
       index: index,
       collection: collection,
       uid: id,
-      body: changes,
-      defaults: defaults,
+      body: {
+        'changes': changes,
+        'defaults': defaults
+      },
       waitForRefresh: waitForRefresh,
       source: source,
       retryOnConflict: retryOnConflict,

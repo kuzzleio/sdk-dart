@@ -30,7 +30,6 @@ class KuzzleRequest {
       this.scope,
       this.state,
       this.source,
-      this.defaults,
       this.userId,
       this.users,
       this.verb,
@@ -68,7 +67,6 @@ class KuzzleRequest {
     users = request.users;
     verb = request.verb;
     source = request.source;
-    defaults = request.defaults;
     includeKuzzleMeta = request.includeKuzzleMeta;
   }
 
@@ -107,7 +105,6 @@ class KuzzleRequest {
     users = data['users'] as String;
     verb = data['verb'] as String;
     source = data['source'] as bool;
-    defaults = data['defaults'] as Map<String, dynamic>;
     includeKuzzleMeta = data['includeKuzzleMeta'] as bool;
   }
 
@@ -203,9 +200,6 @@ class KuzzleRequest {
     if (source != null) {
       map['source'] = source;
     }
-    if (defaults != null) {
-      map['defaults'] = defaults;
-    }
     if (includeKuzzleMeta != null) {
       map['includeKuzzleMeta'] = includeKuzzleMeta;
     }
@@ -240,7 +234,6 @@ class KuzzleRequest {
   int retryOnConflict;
   bool reset;
   bool source;
-  Map<String, dynamic> defaults;
   String scope;
   String state;
   String userId;
