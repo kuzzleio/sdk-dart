@@ -6,6 +6,7 @@ jobs:
   dead-links:
     name: Dead links
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v2
       - name: Cache node modules
@@ -27,6 +28,7 @@ jobs:
   doc-snippets:
     name: Doc Snippets
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v2
       - name: Cache node modules
@@ -48,6 +50,7 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v2
       - uses: cedx/setup-dart@v2
