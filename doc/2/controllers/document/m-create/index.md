@@ -14,7 +14,7 @@ Creates multiple documents.
 ## Arguments
 
 ```dart
-Future<c> mCreate(
+Future<Map<String, dynamic>> mCreate(
       String index, String collection, 
       List<Map<String, dynamic>> documents,
       { bool waitForRefresh = false, })

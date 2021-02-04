@@ -21,6 +21,7 @@ Future<Map<String, dynamic>> mUpdate(
       bool waitForRefresh = false, 
       int retryOnConflict
 })
+```
 
 | Arguments          | Type                                                    | Description                       |
 | ------------------ | ------------------------------------------------------- | --------------------------------- |

@@ -24,6 +24,7 @@ Future<int> count(
     {
     Map<String, dynamic> query
 })
+```
 
 ---
 
