@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:kuzzle/src/kuzzle/response.dart';
 import 'package:pedantic/pedantic.dart';
 
 import '../kuzzle/errors.dart';
@@ -78,10 +79,11 @@ class WebSocketProtocol extends KuzzleProtocol {
   }
 
   @override
-  void send(KuzzleRequest request) {
+  Future<KuzzleResponse> send(KuzzleRequest request) {
     if (_webSocket != null && _webSocket.readyState == WebSocket.open) {
       _webSocket.add(json.encode(request));
     }
+    return null;
   }
 
   @override

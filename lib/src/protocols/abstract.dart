@@ -52,7 +52,7 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
   }
 
   /// Sends a payload to the connected server
-  void send(KuzzleRequest request);
+  Future<KuzzleResponse> send(KuzzleRequest request);
 
   /// Called when the client's connection is established
   void clientConnected({
@@ -120,7 +120,11 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     });
 
     try {
-      send(request);
+      final syncRes = send(request);
+      // If we use a synchronous protocol the result is returned directly
+      if (syncRes != null) {
+        return syncRes;
+      }
     } on Exception catch (error) {
       completer.completeError(error);
     }

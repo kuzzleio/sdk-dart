@@ -73,25 +73,25 @@ class Kuzzle extends KuzzleEventEmitter {
     });
 
     protocol.on(ProtocolEvents.NETWORK_ON_RESPONSE_RECEIVED, (payload) {
-    try {
-      final _json = json.decode(payload as String) as Map<String, dynamic>;
-      final response = KuzzleResponse.fromJson(_json);
+      try {
+        final _json = json.decode(payload as String) as Map<String, dynamic>;
+        final response = KuzzleResponse.fromJson(_json);
 
-      if (response.room.isNotEmpty) {
-        if (!_requests.contains(response.room)) {
+        if (response.room.isNotEmpty) {
+          if (!_requests.contains(response.room)) {
+            protocol.emit(ProtocolEvents.UNHANDLED_RESPONSE, [response]);
+          }
+          if (response.error != null &&
+              response.error.id == 'security.token.expired') {
+            emit(ProtocolEvents.TOKEN_EXPIRED);
+          }
+          protocol.emit(response.room, [response]);
+        } else {
           protocol.emit(ProtocolEvents.UNHANDLED_RESPONSE, [response]);
         }
-        if (response.error != null && 
-          response.error.id == 'security.token.expired') {
-            emit(ProtocolEvents.TOKEN_EXPIRED);
-        }
-        protocol.emit(response.room, [response]);
-      } else {
-        protocol.emit(ProtocolEvents.UNHANDLED_RESPONSE, [response]);
+      } catch (e) {
+        protocol.emit(ProtocolEvents.DISCARDED, [payload]);
       }
-    } catch (_) {
-      protocol.emit(ProtocolEvents.DISCARDED, [payload]);
-    }
     });
   }
 
@@ -376,11 +376,9 @@ class Kuzzle extends KuzzleEventEmitter {
       // todo: implement queueFilter
     }
 
-
     // check queueing
     if (_queuing) {
       if (queueable) {
-
         final completer = Completer<KuzzleResponse>();
         final queuedRequest = _KuzzleQueuedRequest(
           completer: completer,
@@ -396,10 +394,8 @@ class Kuzzle extends KuzzleEventEmitter {
       }
 
       emit(ProtocolEvents.DISCARDED, [request]);
-      return Future.error(KuzzleError(
-          'not_connected',
-          'Unable to execute request: not connected to a Kuzzle server.',
-        503));
+      return Future.error(KuzzleError('not_connected',
+          'Unable to execute request: not connected to a Kuzzle server.', 503));
     }
 
     _requests.add(request.requestId);

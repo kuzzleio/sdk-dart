@@ -1,0 +1,8 @@
+---
+name: http#constructor
+description: Creates a new Http instance
+hooks:
+  before:
+  after:
+template: without-ctor
+expected: Success

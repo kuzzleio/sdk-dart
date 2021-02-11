@@ -1,87 +1,44 @@
 import 'dart:convert';
 
 import 'package:kuzzle/src/kuzzle/request.dart';
+import 'package:kuzzle/src/kuzzle/response.dart';
 import 'package:kuzzle/src/protocols/abstract.dart';
 import 'package:http/http.dart' as http;
-import 'package:kuzzle/src/protocols/routes.dart';
 
 class HttpProtocol extends KuzzleProtocol {
-  HttpProtocol(Uri uri, {Map<String, dynamic> customRoutes = const {}})
-      : super(uri) {
-    customRoutes.forEach((key, value) {
-      _routes[key] = value;
-    });
-  }
-
-  Map<String, dynamic> _routes = {};
+  HttpProtocol(Uri uri) : super(uri);
 
   @override
   Future<void> connect() async {
     await super.connect();
 
-    final res = await http.get('${uri.toString()}/_publicApi');
+    final res = await http.get('${uri.toString()}/_query');
     if (res.statusCode == 401 || res.statusCode == 403) {
-      _routes = routes;
-    } else {
-      final decoded = json.decode(res.body);
-      final map = decoded['result'] as Map;
-      // print(map['auth']);
-      map.forEach((controller, value) {
-        _routes[controller.toString()] = {};
-        final valueAsMap = value as Map;
-        valueAsMap.forEach((action, value) {
-          if (value['http']?.length == 1) {
-            _routes[controller][action] = value['http'][0];
-          } else if (value['http'] != null) {
-            // We need this ugly fix because the document:search route can also
-            // be accessed in GET with this url: "/:index/:collection"
-            // But to send a query,
-            // we need to pass it in the body so we need POST
-            // so we can change the verb but then POST on "/:index/:collection"
-            // is the collection:update method (document:search is "/:index/:collection/_search")
-            if (controller == 'document' && action == 'search') {
-              _routes[controller][action] = _getPostRoute(value['http']);
-            } else {
-              _routes[controller][action] = _getRightRoute(value['http']);
-            }
-          }
-        });
-      });
+      return Future.error('You must have permission on the _query route.');
     }
-  }
-
-  dynamic _getPostRoute(routes) =>
-      routes[0]['verb'] == 'POST' ? routes[0] : routes[1];
-
-  dynamic _getRightRoute(routes) {
-    dynamic shortestRoute = routes[0], getRoute;
-    var minLength = routes[0]['url'].length as int;
-    var sameLength = true;
-
-    for (final route in routes) {
-      final url = route['url'] as String;
-      if (url.length != minLength) {
-        sameLength = false;
-      }
-
-      if (url.length < minLength) {
-        shortestRoute = route;
-        minLength = url.length;
-      }
-
-      if (route['verb'] == 'GET') {
-        getRoute = route;
-      }
-    }
-
-    // with same URL size, we keep the GET route
-    // with differents URL sizes, we keep the shortest because URL params
-    // will be in the query string
-    return sameLength ? getRoute : shortestRoute;
+    clientConnected();
+    return Future.value();
   }
 
   @override
-  void send(KuzzleRequest request) {
-    // TODO: implement send
+  Future<KuzzleResponse> send(KuzzleRequest request) async {
+    final headers = {'Content-Type': 'application/json'};
+
+    if (request.jwt != null) {
+      headers['Authorization'] = 'Bearer ${request.jwt}';
+    }
+
+    if (request.volatile != null) {
+      headers['x-kuzzle-volatile'] = jsonEncode(request.volatile);
+    }
+
+    final res = await http.post(
+      '${uri.toString()}/_query',
+      headers: headers,
+      body: jsonEncode(request),
+    );
+    return Future.value(
+      KuzzleResponse.fromJson(jsonDecode(res.body) as Map<String, dynamic>),
+    );
   }
 }
