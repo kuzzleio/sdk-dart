@@ -8,7 +8,7 @@ order: 50
 
 # Constructor
 
-Use this constructor to create a new instance of the `Http` protocol with specific Uri Dart Object https://api.dart.dev/stable/2.10.5/dart-core/Uri-class.html.
+Use this constructor to create a new instance of the `Http` protocol with specific Uri Dart Object https://api.dart.dev/stable/2.10.5/dart-core/Uri-class.html
 
 ## Arguments
 
