@@ -5,3 +5,4 @@ description: Dart SDK doc snippet test project
 dependencies:
   kuzzle:
     path: /mnt/
+  http: any
