@@ -16,6 +16,7 @@ import 'kuzzle/request.dart';
 import 'kuzzle/response.dart';
 import 'protocols/abstract.dart';
 import 'protocols/events.dart';
+import 'utils/deprecation.dart';
 
 enum OfflineMode { manual, auto }
 
@@ -31,11 +32,14 @@ class _KuzzleQueuedRequest {
 }
 
 class Kuzzle extends KuzzleEventEmitter {
+  final Deprecation deprecationHandler;
+
   Kuzzle(
     this.protocol, {
     this.autoQueue = false,
     this.autoReplay = false,
     this.autoResubscribe = true,
+    deprecationWarning = true,
     this.eventTimeout = 200,
     this.offlineMode = OfflineMode.manual,
     this.offlineQueueLoader,
@@ -53,6 +57,7 @@ class Kuzzle extends KuzzleEventEmitter {
     globalVolatile ??= <String, dynamic>{};
     queueTTL ??= const Duration(minutes: 2);
     replayInterval ??= const Duration(milliseconds: 10);
+    deprecationHandler = Deprecation(deprecationWarning);
 
     server = ServerController(this);
     bulk = BulkController(this);
@@ -342,7 +347,7 @@ class Kuzzle extends KuzzleEventEmitter {
   /// ```
   ///
   Future<KuzzleResponse> query(KuzzleRequest request,
-      {Map<String, dynamic> volatile, bool queueable = true}) {
+      {Map<String, dynamic> volatile, bool queueable = true}) async {
     //final _request = KuzzleRequest.fromMap(request);
 
     // bind volatile data
@@ -395,7 +400,8 @@ class Kuzzle extends KuzzleEventEmitter {
 
     _requests.add(request.requestId);
     // todo: implement query options
-    return protocol.query(request);
+    const response = await protocol.query(request);
+    return deprecationHandler.logDeprecation(response);
   }
 
   KuzzleController operator [](String accessor) => _controllers[accessor];

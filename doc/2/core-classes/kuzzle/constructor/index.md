@@ -19,6 +19,7 @@ Kuzzle(
     autoQueue = false,
     autoReplay = false,
     autoResubscribe = true,
+    deprecationWarning = true,
     eventTimeout = 200,
     offlineMode = OfflineMode.manual,
     offlineQueueLoader,
