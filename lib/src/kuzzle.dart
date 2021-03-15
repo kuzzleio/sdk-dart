@@ -32,14 +32,13 @@ class _KuzzleQueuedRequest {
 }
 
 class Kuzzle extends KuzzleEventEmitter {
-  final Deprecation deprecationHandler;
 
   Kuzzle(
     this.protocol, {
     this.autoQueue = false,
     this.autoReplay = false,
     this.autoResubscribe = true,
-    deprecationWarning = true,
+    bool deprecationWarning = true,
     this.eventTimeout = 200,
     this.offlineMode = OfflineMode.manual,
     this.offlineQueueLoader,
@@ -48,16 +47,18 @@ class Kuzzle extends KuzzleEventEmitter {
     this.queueMaxSize = 500,
     this.replayInterval,
     this.globalVolatile,
-  }) {
+  }) :
+    deprecationHandler = 
+      DeprecationHandler(deprecationWarning: deprecationWarning)
+    {
     if (offlineMode == OfflineMode.auto) {
       autoQueue = true;
       autoReplay = true;
     }
 
     globalVolatile ??= <String, dynamic>{};
-    queueTTL ??= Duration(minutes: 2);
-    replayInterval ??= Duration(milliseconds: 10);
-    deprecationHandler = Deprecation(deprecationWarning);
+    queueTTL ??= const Duration(minutes: 2);
+    replayInterval ??= const Duration(milliseconds: 10);
 
     server = ServerController(this);
     bulk = BulkController(this);
@@ -133,6 +134,7 @@ class Kuzzle extends KuzzleEventEmitter {
   final OfflineMode offlineMode;
   final Function offlineQueueLoader;
   final Function queueFilter;
+  final DeprecationHandler deprecationHandler;
 
   /// Automatically queue all requests during offline mode
   bool autoQueue;
@@ -158,7 +160,7 @@ class Kuzzle extends KuzzleEventEmitter {
   /// Common volatile data, will be sent to all future requests
   Map<String, dynamic> globalVolatile;
 
-  final List<String> _requests = List();
+  final _requests = <String>[];
 
   bool get autoReconnect => protocol.autoReconnect;
   set autoReconnect(bool value) {
@@ -405,7 +407,8 @@ class Kuzzle extends KuzzleEventEmitter {
 
     _requests.add(request.requestId);
     // todo: implement query options
-    const response = await protocol.query(request);
+    final response = await protocol.query(request);
+
     return deprecationHandler.logDeprecation(response);
   }
 
