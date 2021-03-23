@@ -1,21 +1,17 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:http/io_client.dart';
+import 'package:http/http.dart';
 import 'package:kuzzle/src/kuzzle/request.dart';
 import 'package:kuzzle/src/kuzzle/response.dart';
 import 'package:kuzzle/src/protocols/abstract.dart';
+import 'package:kuzzle/src/protocols/http_client_browser.dart' if (dart.library.web) 'package:kuzzle/src/protocols/http_client_io.dart';
 
 class HttpProtocol extends KuzzleProtocol {
   HttpProtocol(Uri uri, {bool acceptBadCertificate = false}) : super(uri) {
-    _client = HttpClient()
-      ..badCertificateCallback =
-          ((cert, host, port) => acceptBadCertificate);
-    _ioClient = IOClient(_client);
+    _ioClient = createHttpClient(acceptBadCertificate: acceptBadCertificate);
   }
 
-  HttpClient _client;
-  IOClient _ioClient;
+  BaseClient _ioClient;
 
   @override
   Future<void> connect() async {
