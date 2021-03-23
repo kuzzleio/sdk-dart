@@ -2,6 +2,9 @@ name: Tests
 version: 1.0.0
 description: Dart SDK doc snippet test project
 
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
 dependencies:
   kuzzle:
     path: /mnt/
