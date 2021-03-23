@@ -4,7 +4,8 @@ import 'package:http/http.dart';
 import 'package:kuzzle/src/kuzzle/request.dart';
 import 'package:kuzzle/src/kuzzle/response.dart';
 import 'package:kuzzle/src/protocols/abstract.dart';
-import 'package:kuzzle/src/protocols/http_client_io.dart' if (dart.library.html) 'package:kuzzle/src/protocols/http_client_browser.dart';
+import 'package:kuzzle/src/protocols/http_client_io.dart'
+    if (dart.library.html) 'package:kuzzle/src/protocols/http_client_browser.dart';
 
 class HttpProtocol extends KuzzleProtocol {
   HttpProtocol(Uri uri, {bool acceptBadCertificate = false}) : super(uri) {
