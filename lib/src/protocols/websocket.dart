@@ -1,7 +1,7 @@
 import 'package:kuzzle/src/protocols/websocket_io.dart'
-    if (dart.library.html) 'package:kuzzle/src/protocols/websocket_browser.dart' as websocket;
+    if (dart.library.html) 'package:kuzzle/src/protocols/websocket_browser.dart';
 
-class WebSocketProtocol extends websocket.KuzzleWebSocket {
+class WebSocketProtocol extends KuzzleWebSocket {
   WebSocketProtocol(
     Uri uri, {
     bool autoReconnect = true,
