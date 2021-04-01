@@ -349,7 +349,7 @@ class Kuzzle extends KuzzleEventEmitter {
   /// ```
   ///
   Future<KuzzleResponse> query(KuzzleRequest request,
-      {Map<String, dynamic> volatile, bool queueable = true}) async {
+      {Map<String, dynamic> volatile, bool queueable = true}) {
     //final _request = KuzzleRequest.fromMap(request);
 
     // bind volatile data
@@ -402,9 +402,7 @@ class Kuzzle extends KuzzleEventEmitter {
 
     _requests.add(request.requestId);
     // todo: implement query options
-    final response = await protocol.query(request);
-
-    return deprecationHandler.logDeprecation(response);
+    return protocol.query(request).then(deprecationHandler.logDeprecation);
   }
 
   KuzzleController operator [](String accessor) => _controllers[accessor];
