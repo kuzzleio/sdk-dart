@@ -48,12 +48,11 @@ class KuzzleResponse {
       map['controller'] = controller;
     }
     if (deprecations != null) {
-      map['deprecations'] = Deprecation.toJsonList(deprecations) ;
+      map['deprecations'] = Deprecation.toJsonList(deprecations);
     }
     if (error != null) {
       map['error'] = error.toJson();
     }
-  String users;
     if (index != null) {
       map['index'] = index;
     }

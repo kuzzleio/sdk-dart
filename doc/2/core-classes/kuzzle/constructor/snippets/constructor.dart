@@ -5,4 +5,5 @@ final kuzzle = Kuzzle(
     port: 7512,
   )),
     offlineMode: OfflineMode.auto,
+    showAPIDeprecatedWarnings: !kReleaseMode,
   );

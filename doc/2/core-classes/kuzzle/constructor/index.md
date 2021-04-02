@@ -19,7 +19,6 @@ Kuzzle(
     autoQueue = false,
     autoReplay = false,
     autoResubscribe = true,
-    deprecationWarning = true,
     eventTimeout = 200,
     offlineMode = OfflineMode.manual,
     offlineQueueLoader,
@@ -27,6 +26,7 @@ Kuzzle(
     queueTTL,
     queueMaxSize = 500,
     replayInterval,
+    showAPIDeprecatedWarnings = true,
     globalVolatile,
   })
 ```

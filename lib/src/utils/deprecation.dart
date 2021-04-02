@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:kuzzle/src/kuzzle/response.dart';
 
 class DeprecationHandler {
   
-  DeprecationHandler({ this.deprecationWarning });
+  DeprecationHandler({ this.deprecationWarning = true });
 
   final bool deprecationWarning;
 
@@ -50,14 +51,12 @@ class Deprecation {
     'version': version,
   };
 
-  static Map<String, dynamic> toJsonList(List<Deprecation> list) {
+  static String toJsonList(List<Deprecation> list) {
     final jsonList = <Map<String, dynamic>>[]; 
     for (var index = 0; index < list.length; index++) {
       jsonList.add(list[index].toJson());
     }
-    return {
-      'deprecations': jsonList
-    };
+    return jsonEncode(jsonList);
   }
 
 }
