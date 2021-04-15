@@ -53,8 +53,8 @@ class Deprecation {
 
   static String toJsonList(List<Deprecation> list) {
     final jsonList = <Map<String, dynamic>>[]; 
-    for (var index = 0; index < list.length; index++) {
-      jsonList.add(list[index].toJson());
+    for (final l in list) {
+      jsonList.add(l.toJson());
     }
     return jsonEncode(jsonList);
   }
