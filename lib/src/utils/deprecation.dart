@@ -10,9 +10,9 @@ class DeprecationHandler {
 
   KuzzleResponse logDeprecation(KuzzleResponse response) {
     if(deprecationWarning && response.deprecations.isNotEmpty) {
-      for (var index = 0; index < response.deprecations.length; index++) {
+      for (final deprecation in response.deprecations) {
         log(
-          '${response.action}: ${response.deprecations[index].message}',
+          '${response.action}: ${deprecation.message}',
           name: 'Deprecation Warning',
           level: 900 // Warning
         );
