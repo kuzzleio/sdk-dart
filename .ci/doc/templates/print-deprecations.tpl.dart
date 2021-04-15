@@ -13,7 +13,7 @@ void main() async {
   );
   kuzzle.connect();
   [snippet-code]
-  print(result.deprecations);
+  print(result);
   kuzzle.disconnect();
   exit(0);
 }
