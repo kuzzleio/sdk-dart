@@ -3,10 +3,5 @@ description: Returns the collection list of an index
 hooks:
   before: curl -X POST kuzzle:7512/nyc-open-data/_create && curl -X PUT kuzzle:7512/nyc-open-data/pink-taxi && curl -X PUT kuzzle:7512/nyc-open-data/dark-taxi
   after:
-template: print-deprecations
-expected: [
-    {
-      "message": "The \"type\" argument and this route returning a list of realtime collections have both been deprecated since Kuzzle version 2.10.1. This feature might be removed in a future major version. To get a list of realtime collections, use this API action instead: \"realtime:list\".",
-      "version": "2.10.2"
-    }
-  ]
+template: print-collection-length
+expected: 3
