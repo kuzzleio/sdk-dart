@@ -33,10 +33,10 @@ class Deprecation {
       return [];
     }
     final list = <Deprecation>[];
-    for (var index = 0; index < (json['deprecations'].length as int); index++) {
+    for (final deprecation in json['deprecations']) {
       list.add(
         Deprecation.fromJson(
-          json['deprecations'][index] as Map<String, dynamic>
+          deprecation as Map<String, dynamic>
         )
       );
     }
