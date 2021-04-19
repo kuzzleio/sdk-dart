@@ -38,7 +38,7 @@ class Kuzzle extends KuzzleEventEmitter {
     this.autoQueue = false,
     this.autoReplay = false,
     this.autoResubscribe = true,
-    bool showAPIDeprecatedWarnings = true,
+    bool deprecationWarnings = true,
     this.eventTimeout = 200,
     this.offlineMode = OfflineMode.manual,
     this.offlineQueueLoader,
@@ -49,7 +49,7 @@ class Kuzzle extends KuzzleEventEmitter {
     this.globalVolatile,
   }) :
     deprecationHandler = 
-      DeprecationHandler(deprecationWarning: showAPIDeprecatedWarnings)
+      DeprecationHandler(deprecationWarning: deprecationWarnings)
     {
     if (offlineMode == OfflineMode.auto) {
       autoQueue = true;
