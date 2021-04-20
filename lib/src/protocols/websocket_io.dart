@@ -27,9 +27,17 @@ class KuzzleWebSocket extends KuzzleProtocol {
   Duration _reconnectionDelay;
   bool autoReconnect;
   bool _stopRetryingToConnect = false;
+  bool _hasBeenClosed = false;
 
   @override
   Future<void> connect() async {
+    // If a reconnection is going on 
+    // and the enduser called disconnect in between
+    // then don't try to connect
+    if (_hasBeenClosed && retrying) {
+      return;
+    }
+
     final url = '${uri.scheme}://${uri.host}:${uri.port}';
 
     await super.connect();
@@ -66,6 +74,7 @@ class KuzzleWebSocket extends KuzzleProtocol {
     _subscription = _webSocket.listen(_handlePayload,
         onError: _handleError, onDone: _handleDone);
 
+    _hasBeenClosed = false;
     clientConnected();
 
     unawaited(_webSocket.done.then((error) {
@@ -85,6 +94,8 @@ class KuzzleWebSocket extends KuzzleProtocol {
   @override
   void close() {
     super.close();
+
+    _hasBeenClosed = true;
 
     removeAllListeners();
     _stopRetryingToConnect = true;
@@ -114,8 +125,8 @@ class KuzzleWebSocket extends KuzzleProtocol {
       retrying = true;
 
       Timer(_reconnectionDelay, () async {
-        retrying = false;
         await connect().catchError(clientNetworkError);
+        retrying = false;
       });
     } else {
       emit(ProtocolEvents.DISCONNECT);
