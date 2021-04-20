@@ -65,6 +65,7 @@ class KuzzleWebSocket extends KuzzleProtocol {
         onError: _handleError, onDone: _handleDone);
 
     clientConnected();
+    _stopRetryingToConnect = false;
 
     unawaited(_webSocket.done.then((error) {
       clientNetworkError(
