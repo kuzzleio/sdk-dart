@@ -15,8 +15,9 @@ class KuzzleWebSocket extends KuzzleProtocol {
     bool autoReconnect = true,
     Duration reconnectionDelay,
     this.pingInterval,
-  }) : super(uri,
-            autoReconnect: autoReconnect, reconnectionDelay: reconnectionDelay);
+  }) : super(
+          uri,
+        );
 
   String _lastUrl;
   WebSocket _webSocket;
@@ -64,7 +65,6 @@ class KuzzleWebSocket extends KuzzleProtocol {
     super.close();
 
     removeAllListeners();
-    stopRetryingToConnect = true;
     wasConnected = false;
 
     _subscription?.cancel();

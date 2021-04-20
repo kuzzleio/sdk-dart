@@ -51,8 +51,8 @@ class Kuzzle extends KuzzleEventEmitter {
     }
 
     globalVolatile ??= <String, dynamic>{};
-    queueTTL ??= Duration(minutes: 2);
-    replayInterval ??= Duration(milliseconds: 10);
+    queueTTL ??= const Duration(minutes: 2);
+    replayInterval ??= const Duration(milliseconds: 10);
 
     server = ServerController(this);
     bulk = BulkController(this);
@@ -153,12 +153,7 @@ class Kuzzle extends KuzzleEventEmitter {
   /// Common volatile data, will be sent to all future requests
   Map<String, dynamic> globalVolatile;
 
-  final List<String> _requests = List();
-
-  bool get autoReconnect => protocol.autoReconnect;
-  set autoReconnect(bool value) {
-    protocol.autoReconnect = value;
-  }
+  final List<String> _requests = [];
 
   final Map<String, KuzzleController> _controllers =
       <String, KuzzleController>{};
@@ -174,7 +169,7 @@ class Kuzzle extends KuzzleEventEmitter {
     if (protocol.state == KuzzleProtocolState.connecting) {
       final completer = Completer<void>();
 
-      // todo: handle reconnect event
+      protocol.once(ProtocolEvents.RECONNECT, completer.complete);
       protocol.once(ProtocolEvents.CONNECT, completer.complete);
 
       return completer.future;

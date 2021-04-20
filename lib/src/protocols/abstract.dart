@@ -20,23 +20,15 @@ enum KuzzleProtocolState {
 
 abstract class KuzzleProtocol extends KuzzleEventEmitter {
   KuzzleProtocol(
-    this.uri, {
-    this.autoReconnect = true,
-    Duration reconnectionDelay,
-  }) : _state = KuzzleProtocolState.offline,
-      _reconnectionDelay = reconnectionDelay ?? Duration(seconds: 1),
-      id = _uuid.v4();
+    this.uri,
+  )   : _state = KuzzleProtocolState.offline,
+        id = _uuid.v4();
 
-  bool autoReconnect;
   final Uri uri;
   final String id;
-  final Duration _reconnectionDelay;
 
   @protected
   bool wasConnected = false;
-
-  @protected
-  bool stopRetryingToConnect = false;
 
   @protected
   bool retrying = false;
@@ -59,7 +51,6 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     KuzzleProtocolState state = KuzzleProtocolState.connected,
   }) {
     _state = state;
-    stopRetryingToConnect = false;
     emit(wasConnected ? ProtocolEvents.RECONNECT : ProtocolEvents.CONNECT);
 
     wasConnected = true;
@@ -74,27 +65,16 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
   void clientNetworkError([dynamic error]) {
     _state = KuzzleProtocolState.offline;
 
-    emit(ProtocolEvents.NETWORK_ERROR,
-        [
-          KuzzleError('Unable to connect to kuzzle server at ${uri.toString()}')
-        ]);
-
-    if (autoReconnect && !retrying && !stopRetryingToConnect) {
-      retrying = true;
-
-      Timer(_reconnectionDelay, () async {
-        retrying = false;
-        await connect().catchError(clientNetworkError);
-      });
-    } else {
-      emit(ProtocolEvents.DISCONNECT);
-    }
+    emit(ProtocolEvents.NETWORK_ERROR, [
+      KuzzleError('Unable to connect to kuzzle server at ${uri.toString()}')
+    ]);
   }
 
   /// Called when the client's connection is closed
   @mustCallSuper
   void close() {
     _state = KuzzleProtocolState.offline;
+    clientDisconnected();
   }
 
   // todo: implement query options
