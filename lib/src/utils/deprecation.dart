@@ -9,7 +9,7 @@ class DeprecationHandler {
   final bool deprecationWarning;
 
   KuzzleResponse logDeprecation(KuzzleResponse response) {
-    if(deprecationWarning && response.deprecations.isNotEmpty) {
+    if (deprecationWarning && response.deprecations.isNotEmpty) {
       for (final deprecation in response.deprecations) {
         log(
           '${response.action}: ${deprecation.message}',
