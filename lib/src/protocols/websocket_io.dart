@@ -45,6 +45,8 @@ class KuzzleWebSocket extends KuzzleProtocol {
     await _webSocket?.close();
     _webSocket = null;
 
+    _stopRetryingToConnect = false;
+
     try {
       _webSocket = await WebSocket.connect(url);
     } on IOException {
@@ -65,7 +67,6 @@ class KuzzleWebSocket extends KuzzleProtocol {
         onError: _handleError, onDone: _handleDone);
 
     clientConnected();
-    _stopRetryingToConnect = false;
 
     unawaited(_webSocket.done.then((error) {
       clientNetworkError(
