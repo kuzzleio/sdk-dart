@@ -37,6 +37,7 @@ class KuzzleWebSocket extends KuzzleProtocol {
     if (_hasBeenClosed && retrying) {
       return;
     }
+    _hasBeenClosed = false;
 
     final url = '${uri.scheme}://${uri.host}:${uri.port}';
 
@@ -74,7 +75,6 @@ class KuzzleWebSocket extends KuzzleProtocol {
     _subscription = _webSocket.listen(_handlePayload,
         onError: _handleError, onDone: _handleDone);
 
-    _hasBeenClosed = false;
     clientConnected();
 
     unawaited(_webSocket.done.then((error) {
