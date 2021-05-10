@@ -1,5 +1,5 @@
 name: kuzzle
-version: 2.4.3
+version: 2.4.4
 description: A library to interact with kuzzle API. A backend software,
   self-hostable and ready to use to power modern cross-platform apps.
 homepage: https://github.com/kuzzleio/sdk-dart
