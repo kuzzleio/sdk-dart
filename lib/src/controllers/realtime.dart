@@ -1,4 +1,10 @@
+/* 
+  Code adapted by V.Arsic
+  09.08.2021.
+ */
+
 import 'dart:async';
+import 'dart:core';
 
 import 'package:kuzzle/src/kuzzle/response.dart';
 import 'package:kuzzle/src/protocols/events.dart';
@@ -12,34 +18,59 @@ import 'abstract.dart';
 typedef SubscribeListener = void Function(KuzzleResponse);
 
 class Subscription {
-    Subscription({this.index,
-                this.collection,
-                this.filters,
-                this.callback,
-                this.autoResubscribe,
-                this.subscribeToSelf,
-                this.state,
-                this.scope,
-                this.users,
-                this.volatile}
-    );
+  String index;
+  String collection;
+  Map<String, dynamic> filters;
+  SubscribeListener callback;
+  bool autoResubscribe;
+  bool subscribeToSelf;
+  String state;
+  String scope;
+  String users;
+  Map<String, dynamic> volatile;
 
-    String index;
-    String collection;
-    Map<String, dynamic> filters;
-    SubscribeListener callback;
-    bool autoResubscribe;
-    bool subscribeToSelf;
-    String state;
-    String scope;
-    String users;
-    Map<String, dynamic> volatile;
+  // Constructor
+  Subscription(
+      {this.index,
+      this.collection,
+      this.filters,
+      this.callback,
+      this.autoResubscribe,
+      this.subscribeToSelf,
+      this.state,
+      this.scope,
+      this.users,
+      this.volatile});
+
+  @override
+  String toString() {
+    return 'Subscription: {index: ${index}, collection: ${collection}, filters: ${filters}, callback: ${callback}, autoResubscribe: ${autoResubscribe}, subscribeToSelf: ${subscribeToSelf}, state: ${state}, scope: ${scope}, users: ${users}, volatile: ${volatile}}';
+  }
+
+  @override
+  bool operator ==(other) {
+    return (other is Subscription) &&
+        other.index == index &&
+        other.collection == collection &&
+        // other.filters == filters &&
+        // other.callback == callback &&
+        other.autoResubscribe == autoResubscribe &&
+        other.subscribeToSelf == subscribeToSelf &&
+        other.state == state &&
+        other.scope == scope &&
+        other.users == users &&
+        other.volatile == volatile;
+  }
+
+  @override
+  int get hashCode =>
+      index.hashCode ^ collection.hashCode ^ subscribeToSelf.hashCode;
 }
 
 class RealTimeController extends KuzzleController {
   RealTimeController(Kuzzle kuzzle) : super(kuzzle, name: 'realtime') {
-    kuzzle.protocol.on(ProtocolEvents.UNHANDLED_RESPONSE, 
-    (KuzzleResponse message) {
+    kuzzle.protocol.on(ProtocolEvents.UNHANDLED_RESPONSE,
+        (KuzzleResponse message) {
       var fromSelf = false;
       if (message.volatile != null && message.volatile.isNotEmpty) {
         if (message.volatile.containsKey('sdkInstanceId') &&
@@ -103,60 +134,75 @@ class RealTimeController extends KuzzleController {
   /// optionally, user events matching the provided filters will
   /// generate real-time notifications, sent to you in real-time by Kuzzle.
   Future<String> subscribe(String index, String collection,
-      Map<String, dynamic> filters, SubscribeListener callback,
-      {String scope = 'all',
-      String state,
-      String users,
-      Map<String, dynamic> volatile,
-      bool subscribeToSelf = true,
-      bool autoResubscribe}) async => kuzzle.query(
-        KuzzleRequest(
-          action: 'subscribe',
-          controller: 'realtime',
-          index: index,
-          collection: collection,
-          body: filters,
-          state: state,
-          scope: scope,
-          users: users,
-          volatile: volatile,
-        ),
-        volatile: volatile)
-        .then((response) {
-          final subscription = Subscription(
-            index: index, 
-            collection: collection, 
-            filters: filters, 
+          Map<String, dynamic> filters, SubscribeListener callback,
+          {String scope = 'all',
+          String state,
+          String users,
+          Map<String, dynamic> volatile,
+          bool subscribeToSelf = true,
+          bool autoResubscribe}) async =>
+      kuzzle
+          .query(
+              KuzzleRequest(
+                action: 'subscribe',
+                controller: 'realtime',
+                index: index,
+                collection: collection,
+                body: filters,
+                state: state,
+                scope: scope,
+                users: users,
+                volatile: volatile,
+              ),
+              volatile: volatile)
+          .then((response) {
+        final subscription = Subscription(
+            index: index,
+            collection: collection,
+            filters: filters,
             callback: callback,
             volatile: volatile,
             users: users,
             scope: scope,
             state: state,
             subscribeToSelf: subscribeToSelf,
-            autoResubscribe: autoResubscribe
-          );
-          final roomId = response.result['roomId'] as String;
-          final channel = response.result['channel'] as String;
+            autoResubscribe: autoResubscribe);
+        final roomId = response.result['roomId'] as String;
+        final channel = response.result['channel'] as String;
 
-          if (_currentSubscriptions[channel] == null) {
-            final List<Subscription> item = [];
-            item.add(subscription);
-            _currentSubscriptions[channel] = item;
-            _subscriptionsCache[channel] = item;
-          } else {
-            if (!_currentSubscriptions[channel].contains(subscription)) {
-              _currentSubscriptions[channel].add(subscription);
-            }
-            if (!_subscriptionsCache[channel].contains(subscription)) {
-              _subscriptionsCache[channel].add(subscription);
-            }
+        if (_currentSubscriptions[channel] == null) {
+          final List<Subscription> item = [];
+          item.add(subscription);
+          _currentSubscriptions[channel] = item;
+          _subscriptionsCache[channel] = item;
+        } else {
+          if (!_checkIsSubscriptionExisting(
+              _currentSubscriptions[channel], subscription)) {
+            _currentSubscriptions[channel].add(subscription);
           }
-          _rooms[roomId] = channel;
+          if (!_checkIsSubscriptionExisting(
+              _subscriptionsCache[channel], subscription)) {
+            _subscriptionsCache[channel].add(subscription);
+          }
+        }
+        _rooms[roomId] = channel;
 
-          kuzzle.on(ProtocolEvents.RECONNECTED, _renewSubscribe);
+        kuzzle.on(ProtocolEvents.RECONNECTED, _renewSubscribe);
 
-          return roomId;
-        });
+        return roomId;
+      });
+
+  bool _checkIsSubscriptionExisting(
+      List<Subscription> currentSubs, Subscription _subscription) {
+    for (var i = 0; i < currentSubs.length; i++) {
+      final Subscription sub = currentSubs[i];
+      if (sub == _subscription) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   void _renewSubscribe() async {
     for (final subs in _subscriptionsCache.values) {
@@ -182,11 +228,8 @@ class RealTimeController extends KuzzleController {
   /// Removes a subscription.
   Future<void> unsubscribe(String roomId) async {
     if (!_currentSubscriptions.containsKey(_rooms[roomId])) {
-      return Future.error(
-          KuzzleError(
-            'not.subscribed',
-            '$name.unsubscribe: not subscribed to $roomId'
-          ));
+      return Future.error(KuzzleError(
+          'not.subscribed', '$name.unsubscribe: not subscribed to $roomId'));
     }
 
     await kuzzle.query(KuzzleRequest(
@@ -194,8 +237,11 @@ class RealTimeController extends KuzzleController {
         action: 'unsubscribe',
         body: <String, dynamic>{'roomId': roomId}));
 
-    _currentSubscriptions[roomId]?.clear();
-    _subscriptionsCache[roomId]?.clear();
+    if (_currentSubscriptions[_rooms[roomId]] != null)
+      _currentSubscriptions[_rooms[roomId]].clear();
+    if (_subscriptionsCache[_rooms[roomId]] != null)
+      _subscriptionsCache[_rooms[roomId]].clear();
+
     _rooms.remove(roomId);
   }
 }
