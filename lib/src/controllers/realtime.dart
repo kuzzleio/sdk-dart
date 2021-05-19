@@ -52,8 +52,6 @@ class Subscription {
     return (other is Subscription) &&
         other.index == index &&
         other.collection == collection &&
-        // other.filters == filters &&
-        // other.callback == callback &&
         other.autoResubscribe == autoResubscribe &&
         other.subscribeToSelf == subscribeToSelf &&
         other.state == state &&
