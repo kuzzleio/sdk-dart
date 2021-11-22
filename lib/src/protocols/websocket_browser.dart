@@ -32,25 +32,40 @@ class KuzzleWebSocket extends KuzzleProtocol {
       return;
     }
 
+    print('Attempt');
+
     final _connected = Completer();
     final url = '${uri.scheme}://${uri.host}:${uri.port}';
 
-    _webSocket ??= WebSocket(url);
+    _webSocket = WebSocket(url);
 
     await _subscription?.cancel();
     _subscription = null;
 
     _subscription = _webSocket!.onMessage.listen(_handlePayload);
 
-    final onErrorSubscription =
-        _webSocket!.onError.listen(_connected.completeError);
+    final onErrorSubscription = _webSocket!.onError.listen((Event event) {
+      if (_connected.isCompleted) {
+        return;
+      }
+
+      _connected.completeError(KuzzleError(
+          'sdk:network:error', 'Unable to connect to ${uri.toString()}'));
+    });
 
     final onCloseSubscription = _webSocket!.onClose.listen((Event event) {
-      _connected
-          .completeError(KuzzleError('Unable to connect to ${uri.toString()}'));
+      if (_connected.isCompleted) {
+        return;
+      }
+
+      _connected.completeError(KuzzleError(
+          'sdk:network:error', 'Unable to connect to ${uri.toString()}'));
     });
 
     _webSocket!.onOpen.listen((_) {
+      if (_connected.isCompleted) {
+        return;
+      }
       onErrorSubscription.cancel();
       onCloseSubscription.cancel();
 
