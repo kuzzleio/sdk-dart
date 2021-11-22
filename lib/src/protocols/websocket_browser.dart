@@ -32,8 +32,6 @@ class KuzzleWebSocket extends KuzzleProtocol {
       return;
     }
 
-    print('Attempt');
-
     final _connected = Completer();
     final url = '${uri.scheme}://${uri.host}:${uri.port}';
 
