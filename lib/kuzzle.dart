@@ -11,6 +11,7 @@ export 'src/controllers/server.dart';
 export 'src/kuzzle.dart';
 export 'src/kuzzle/errors.dart';
 export 'src/kuzzle/event_emitter.dart';
+export 'src/kuzzle/events.dart';
 export 'src/kuzzle/profile.dart';
 export 'src/kuzzle/request.dart';
 export 'src/kuzzle/response.dart';
