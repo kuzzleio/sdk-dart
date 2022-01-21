@@ -22,7 +22,7 @@ class HttpProtocol extends KuzzleProtocol {
       return;
     }
 
-    final res = await _ioClient.get(Uri.parse('${uri.toString()}/_query'));
+    final res = await _ioClient.post(Uri.parse('${uri.toString()}/_query'));
     if (res.statusCode == 401 || res.statusCode == 403) {
       throw Exception('You must have permission on the _query route.');
     }
