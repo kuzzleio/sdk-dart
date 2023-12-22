@@ -1,3 +1,7 @@
+## [3.0.3]
+
+- Bug fix: Implement periodic pings for the websocket protocol in browser environments.
+
 ## [3.0.2]
 
 - Bug fix: Use proper HTTP method with query in the HTTP protocol connection
