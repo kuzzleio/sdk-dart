@@ -16,7 +16,7 @@ class KuzzleWebSocket extends KuzzleProtocol {
     bool autoReconnect = true,
     Duration reconnectionDelay = const Duration(seconds: 1),
     int reconnectionAttempts = 10,
-    this.pingInterval,
+    required this.pingInterval,
   }) : super(uri,
             autoReconnect: autoReconnect,
             reconnectionDelay: reconnectionDelay,
@@ -24,7 +24,8 @@ class KuzzleWebSocket extends KuzzleProtocol {
 
   WebSocket? _webSocket;
   StreamSubscription? _subscription;
-  Duration? pingInterval;
+  Duration pingInterval;
+  Timer? pingTimer;
 
   @override
   Future<void> protocolConnect() async {
@@ -41,6 +42,15 @@ class KuzzleWebSocket extends KuzzleProtocol {
     _subscription = null;
 
     _subscription = _webSocket!.onMessage.listen(_handlePayload);
+
+    pingTimer?.cancel();
+    pingTimer = Timer.periodic(pingInterval, (timer) {
+      if (_webSocket != null && _webSocket!.readyState == WebSocket.OPEN) {
+        _webSocket!.sendString('{"p":1}');
+      } else {
+        timer.cancel();
+      }
+    });
 
     final onErrorSubscription =
         _webSocket!.onError.listen(_connected.completeError);

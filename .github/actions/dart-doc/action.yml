@@ -2,9 +2,9 @@ name: Generate DartDoc
 description: Dart Documentation Generation
 runs:
   using: "composite"
-  steps: 
+  steps:
     - name: Run DartDoc
       run: |
         ./docker_launch.sh
-        dartdoc
+        dart doc
       shell: bash

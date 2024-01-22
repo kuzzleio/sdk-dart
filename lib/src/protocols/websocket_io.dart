@@ -15,7 +15,7 @@ class KuzzleWebSocket extends KuzzleProtocol {
     bool autoReconnect = true,
     Duration reconnectionDelay = const Duration(seconds: 1),
     int reconnectionAttempts = 10,
-    this.pingInterval,
+    required this.pingInterval,
   }) : super(uri,
             autoReconnect: autoReconnect,
             reconnectionDelay: reconnectionDelay,
@@ -23,7 +23,7 @@ class KuzzleWebSocket extends KuzzleProtocol {
 
   WebSocket? _webSocket;
   StreamSubscription? _subscription;
-  Duration? pingInterval;
+  Duration pingInterval;
 
   @override
   Future<void> protocolConnect() async {

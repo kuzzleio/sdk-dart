@@ -79,3 +79,4 @@ coverage
 doc/framework
 .ci/doc/project/*.dart
 .vuepress
+pubspec.lock
