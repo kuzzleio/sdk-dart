@@ -8,8 +8,8 @@ environment:
 dependencies:
   pedantic: ^1.11.1
   meta: ^1.4.0
-  uuid: ^3.0.4
-  http: ^0.13.3
+  uuid: ^4.3.3
+  http: ^1.2.1
   mockito: ^5.0.10
 dev_dependencies:
   test: ^1.17.8
