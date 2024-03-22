@@ -13,7 +13,7 @@ for (var i = 1; i <= 5; i++) {
   });
 }
 
-var res = await kuzzle.security.searchUsers(
+SearchResult? res = await kuzzle.security.searchUsers(
   query: {
     'query': {
       'term': {
@@ -27,6 +27,6 @@ var res = await kuzzle.security.searchUsers(
 final result = [];
 
 while (res != null) {
-  result.addAll(res.hits);
+  result.addAll(res.hits as Iterable<dynamic>);
   res = await res.next();
 }

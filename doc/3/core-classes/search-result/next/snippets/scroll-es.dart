@@ -8,7 +8,7 @@ await kuzzle.document.mCreate('nyc-open-data', 'yellow-taxi', documents,
   waitForRefresh: true
 );
 
-var res = await kuzzle.document.search(
+SearchResult? res = await kuzzle.document.search(
   'nyc-open-data',
   'yellow-taxi',
   query: { 'query': { 'match': { 'category': 'suv' } } },
@@ -18,6 +18,6 @@ var res = await kuzzle.document.search(
 final result = [];
 
 while (res != null) {
-  result.addAll(res.hits);
+  result.addAll(res.hits as Iterable<dynamic>);
   res = await res.next();
 }
