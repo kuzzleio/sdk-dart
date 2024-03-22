@@ -41,7 +41,7 @@ services:
       - CONFIG_FILE=/mnt/.ci/doc/config.yml
 
   doc-runner-dart:
-    image: google/dart
+    image: dart:3
     command: >
       bash -c '
         mkdir -p /var/snippets/dart;
