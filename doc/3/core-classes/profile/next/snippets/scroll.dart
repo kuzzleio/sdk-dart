@@ -9,7 +9,7 @@ for (var i = 1; i <= 5; i++) {
   );
 }
 
-var res = await kuzzle.security.searchProfiles(
+SearchResult? res = await kuzzle.security.searchProfiles(
   query:{ 'roles': [ 'default' ] }, 
   scroll: '10s', 
   size: 1);
@@ -17,6 +17,6 @@ var res = await kuzzle.security.searchProfiles(
 final result = [];
 
 while (res != null) {
-  result.addAll(res.hits);
+  result.addAll(res.hits as Iterable<dynamic>);
   res = await res.next();
 }

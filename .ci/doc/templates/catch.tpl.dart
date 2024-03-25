@@ -31,7 +31,7 @@ void main() async {
     await kuzzle.connect();
     [snippet-code]
   } catch(e, s) {
-    print(e.message);
+    print(e);
   } finally {
   kuzzle.disconnect();
   }

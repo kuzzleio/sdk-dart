@@ -3,7 +3,7 @@ version: 1.0.0
 description: Dart SDK doc snippet test project
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   kuzzle:
