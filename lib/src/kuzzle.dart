@@ -189,7 +189,7 @@ class Kuzzle extends KuzzleEventEmitter {
         startQueuing();
       }
 
-      emit(ProtocolEvents.NETWORK_ERROR, [error]);
+      emit(KuzzleEvents.NETWORK_ERROR, [error]);
     });
 
     protocol.on(ProtocolEvents.DISCONNECT, () {
