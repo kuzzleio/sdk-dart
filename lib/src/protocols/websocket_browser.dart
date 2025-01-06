@@ -4,7 +4,6 @@ import 'dart:html';
 
 import 'package:kuzzle/src/kuzzle/response.dart';
 
-import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
 
 import 'abstract.dart';
@@ -24,6 +23,8 @@ class KuzzleWebSocket extends KuzzleProtocol {
 
   WebSocket? _webSocket;
   StreamSubscription? _subscription;
+  StreamSubscription? _onErrorSubscription;
+  StreamSubscription? _onCloseSubscription;
   Duration pingInterval;
   Timer? pingTimer;
 
@@ -52,21 +53,11 @@ class KuzzleWebSocket extends KuzzleProtocol {
       }
     });
 
-    final onErrorSubscription =
-        _webSocket!.onError.listen(_connected.completeError);
+    _onErrorSubscription = _webSocket!.onError.listen(_handleError);
 
-    final onCloseSubscription = _webSocket!.onClose.listen((Event event) {
-      _connected
-          .completeError(KuzzleError('Unable to connect to ${uri.toString()}'));
-    });
+    _onCloseSubscription = _webSocket!.onClose.listen(_handleDone);
 
     _webSocket!.onOpen.listen((_) {
-      onErrorSubscription.cancel();
-      onCloseSubscription.cancel();
-
-      _webSocket!.onError.listen(_handleError);
-      _webSocket!.onClose.listen(_handleDone);
-
       _connected.complete();
     });
 
@@ -91,6 +82,12 @@ class KuzzleWebSocket extends KuzzleProtocol {
 
     _webSocket?.close();
     _webSocket = null;
+
+    _onErrorSubscription?.cancel();
+    _onErrorSubscription = null;
+
+    _onCloseSubscription?.cancel();
+    _onCloseSubscription = null;
   }
 
   void _handlePayload(MessageEvent payload) {
