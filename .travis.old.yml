@@ -32,7 +32,7 @@ jobs:
       if: type = pull_request OR type = push AND branch =~ /^master|[0-9]+-dev$/ OR type = cron
       language: node_js
       node_js: 12
-      script: docker-compose -f .ci/doc/docker-compose.yml run doc-tests index
+      script: docker compose -f .ci/doc/docker-compose.yml run doc-tests index
 
 
     - stage: Tests
