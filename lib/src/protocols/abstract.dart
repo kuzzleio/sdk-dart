@@ -10,7 +10,7 @@ import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
 import 'events.dart';
 
-final _uuid = Uuid();
+const _uuid = Uuid();
 
 enum KuzzleProtocolState {
   connected,
@@ -58,6 +58,10 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
         protocolState = KuzzleProtocolState.offline;
         throw KuzzleError(
             'Unable to connect to kuzzle server at ${uri.toString()}: Connection aborted.');
+      }
+
+      if (protocolState == KuzzleProtocolState.reconnecting) {
+        emit(ProtocolEvents.RECONNECTING, [attempt]);
       }
 
       try {
