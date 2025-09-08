@@ -192,6 +192,10 @@ class Kuzzle extends KuzzleEventEmitter {
       emit(KuzzleEvents.NETWORK_ERROR, [error]);
     });
 
+    protocol.on(ProtocolEvents.RECONNECTING, (attempt) {
+      emit(KuzzleEvents.RECONNECTING, [(attempt as int) + 1]);
+    });
+
     protocol.on(ProtocolEvents.DISCONNECT, () {
       _requests.clear();
       emit(KuzzleEvents.DISCONNECTED);

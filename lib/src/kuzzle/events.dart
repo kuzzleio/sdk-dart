@@ -5,6 +5,7 @@ class KuzzleEvents {
   static const String OFFLINE_QUEUE_POP = 'offlineQueuePop';
   static const String TOKEN_EXPIRED = 'tokenExpired';
   static const String CONNECTED = 'connected';
+  static const String RECONNECTING = 'reconnecting';
   static const String RECONNECTED = 'reconnected';
   static const String DISCONNECTED = 'disconnected';
   static const String QUERY_ERROR = 'queryError';
