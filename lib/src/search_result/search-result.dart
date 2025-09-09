@@ -5,6 +5,7 @@ import '../kuzzle.dart';
 import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
+
 class SearchResult {
   SearchResult(
     this.kuzzle, {
@@ -30,7 +31,7 @@ class SearchResult {
     }
   }
 
-  // todo: implement query options
+  // TODO(todo): implement query options
   // Map<String, dynamic> _options;
 
   @protected
@@ -59,7 +60,6 @@ class SearchResult {
   int fetched = 0;
   int? total = 0;
 
-  @override
   Future<SearchResult?> next() async {
     if (fetched >= total!) {
       return null;
@@ -72,9 +72,7 @@ class SearchResult {
       );
       query.action = scrollAction;
       query.lang = lang;
-      return await kuzzle
-          .query(query)
-          .then((_response) {
+      return await kuzzle.query(query).then((_response) {
         response = _response;
 
         final result = response!.result as Map<String, dynamic>;
@@ -125,7 +123,6 @@ class SearchResult {
         return buildNextSearchResult(response);
       });
     } else if (request!.size != null) {
-
       if (request!.from! >= total!) {
         return null;
       }
@@ -171,11 +168,9 @@ class SearchResult {
   }
 
   @protected
-  SearchResult buildNextSearchResult(KuzzleResponse? response){
-    final nextSearchResult = SearchResult(
-      kuzzle, 
-      request: request, 
-      response: response);
+  SearchResult buildNextSearchResult(KuzzleResponse? response) {
+    final nextSearchResult =
+        SearchResult(kuzzle, request: request, response: response);
     nextSearchResult.fetched += fetched;
     return nextSearchResult;
   }

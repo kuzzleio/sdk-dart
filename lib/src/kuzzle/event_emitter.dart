@@ -13,9 +13,7 @@ class KuzzleEventEmitter {
   final Map<String, List<_KuzzleListener>> _events = {};
 
   bool _exist(String eventName, Function callback) {
-    assert(eventName != null);
     assert(eventName.isNotEmpty);
-    assert(callback != null);
 
     if (!_events.containsKey(eventName)) {
       return false;
@@ -29,14 +27,12 @@ class KuzzleEventEmitter {
   List<String> eventNames() => _events.keys.toList();
 
   int listenerCount(String eventName) {
-    assert(eventName != null);
     assert(eventName.isNotEmpty);
 
     return listeners(eventName)!.length;
   }
 
   List<_KuzzleListener>? listeners(String eventName) {
-    assert(eventName != null);
     assert(eventName.isNotEmpty);
 
     if (!_events.containsKey(eventName)) {
@@ -48,8 +44,6 @@ class KuzzleEventEmitter {
 
   @mustCallSuper
   void addListener(String eventName, Function callback, {bool once = false}) {
-    assert(callback != null);
-    assert(eventName != null);
     assert(eventName.isNotEmpty);
 
     if (!_events.containsKey(eventName)) {
@@ -64,8 +58,6 @@ class KuzzleEventEmitter {
   @mustCallSuper
   void prependListener(String eventName, Function callback,
       {bool once = false}) {
-    assert(callback != null);
-    assert(eventName != null);
     assert(eventName.isNotEmpty);
 
     if (!_events.containsKey(eventName)) {
@@ -79,8 +71,6 @@ class KuzzleEventEmitter {
 
   @mustCallSuper
   void removeListener(String eventName, Function callback) {
-    assert(callback != null);
-    assert(eventName != null);
     assert(eventName.isNotEmpty);
 
     if (!_events.containsKey(eventName)) {
@@ -124,7 +114,6 @@ class KuzzleEventEmitter {
     List? positionalArguments,
     Map<Symbol, dynamic>? namedArguments,
   ]) {
-    assert(eventName != null);
     assert(eventName.isNotEmpty);
 
     if (!_events.containsKey(eventName)) {
