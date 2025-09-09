@@ -210,13 +210,9 @@ class CollectionController extends KuzzleController {
   ) async {
     final body = <String, dynamic>{};
 
-    if (mappings != null) {
-      body['mappings'] = mappings;
-    }
+    body['mappings'] = mappings;
 
-    if (settings != null) {
-      body['settings'] = settings;
-    }
+    body['settings'] = settings;
 
     final response = await kuzzle.query(KuzzleRequest(
       index: index,

@@ -2,13 +2,7 @@
 .ci/
 doc/
 test/
-.travis.old.yaml
 docker-compose.yml
-package-lock.json
-package.json
-docker_launch.sh
 codecov.yml
-coverage.sh
 analysis_options.yaml
-adminauth.sh
 kuzzle-dart.png

@@ -9,24 +9,24 @@ import 'search-result.dart';
 class RoleSearchResult extends SearchResult {
   RoleSearchResult(
     Kuzzle kuzzle, {
-    KuzzleRequest? request,
     required KuzzleResponse response,
+    KuzzleRequest? request,
   }) : super(kuzzle, request: request, response: response) {
     searchAction = 'searchRoles';
     scrollAction = null; // scrollRoles action does not exists in Kuzzle API.
 
-    hits = (response.result['hits'] as List).map((hit) => KuzzleRole(kuzzle,
+    hits = (response.result['hits'] as List)
+        .map((hit) => KuzzleRole(kuzzle,
             uid: hit['_id'] as String?,
-            controllers: hit['_source']['controllers'] as Map<String, dynamic>?))
+            controllers:
+                hit['_source']['controllers'] as Map<String, dynamic>?))
         .toList();
   }
 
   @override
-  RoleSearchResult buildNextSearchResult (KuzzleResponse? response) {
-    final nextSearchResult = RoleSearchResult(
-      kuzzle, 
-      request: request, 
-      response: response!);
+  RoleSearchResult buildNextSearchResult(KuzzleResponse? response) {
+    final nextSearchResult =
+        RoleSearchResult(kuzzle, request: request, response: response!);
     nextSearchResult.fetched += fetched;
     return nextSearchResult;
   }
@@ -64,21 +64,6 @@ class RoleSearchResult extends SearchResult {
 
     throw KuzzleError('Unable to retrieve next results from search: '
         'missing from/size params');
-  }
-
-  dynamic _get(Map<String, dynamic>? object, List<String> path) {
-    if (object == null) {
-      return <String>[];
-    }
-
-    if (path.length == 1) {
-      return object[path.first];
-    }
-
-    final key = path.first;
-    path.removeAt(0);
-
-    return _get(object[key] as Map<String, dynamic>?, path);
   }
 
   List<KuzzleRole> getRoles() => List<KuzzleRole>.from(hits!);

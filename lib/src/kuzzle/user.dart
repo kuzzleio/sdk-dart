@@ -29,7 +29,7 @@ class KuzzleUser {
       : <String>[];
 
   Future<List<KuzzleProfile>> getProfiles() async {
-    if (profileIds == null || profileIds.isEmpty) {
+    if (profileIds.isEmpty) {
       return <KuzzleProfile>[];
     }
 
