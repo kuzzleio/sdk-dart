@@ -1,5 +1,6 @@
 class ProtocolEvents {
   static const String DISCONNECT = 'disconnect';
+  static const String RECONNECTING = 'reconnecting';
   static const String RECONNECT = 'reconnect';
   static const String CONNECT = 'connect';
   static const String QUERY_ERROR = 'queryError';
