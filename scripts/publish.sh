@@ -27,7 +27,7 @@ sed -i "s/^version: .*/version: ${NEW_VERSION}/" pubspec.yaml
 
 # Commit changes
 git add pubspec.yaml
-git commit -m "Release $NEW_VERSION [skip ci]"
+git commit -m "Release $NEW_VERSION"
 git push origin master
 
 # Git tag and push
