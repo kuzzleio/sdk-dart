@@ -52,16 +52,11 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
       protocolState = KuzzleProtocolState.connecting;
     }
 
-    var attempt = 0;
     do {
       if (abortConnection) {
         protocolState = KuzzleProtocolState.offline;
         throw KuzzleError(
             'Unable to connect to kuzzle server at ${uri.toString()}: Connection aborted.');
-      }
-
-      if (protocolState == KuzzleProtocolState.reconnecting) {
-        emit(ProtocolEvents.RECONNECTING, [attempt]);
       }
 
       try {
@@ -70,18 +65,11 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
         return;
         // ignore: avoid_catches_without_on_clauses
       } catch (e) {
-        attempt += reconnectionAttempts > -1 ? 1 : 0;
-
-        if (!autoReconnect ||
-            reconnectionAttempts > -1 && attempt >= reconnectionAttempts) {
-          protocolState = KuzzleProtocolState.offline;
-          rethrow;
-        }
+        emit(ProtocolEvents.NETWORK_ERROR, [e]);
 
         await Future.delayed(reconnectionDelay);
       }
-    } while (autoReconnect &&
-        (reconnectionAttempts == -1 || attempt < reconnectionAttempts));
+    } while (protocolState != KuzzleProtocolState.connected);
   }
 
   @internal
@@ -126,25 +114,15 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
 
     protocolState = KuzzleProtocolState.offline;
 
-    emit(ProtocolEvents.NETWORK_ERROR, [error]);
-
     unawaited(_handleAutoReconnect());
   }
 
   Future<void> _handleAutoReconnect() async {
-    if (!autoReconnect) {
-      emit(ProtocolEvents.DISCONNECT);
-      return;
-    }
+    emit(ProtocolEvents.DISCONNECT);
 
     protocolState = KuzzleProtocolState.reconnecting;
 
-    try {
-      await connect();
-      // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      emit(ProtocolEvents.DISCONNECT);
-    }
+    await connect();
   }
 
   /// Called when the client's connection is closed
