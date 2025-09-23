@@ -1,3 +1,7 @@
+## [3.0.7]
+
+- Change autoreconnect behaviour
+
 ## [3.0.6]
 
 - Add reconnecting event
